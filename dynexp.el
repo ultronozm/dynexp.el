@@ -253,17 +253,17 @@ TODO: relevance of BEG?"
 ;;     "{[^}]+}")
 ;;    (line-beginning-position)))
 
-;; (defun dynexp--looking-back-macro-to-fold-p ()
-;;   "Look back for a macro that needs to be folded."
-;;   (and
-;;    (looking-back "}")
-;;    (save-excursion
-;;      (backward-sexp)
-;;      (looking-back
-;;       (concat
-;;        "\\\\"
-;;        (regexp-opt dynexp-macros-to-fold))
-;;       (line-beginning-position)))))
+(defun dynexp--looking-back-macro-to-fold-p ()
+  "Look back for a macro that needs to be folded."
+  (and
+   (looking-back "}")
+   (save-excursion
+     (backward-sexp)
+     (looking-back
+      (concat
+       "\\\\"
+       (regexp-opt dynexp-macros-to-fold))
+      (line-beginning-position)))))
 
 ;;;###autoload
 (defun dynexp-space ()
