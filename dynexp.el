@@ -5,7 +5,7 @@
 ;; Author: Paul D. Nelson <nelson.paul.david@gmail.com>
 ;; Version: 0.1
 ;; URL: https://github.com/ultronozm/dynexp.el
-;; Package-Requires: ((emacs "26.1"))
+;; Package-Requires: ((emacs "26.1") (auctex "11.86.1"))
 ;; Keywords: convenience
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -29,6 +29,7 @@
 
 (require 'subr-x)
 (require 'cl-lib)
+(require 'tex)
 (require 'latex)
 (require 'tex-fold)
 
