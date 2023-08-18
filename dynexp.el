@@ -3,7 +3,7 @@
 ;; Copyright (C) 2023  Paul D. Nelson
 
 ;; Author: Paul D. Nelson <nelson.paul.david@gmail.com>
-;; Version: 0.1
+;; Version: 0.0
 ;; URL: https://github.com/ultronozm/dynexp.el
 ;; Package-Requires: ((emacs "26.1") (auctex "11.86.1"))
 ;; Keywords: convenience
