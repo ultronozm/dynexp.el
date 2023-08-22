@@ -38,7 +38,7 @@
   :group 'czm)
 
 (defcustom dynexp-macros-to-fold
-  '("emph" "textbf" "textit")
+  '("emph" "textbf" "textit" "alert")
   "LaTeX macros to fold automatically when inserted as templates."
   :type '(repeat string)
   :group 'dynexp)
