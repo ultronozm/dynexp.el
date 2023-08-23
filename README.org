@@ -1,0 +1,93 @@
+#+title: czm-tex-fold.el: Snippets via abbrev-mode
+#+author: Paul Nelson
+
+* Overview
+This package provides completion features that allow for the rapid entry of various LaTeX constructs (environments, macros, symbols, subscripts, ...).  It is similar in spirit to what is offered by the popular packages [[https://github.com/cdominik/cdlatex][CDLaTeX]] and [[https://github.com/joaotavora/yasnippet][YASnippet]], and also to the built-in [[https://www.gnu.org/software/emacs/manual/html_node/autotype/Skeleton-Language.html][Skeleton language]].  I suspect that this package is objectively inferior to these alternatives in most respects, but it has suited my needs well.  
+
+* Configuration
+This package requires [[https://www.gnu.org/software/auctex/manual/auctex/Installation.html#Installation][AUCTeX]] (to carry out the macro folding), so install that first.
+
+Download this repository, install using =M-x package-install-file= (or package-vc-install, straight, elpaca, ...), and add something like the following to your [[https://www.emacswiki.org/emacs/InitFile][init file]] (after whatever is needed to load [[https://www.gnu.org/software/auctex/manual/auctex/Installation.html#Installation][AUCTeX]]):
+#+begin_src elisp
+(use-package dynexp
+  :demand ; but after auctex
+  :bind
+  (:map LaTeX-mode-map
+        ("SPC" . dynexp-space)
+        ("TAB . dynexp-next)))
+#+end_src
+
+Next, put the line =(quietly-read-abbrev-file "path/to/abbrevs.el")= in your config somewhere after =AUCTeX= and =dynexp= are loaded.  The path should point to a copy of the file =lisp/abbrevs.el= included in this package, which you should edit to your liking (see below for details on the format).
+
+* Usage
+This package makes use of Emacs's built-in [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Abbrevs.html][abbrevs]] feature, which expands words, called /abbrevs/, into some different text, called the /expansion/ of the abbrev.  Quoting from this most recent link:
+#+begin_quote
+For example, you might define =foo= as an abbrev expanding to =find outer otter=. Then you could insert =find outer otter= into the buffer by typing =f o o SPC=.
+#+end_quote
+To each abbrev, one can attach a /hook/ function, which is called, with no arguments, after the abbrev is replaced by its expansion; see [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Defining-Abbrevs.html][this part]] of the elisp manual for details.
+
+The main export of this package is a certain abbrev hook function =dynexp= that postprocesses the expansion.  We illustrate with three examples.
+
+1. I use "bthm" as an abbrev for theorem environments.  When I type "bthm" in a LaTeX buffer followed by =SPC= (bound to =dynexp-space=), it expands to the following abbrev:
+  #+begin_example
+  <+START+><+TAB+>\\begin{theorem}
+  <+TAB+><+++>
+  <+TAB+>\\end{theorem}<++><+END+>"
+  #+end_example
+
+  The function =dynexp= postprocesses this expansion, transforming it into the following:
+  #+begin_example
+  \\begin{theorem}
+    _
+  \\end{theorem}<++>"
+  #+end_example
+  The underscore _ is not actually present -- I have used it just to indicate where the cursor is positioned.  When I'm done writing the contents of the theorem, I hit =TAB= (bound to =dynexp-next=), which positions the cursor just beyond the theorem environment, like so:
+  #+begin_example
+  \\begin{theorem}
+    (Contents of my cool theorem.)
+  \\end{theorem}_
+  #+end_example
+  
+2. The abbrev "zx" expands to
+   #+begin_example
+   <+START+>$<+++>$<++><+END+>
+   #+end_example
+   which =dynexp= then postprocesses to
+   #+begin_example
+   $_$<++>
+   #+end_example
+   I then type some inline math. When I'm done, I hit =TAB= to position the cursor just beyond the second dollar delimiter:
+   #+begin_example
+   $x=y$_
+   #+end_example
+
+3. The abbrev "mx3p" expands to
+   #+begin_src example
+   <+START+><+TAB+>\\begin{pmatrix}
+   <+TAB+><+++> & <++> & <++> \\\\
+   <+TAB+><++> & <++> & <++> \\\\
+   <+TAB+><++> & <++> & <++> \\\\
+   <+TAB+>\\end{pmatrix}<++><+END+>
+   #+end_src
+   which =dynexp= postprocesses to
+   #+begin_src example
+   \begin{pmatrix}
+   _ & <++> & <++> \\
+   <++> & <++> & <++> \\
+   <++> & <++> & <++> \\
+   \end{pmatrix}<++>
+   #+end_src
+   I can then fill in the matrix one entry at a time, using =TAB= to navigate.
+
+The recipe is likely clear:
+- =<+START+>= and =<+END+>= specify the start and the end of the expansion,
+- =<+TAB+>= indicates where we should apply suitable indentation,
+- <+++> is where the cursor should be positioned after the expansion, and
+- <++> is left intact by the expansion, but used to denote "positions of interest" that are "eaten up" by =dynexp-next=.
+
+There are a few variants of the hook function =dynexp=, e.g., =dynexp-fold=, which expands the abbreviation template and applies =TeX-fold-region= to it.
+
+The package file =lisp/abbrevs.el= contains a few thousand abbrevs that I've accumulated over the years.  As a base, I started with FasTeX (http://www.cds.caltech.edu/~fastex/fastex.html), specifically, the FasTeX shortcuts for Emacs released by Ari Stern.
+
+You can create new expansion templates by modifying =lisp/abbrevs.el=.  It's often convenient to mimic an existing expansion template.
+
