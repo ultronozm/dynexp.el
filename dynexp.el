@@ -295,7 +295,9 @@ the expansion ends with \"%!!!\", then delete that."
        ((looking-back "%!!!mmm")
         (search-backward "%!!!mmm")
         (replace-match "")
-        ;; (call-interactively #'mmm-parse-buffer)        
+        ; The following hack seems necessary to avoid putting
+        ; abbrev-mode in a buffer-local broken state.  Not sure why
+        ; that happens.
         (run-at-time
          "0.01 sec" 
          nil 
