@@ -5,7 +5,7 @@
 ;; Author: Paul D. Nelson <nelson.paul.david@gmail.com>
 ;; Version: 0.0
 ;; URL: https://github.com/ultronozm/dynexp.el
-;; Package-Requires: ((emacs "26.1") (auctex "11.86.1"))
+;; Package-Requires: ((emacs "26.1") (auctex "11.86.1") (mmm-mode "0.5.9"))
 ;; Keywords: convenience
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -32,6 +32,7 @@
 (require 'tex)
 (require 'latex)
 (require 'tex-fold)
+(require 'mmm-cmds)
 
 (defgroup dynexp nil
   "Settings for dynamic expressions module."
@@ -52,10 +53,10 @@ Example:
 <+TAB+>\\end{theorem}<++><+END+>\" dynexp-fold)"
   (dynexp--core :fold t))
 
-;; (cl-defun dynexp-fold-and-mmm-parse ()
-;;   (dynexp--core :fold t)
-;;   (mmm-parse-buffer)
-;;   )
+(cl-defun dynexp-fold-and-mmm-parse ()
+  (dynexp--core :fold t)
+  (mmm-parse-buffer)
+  )
 
 (defun dynexp-delete-leading-space ()
   "Delete leading space.
