@@ -23,7 +23,9 @@
 
 ;;; Commentary:
 
-;; Alternative to, e.g., Yasnippet.  Will document some other time.
+;; This package provides completion features similar in spirit to what
+;; is offered by the popular packages `CDLaTeX' and `YASnippet' and
+;; the built-in `Skeleton' language.  See the README for details.
 
 ;;; Code:
 
@@ -39,7 +41,7 @@
   :group 'czm)
 
 (defcustom dynexp-macros-to-fold
-  '("emph" "textbf" "textit")
+  '("emph" "textbf" "textit" "alert")
   "LaTeX macros to fold automatically when inserted as templates."
   :type '(repeat string)
   :group 'dynexp)
@@ -289,6 +291,14 @@ the expansion ends with \"%!!!\", then delete that."
 	    (progn (search-backward "%!!!") (replace-match ""))
 	  (insert " ")))
     (insert " ")))
+
+;;;###autoload
+(defun dynexp-modify-abbrev-table (table abbrevs)
+  "Define abbreviations in TABLE given by ABBREVS."
+  (unless table
+    (error "Abbrev table does not exist" table))
+  (dolist (abbrev abbrevs)
+    (define-abbrev table (car abbrev) (cadr abbrev) (caddr abbrev))))
 
 
 (provide 'dynexp)
