@@ -57,10 +57,6 @@ Example:
 
 (cl-defun dynexp-fold-and-mmm-parse ()
   (dynexp--core :fold t)
-  (mmm-parse-buffer)
-  )
-(cl-defun dynexp-fold-and-mmm-parse ()
-  (dynexp--core :fold t)
   (insert "mmm"))
 
 (defun dynexp-delete-leading-space ()
@@ -272,6 +268,15 @@ TODO: relevance of BEG?"
        (regexp-opt dynexp-macros-to-fold))
       (line-beginning-position)))))
 
+(defun dynexp--mmm-parse-LaTeX-environment ()
+  (let* ((bounds
+          (save-mark-and-excursion
+            (LaTeX-mark-environment)
+            (region-bounds)))
+         (beg (caar bounds))
+         (end (cdar bounds)))
+    (mmm-parse-region beg end)))
+
 ;;;###autoload
 (defun dynexp-space ()
   "Expand dynamic abbreviation.
@@ -295,17 +300,13 @@ the expansion ends with \"%!!!\", then delete that."
        ((looking-back "%!!!mmm")
         (search-backward "%!!!mmm")
         (replace-match "")
-        ; The following hack seems necessary to avoid putting
-        ; abbrev-mode in a buffer-local broken state.  Not sure why
-        ; that happens.
+                                        ; The following hack seems necessary to avoid putting
+                                        ; abbrev-mode in a buffer-local broken state.  Not sure why
+                                        ; that happens.
         (run-at-time
-         "0.01 sec" 
-         nil 
-         (lambda () 
-           (save-mark-and-excursion
-             (LaTeX-mark-environment)
-             (mmm-parse-region (region-beginning) (region-end)))))
-        )
+         "0.01 sec"
+         nil
+         #'dynexp--mmm-parse-LaTeX-environment))
        (t
         (insert " ")))
     (insert " ")))
@@ -314,7 +315,7 @@ the expansion ends with \"%!!!\", then delete that."
 (defun dynexp-modify-abbrev-table (table abbrevs)
   "Define abbreviations in TABLE given by ABBREVS."
   (unless table
-    (error "Abbrev table does not exist" table))
+    (error "Abbrev table does not exist"))
   (dolist (abbrev abbrevs)
     (define-abbrev table (car abbrev) (cadr abbrev) (caddr abbrev))))
 
