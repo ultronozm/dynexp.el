@@ -269,12 +269,12 @@ TODO: relevance of BEG?"
       (line-beginning-position)))))
 
 (defun dynexp--mmm-parse-LaTeX-environment ()
-  (let* ((bounds
-          (save-mark-and-excursion
-            (LaTeX-mark-environment)
-            (region-bounds)))
-         (beg (caar bounds))
-         (end (cdar bounds)))
+  (let* ((beg (save-mark-and-excursion
+                (LaTeX-find-matching-begin)
+                (point)))
+         (end (save-mark-and-excursion
+                (LaTeX-find-matching-end)
+                (line-beginning-position 2))))
     (mmm-parse-region beg end)))
 
 ;;;###autoload
