@@ -59,6 +59,9 @@ Example:
   (dynexp--core :fold t)
   (mmm-parse-buffer)
   )
+(cl-defun dynexp-fold-and-mmm-parse ()
+  (dynexp--core :fold t)
+  (insert "mmm"))
 
 (defun dynexp-delete-leading-space ()
   "Delete leading space.
@@ -285,11 +288,24 @@ the expansion ends with \"%!!!\", then delete that."
        abbrev-mode
        (not (looking-back " "))
        (expand-abbrev))
-      (progn
-					;				(indent-for-tab-command)
-	(if (looking-back "%!!!")
-	    (progn (search-backward "%!!!") (replace-match ""))
-	  (insert " ")))
+      (cond
+       ((looking-back "%!!!")
+        (search-backward "%!!!")
+        (replace-match ""))
+       ((looking-back "%!!!mmm")
+        (search-backward "%!!!mmm")
+        (replace-match "")
+        ;; (call-interactively #'mmm-parse-buffer)        
+        (run-at-time
+         "0.01 sec" 
+         nil 
+         (lambda () 
+           (save-mark-and-excursion
+             (LaTeX-mark-environment)
+             (mmm-parse-region (region-beginning) (region-end)))))
+        )
+       (t
+        (insert " ")))
     (insert " ")))
 
 ;;;###autoload
