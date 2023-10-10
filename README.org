@@ -30,22 +30,22 @@ The main export of this package is a certain abbrev hook function =dynexp= that 
 
 1. I use "bthm" as an abbrev for theorem environments.  When I type "bthm" in a LaTeX buffer followed by =SPC= (bound to =dynexp-space=), it expands to the following abbrev:
   #+begin_example
-  <+START+><+TAB+>\\begin{theorem}
+  <+START+><+TAB+>\begin{theorem}
   <+TAB+><+++>
-  <+TAB+>\\end{theorem}<++><+END+>"
+  <+TAB+>\end{theorem}<++><+END+>"
   #+end_example
 
   The function =dynexp= postprocesses this expansion, transforming it into the following:
   #+begin_example
-  \\begin{theorem}
+  \begin{theorem}
     _
-  \\end{theorem}<++>"
+  \end{theorem}<++>"
   #+end_example
   The underscore _ is not actually present -- I have used it just to indicate where the cursor is positioned.  When I'm done writing the contents of the theorem, I hit =TAB= (bound to =dynexp-next=), which positions the cursor just beyond the theorem environment, like so:
   #+begin_example
-  \\begin{theorem}
+  \begin{theorem}
     (Contents of my cool theorem.)
-  \\end{theorem}_
+  \end{theorem}_
   #+end_example
   
 2. The abbrev "zx" expands to
@@ -63,11 +63,11 @@ The main export of this package is a certain abbrev hook function =dynexp= that 
 
 3. The abbrev "mx3p" expands to
    #+begin_src example
-   <+START+><+TAB+>\\begin{pmatrix}
-   <+TAB+><+++> & <++> & <++> \\\\
-   <+TAB+><++> & <++> & <++> \\\\
-   <+TAB+><++> & <++> & <++> \\\\
-   <+TAB+>\\end{pmatrix}<++><+END+>
+   <+START+><+TAB+>\begin{pmatrix}
+   <+TAB+><+++> & <++> & <++> \\
+   <+TAB+><++> & <++> & <++> \\
+   <+TAB+><++> & <++> & <++> \\
+   <+TAB+>\end{pmatrix}<++><+END+>
    #+end_src
    which =dynexp= postprocesses to
    #+begin_src example
