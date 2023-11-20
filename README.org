@@ -1,4 +1,4 @@
-#+title: czm-tex-fold.el: Snippets via abbrev-mode
+#+title: dynexp.el: Snippets via abbrev-mode
 #+author: Paul Nelson
 
 * Overview
