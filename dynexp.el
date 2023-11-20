@@ -144,7 +144,7 @@ If FOLD is non-nil, then fold the macro after inserting it."
   ;; Check if in a LaTeX section environment
   (let ((start (point))
         (start-in-latex-section-env (dynexp--in-latex-section-env-p))
-	(start-texmathp (texmathp)))
+	       (start-texmathp (texmathp)))
     ;; Remove <++> placeholder if present
     (when (search-forward "<++>" nil t)
       (replace-match ""))
@@ -152,35 +152,37 @@ If FOLD is non-nil, then fold the macro after inserting it."
       ;; Fold LaTeX macro or section
       (cond
        ((and start-texmathp
-	     (not (texmathp))
-	     (equal (car texmathp-why) "$"))
-	(let ((beg (cdr texmathp-why))
-	      (end
-	       (save-excursion
-		 (goto-char (cdr texmathp-why))
-		 (forward-char 1)
-		 (search-forward "$"))))
-	  (replace-region-contents
-	   (1+ beg)
-	   (1- end)
-	   (lambda (s)
-	     (with-temp-buffer
-	       (insert s)
-	       (goto-char (point-min))
-	       (while (re-search-forward "\\s-*_\\s-*" end t)
-		 (replace-match "_" t t))
-	       (buffer-substring-no-properties (point-min) (point-max)))))))
+	            (not (texmathp))
+	            (equal (car texmathp-why)
+                    "$"))
+	       (let ((beg (cdr texmathp-why))
+	             (end
+	              (save-excursion
+		               (goto-char (cdr texmathp-why))
+		               (forward-char 1)
+		               (search-forward "$"))))
+	         (replace-region-contents
+	          (1+ beg)
+	          (1- end)
+	          (lambda (s)
+	            (with-temp-buffer
+	              (insert s)
+	              (goto-char (point-min))
+	              (while (re-search-forward "\\s-*_\\s-*" end t)
+		               (replace-match "_" t t))
+	              (buffer-substring-no-properties (point-min)
+                                               (point-max)))))))
        ((and start-in-latex-section-env (not end-in-latex-section-env))
-	(save-excursion
+	       (save-excursion
           (goto-char start)
           (TeX-fold-macro)))
        ((dynexp--looking-back-macro-to-fold-p)
-	(let ((end (point-marker))
-	      (beginnings (dynexp-split-macro (match-beginning 0))))
-	  (dolist (b beginnings)
-	    (goto-char b)
-	    (TeX-fold-macro))
-	  (goto-char end)))))))
+	       (let ((end (point-marker))
+	             (beginnings (dynexp-split-macro (match-beginning 0))))
+	         (dolist (b beginnings)
+	           (goto-char b)
+	           (TeX-fold-macro))
+	         (goto-char end)))))))
 
 (defun dynexp-split-macro (beg)
   "Split macro at point and fold the first part.
