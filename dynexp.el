@@ -41,7 +41,7 @@
   :group 'czm)
 
 (defcustom dynexp-macros-to-fold
-  '("emph" "textbf" "textit" "alert")
+  '("emph" "textbf" "textit" "alert" "underline")
   "LaTeX macros to fold automatically when inserted as templates."
   :type '(repeat string)
   :group 'dynexp)
@@ -88,8 +88,8 @@ Example:
 If FOLD is non-nil, then fold the macro after inserting it."
   (interactive)
   (let (bound
-	start end
-	_fold-pos)
+	       start end
+	       _fold-pos)
     (search-backward "<+END+>")
     (replace-match "")
     (setq bound (point))
@@ -100,13 +100,13 @@ If FOLD is non-nil, then fold the macro after inserting it."
     (setq start (point))
     (save-excursion
       (while (search-forward "<+TAB+>" bound t)
-	(progn
-	  (replace-match "")
-	  (when (and (looking-at-p "\\\\begin")
-		     (not (looking-back "^[[:space:]]*" (line-beginning-position))))
-	    (newline-and-indent))
-	  ;; (indent-for-tab-command)
-	  )))
+	       (progn
+	         (replace-match "")
+	         (when (and (looking-at-p "\\\\begin")
+		                   (not (looking-back "^[[:space:]]*" (line-beginning-position))))
+	           (newline-and-indent))
+	         ;; (indent-for-tab-command)
+	         )))
     ;; (when fold
     ;;   (setq fold-pos (point)))
     (search-forward "<+++>")
@@ -114,10 +114,10 @@ If FOLD is non-nil, then fold the macro after inserting it."
     (forward-char)
     (backward-char)
     (when (and TeX-fold-mode
-	       (looking-back "\\\\item " (line-beginning-position)))
+	              (looking-back "\\\\item " (line-beginning-position)))
       (save-excursion
-	(goto-char (match-beginning 0))
-	(TeX-fold-macro)))
+	       (goto-char (match-beginning 0))
+	       (TeX-fold-macro)))
     ;; (when fold-pos
     ;;   (save-excursion
     ;; 	(goto-char fold-pos)
@@ -128,7 +128,8 @@ If FOLD is non-nil, then fold the macro after inserting it."
     (setq end (marker-position end))
     (when fold
       (TeX-fold-region start (point))
-      (TeX-fold-region (point) end))
+      (TeX-fold-region (point)
+                       end))
 
     (insert "%!!!")
     ;; (replace-match "%!!!")
