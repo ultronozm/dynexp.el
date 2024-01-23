@@ -14,6 +14,7 @@
     ("Cech" "{\\v C}ech" nil)
     ("DD" "\\mathbb{D}" nil)
     ("FF" "\\mathbb{F}" nil)
+    ("TT" "\\mathbb{T}" nil)
     ("Frechet" "Frech{\\'e}t" nil)
     ("GG" "\\mathbb{G}" nil)
     ("HH" "\\mathbb{H}" nil)
