@@ -1,4 +1,7 @@
-;;-*-coding: utf-8;-*-
+;;-*-coding: utf-8; lexical-binding: t;-*-
+
+(defvar latex-mode-abbrev-table)
+(require 'dynexp)
 
 ;; adapted from FasTeX (http://www.cds.caltech.edu/~fastex/fastex.html)
 (dynexp-modify-abbrev-table latex-mode-abbrev-table

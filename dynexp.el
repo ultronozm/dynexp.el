@@ -5,7 +5,7 @@
 ;; Author: Paul D. Nelson <nelson.paul.david@gmail.com>
 ;; Version: 0.0
 ;; URL: https://github.com/ultronozm/dynexp.el
-;; Package-Requires: ((emacs "26.1") (auctex "11.86.1") (mmm-mode "0.5.9"))
+;; Package-Requires: ((emacs "26.1") (mmm-mode "0.5.9") (auctex))
 ;; Keywords: convenience
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -262,7 +262,7 @@ TODO: relevance of BEG?"
 (defun dynexp--looking-back-macro-to-fold-p ()
   "Look back for a macro that needs to be folded."
   (and
-   (looking-back "}")
+   (looking-back "}" 1)
    (save-excursion
      (backward-sexp)
      (looking-back
@@ -272,6 +272,7 @@ TODO: relevance of BEG?"
       (line-beginning-position)))))
 
 (defun dynexp--mmm-parse-LaTeX-environment ()
+  "Call `mmm-parse-region' on the LaTeX environment at point."
   (let* ((beg (save-mark-and-excursion
                 (LaTeX-find-matching-begin)
                 (point)))
@@ -294,13 +295,13 @@ the expansion ends with \"%!!!\", then delete that."
 					; insert a space.
   (if (and
        abbrev-mode
-       (not (looking-back " "))
+       (not (looking-back " " 1))
        (expand-abbrev))
       (cond
-       ((looking-back "%!!!")
+       ((looking-back "%!!!" 4)
         (search-backward "%!!!")
         (replace-match ""))
-       ((looking-back "%!!!mmm")
+       ((looking-back "%!!!mmm" 7)
         (search-backward "%!!!mmm")
         (replace-match "")
                                         ; The following hack seems necessary to avoid putting
