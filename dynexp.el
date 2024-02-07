@@ -140,6 +140,13 @@ If FOLD is non-nil, then fold the macro after inserting it."
   "Expand abbrev, remove <++> placeholders, fold LaTeX macros."
   (interactive)
   ;; Expand abbreviation
+  (when (and (member last-command '(self-insert-command dynexp-space))
+             (let ((keys (recent-keys))
+                   (len (length (recent-keys))))
+               (and (>= len 2)
+                    (equal (aref (recent-keys) (- len 2)) ?\ ))
+               (looking-back " " 1)))
+    (delete-char -1))
   (expand-abbrev)
   
   ;; Check if in a LaTeX section environment
