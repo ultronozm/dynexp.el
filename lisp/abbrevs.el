@@ -452,6 +452,9 @@ Publisher." nil)
     ("bnote" "<+START+><+TAB+>\\begin{note}
 <+TAB+><+++>
 <+TAB+>\\end{note}<++><+END+>" dynexp-fold)
+    ("bfact" "<+START+><+TAB+>\\begin{fact}
+<+TAB+><+++>
+<+TAB+>\\end{fact}<++><+END+>" dynexp-fold)
     ("bo" "\\mathbf{o}" nil)
     ("bopl" "\\boxplus" nil)
     ("bp" "\\mathbf{p}" nil)
