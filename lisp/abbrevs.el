@@ -1,6 +1,6 @@
 ;;-*-coding: utf-8; lexical-binding: t;-*-
 
-(defvar latex-mode-abbrev-table)
+(define-abbrev-table 'latex-mode-abbrev-table ())
 (require 'dynexp)
 
 ;; adapted from FasTeX (http://www.cds.caltech.edu/~fastex/fastex.html)
