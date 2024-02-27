@@ -141,11 +141,11 @@ If FOLD is non-nil, then fold the macro after inserting it."
   (interactive)
   ;; Expand abbreviation
   (when (and (member last-command '(self-insert-command dynexp-space))
-             (let ((keys (recent-keys))
+             (let ((_keys (recent-keys))
                    (len (length (recent-keys))))
                (and (>= len 2)
-                    (equal (aref (recent-keys) (- len 2)) ?\ ))
-               (looking-back " " 1)))
+                    (equal ?\  (aref (recent-keys) (- len 2)))
+                    (looking-back " " 1))))
     (delete-char -1))
   (expand-abbrev)
   
