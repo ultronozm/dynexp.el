@@ -14,10 +14,13 @@ Download this repository, install using =M-x package-install-file= (or package-v
   :bind
   (:map LaTeX-mode-map
         ("SPC" . dynexp-space)
-        ("TAB . dynexp-next)))
+        ("TAB" . dynexp-next))
+  :config
+  (with-eval-after-load 'latex
+    (quietly-read-abbrev-file "~/whatever/dynexp/lisp/dynexp-abbrev.el")))
 #+end_src
 
-Next, put the line =(quietly-read-abbrev-file "path/to/abbrevs.el")= in your config somewhere after =AUCTeX= and =dynexp= are loaded.  The path should point to a copy of the file =lisp/abbrevs.el= included in this package, which you should edit to your liking (see below for details on the format).
+Replace the path with whatever the path is to the =dynexp-abbrev.el= file that comes with this package (and feel free to put that file somewhere else and modify it to your liking; see below for details on the format).
 
 * Usage
 This package makes use of Emacs's built-in [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Abbrevs.html][abbrevs]] feature, which expands words, called /abbrevs/, into some different text, called the /expansion/ of the abbrev.  Quoting from this most recent link:
@@ -60,6 +63,7 @@ The main export of this package is a certain abbrev hook function =dynexp= that 
    #+begin_example
    $x=y$_
    #+end_example
+   The point here is that with my keyboard layout (US), zx is very easy to type.
 
 3. The abbrev "mx3p" expands to
    #+begin_src example
