@@ -34,7 +34,6 @@
 (require 'tex)
 (require 'latex)
 (require 'tex-fold)
-(require 'mmm-cmds)
 
 (defgroup dynexp nil
   "Settings for dynamic expressions module."
@@ -286,7 +285,8 @@ TODO: relevance of BEG?"
          (end (save-mark-and-excursion
                 (LaTeX-find-matching-end)
                 (line-beginning-position 2))))
-    (mmm-parse-region beg end)))
+    (when (fboundp 'mmm-parse-region)
+      (mmm-parse-region beg end))))
 
 ;;;###autoload
 (defun dynexp-space ()
