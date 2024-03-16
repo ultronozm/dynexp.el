@@ -34,6 +34,7 @@
    ("Plucker" "Pl\\\"{u}cker" nil)
    ("Zurich" "Z\\\"{u}rich" nil)
    ("Poincare" "Poincar{\\'e}" nil)
+   ("Apery" "Ap{\\'e}ry" nil)
    ("Grobner" "Gr\\\"{o}bner" nil)
    ("Polya" "P\\'{o}lya" nil)
    ("QQ" "\\mathbb{Q}" nil)
@@ -1525,12 +1526,15 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("sl2" "\\mathrm{SL}_2" nil)
    ("sl3" "\\mathrm{SL}_3" nil)
    ("sln" "\\mathrm{SL}_n" nil)
+   ("slm" "\\mathrm{SL}_m" nil)
    ("gl2" "\\mathrm{GL}_2" nil)
    ("gl3" "\\mathrm{GL}_3" nil)
    ("gln" "\\mathrm{GL}_n" nil)
+   ("glm" "\\mathrm{GL}_m" nil)
    ("pgl2" "\\mathrm{PGL}_2" nil)
    ("pgl3" "\\mathrm{PGL}_3" nil)
    ("pgln" "\\mathrm{PGL}_n" nil)
+   ("pglm" "\\mathrm{PGL}_m" nil)
    ("tra" "\\trace" nil)
    ("slu" "<+START+>\\mathrm{SL}_{<+++>}<++><+END+>" dynexp-delete-leading-space-dynexp)
    ("pglu" "<+START+>\\mathrm{PGL}_{<+++>}<++><+END+>" dynexp-delete-leading-space-dynexp)
@@ -3545,10 +3549,9 @@ Text goes here
    ("xz" "\\zeta" nil)
    ("yln" "y_n" nil)
    ("yq" "y^2" nil)
-   ("zc" "<+START+>\\[
-<+++>
-\\]
-<++><+END+>" dynexp)
+   ("zc" "<+START+><+TAB+>\\begin{equation*}
+<+TAB+><+++>
+<+TAB+>\\end{equation*}<++><+END+>" dynexp)
    ("zln" "z_n" nil)
    ("zq" "z^2" nil)
    ("zx" "<+START+>$<+++>$<++><+END+>" dynexp)
