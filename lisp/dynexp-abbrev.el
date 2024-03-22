@@ -6,7 +6,7 @@
 
 ;; adapted from FasTeX (http://www.cds.caltech.edu/~fastex/fastex.html)
 (dynexp-modify-abbrev-table
- (if (>= (string-to-number AUCTeX-version) 14)
+ (if (>= (string-to-number AUCTeX-version) 13.3)
      LaTeX-mode-abbrev-table
    latex-mode-abbrev-table)
  '(
@@ -1063,6 +1063,7 @@ Publisher." nil)
    ("dtsq" "$T^\\ast Q$" nil)
    ("dtsqq" "$T^{\\ast}_{q} Q$" nil)
    ("dtt" "\\det" nil)
+   ("dgg" "\\deg" nil)
    ("du" "$u$" nil)
    ("dv" "$v$" nil)
    ("dw" "$w$" nil)
@@ -1764,6 +1765,7 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("luu" "_u" dynexp-delete-leading-space)
    ("lv" "_v" dynexp-delete-leading-space)
    ("lve" "<+START+>\\left\\lvert <+++> \\right\\rvert<++><+END+>" dynexp)
+   ("lve" "<+START+>\\left| <+++> \\right|<++><+END+>" dynexp)
    ("lvst" "_\\star" dynexp-delete-leading-space)
    ("lw" "_w" dynexp-delete-leading-space)
    ("lx" "_x" dynexp-delete-leading-space)
@@ -2038,7 +2040,7 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("obbct" "(\\mathbb{T})" dynexp-delete-leading-space)
    ("obbcz" "(\\mathbb{Z})" dynexp-delete-leading-space)
    ("obd" "\\bar{d}" nil)
-   ("obk" "<+START+>[<+++>]<++><+END+>" dynexp)
+   ("obk" "<+START+>[<+++>]<++><+END+>" dynexp-delete-leading-space-dynexp)
    ("obkk" "<+START+>\\lbracket<+++>\\rbracket<++><+END+>" dynexp)
    ("obp" "\\bar{p}" nil)
    ("obq" "\\bar{q}" nil)
