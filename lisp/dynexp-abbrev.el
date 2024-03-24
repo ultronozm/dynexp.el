@@ -40,6 +40,7 @@
    ("QQ" "\\mathbb{Q}" nil)
    ("EE" "\\mathbb{E}" nil)
    ("RR" "\\mathbb{R}" nil)
+   ("SS" "\\mathbb{S}" nil)
    ("Salie" "Sali{\\'e}" nil)
    ("ZZ" "\\mathbb{Z}" nil)
    ("PP" "\\mathbb{P}" nil)
@@ -648,6 +649,8 @@ Publisher." nil)
    ("dNN" "$\\mathbb{N}$" nil)
    ("dQQ" "$\\mathbb{Q}$" nil)
    ("dRR" "$\\mathbb{R}$" nil)
+   ("dSS" "$\\mathbb{S}$" nil)
+   ("dDD" "$\\mathbb{D}$" nil)
    ("dZZ" "$\\mathbb{Z}$" nil)
    ("da" "$a$" nil)
    ("db" "$b$" nil)
@@ -1933,6 +1936,14 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
 <+TAB+><++>  \\\\
 <+TAB+><++> \\\\
 <+TAB+>\\end{pmatrix}<++><+END+>" dynexp)
+   ("mxc2" "<+START+><+TAB+>\\begin{pmatrix}
+<+TAB+><+++>  \\\\
+<+TAB+><++>  \\\\
+<+TAB+>\\end{pmatrix}<++><+END+>" dynexp)
+   ("mx2c" "<+START+><+TAB+>\\begin{pmatrix}
+<+TAB+><+++>  \\\\
+<+TAB+><++>  \\\\
+<+TAB+>\\end{pmatrix}<++><+END+>" dynexp)
    ("mxr" "<+START+><+TAB+>\\begin{pmatrix}
 <+TAB+><+++> & <++> & <++> \\\\
 <+TAB+>\\end{pmatrix}<++><+END+>" dynexp)
@@ -2020,6 +2031,7 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("oNN" "(\\mathbb{N})" dynexp-delete-leading-space)
    ("oQQ" "(\\mathbb{Q})" dynexp-delete-leading-space)
    ("oRR" "(\\mathbb{R})" dynexp-delete-leading-space)
+   ("oSS" "(\\mathbb{S})" dynexp-delete-leading-space)
    ("oZZ" "(\\mathbb{Z})" dynexp-delete-leading-space)
    ("oa" "(a)" dynexp-delete-leading-space)
    ("ob" "<+START+>{<+++>}<++><+END+>" dynexp)
@@ -2487,6 +2499,7 @@ Publisher." nil)
    ("sube" "\\subseteq" nil)
    ("subne" "\\subsetneq" nil)
    ("subs" "\\subset" nil)
+   ("supne" "\\supsetneq" nil)
    ("supe" "\\supseteq" nil)
    ("supr" "\\sup" nil)
    ("sups" "\\supset" nil)

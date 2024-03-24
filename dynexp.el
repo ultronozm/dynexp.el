@@ -125,7 +125,7 @@ If FOLD is non-nil, then fold the macro after inserting it."
 
     ;; convert end back to a point from a marker
     (setq end (marker-position end))
-    (when fold
+    (when (and TeX-fold-mode fold)
       (TeX-fold-region start (point))
       (TeX-fold-region (point)
                        end))
@@ -182,13 +182,15 @@ If FOLD is non-nil, then fold the macro after inserting it."
        ((and start-in-latex-section-env (not end-in-latex-section-env))
 	       (save-excursion
           (goto-char start)
-          (TeX-fold-macro)))
+          (when TeX-fold-mode
+            (TeX-fold-macro))))
        ((dynexp--looking-back-macro-to-fold-p)
 	       (let ((end (point-marker))
 	             (beginnings (dynexp-split-macro (match-beginning 0))))
 	         (dolist (b beginnings)
 	           (goto-char b)
-	           (TeX-fold-macro))
+            (when TeX-fold-mode
+              (TeX-fold-macro)))
 	         (goto-char end)))))))
 
 (defun dynexp-split-macro (beg)
