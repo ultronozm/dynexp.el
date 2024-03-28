@@ -138,7 +138,6 @@ If FOLD is non-nil, then fold the macro after inserting it."
 (defun dynexp-next ()
   "Expand abbrev, remove <++> placeholders, fold LaTeX macros."
   (interactive)
-  ;; Expand abbreviation
   (when (and (member last-command '(self-insert-command dynexp-space))
              (let ((_keys (recent-keys))
                    (len (length (recent-keys))))
@@ -147,16 +146,12 @@ If FOLD is non-nil, then fold the macro after inserting it."
                     (looking-back " " 1))))
     (delete-char -1))
   (expand-abbrev)
-  
-  ;; Check if in a LaTeX section environment
   (let ((start (point))
         (start-in-latex-section-env (dynexp--in-latex-section-env-p))
 	       (start-texmathp (texmathp)))
-    ;; Remove <++> placeholder if present
     (when (search-forward "<++>" nil t)
       (replace-match ""))
     (let ((end-in-latex-section-env (dynexp--in-latex-section-env-p)))
-      ;; Fold LaTeX macro or section
       (cond
        ((and start-texmathp
 	            (not (texmathp))
@@ -256,16 +251,7 @@ TODO: relevance of BEG?"
                  LaTeX-section-list))
         "{[^}]*$")
        (buffer-substring-no-properties
-	(point) pos)))))
-
-;; (defun dynexp--looking-back-macro-to-fold-p ()
-;;   "Check if the point is looking back at a macro that needs to be folded."
-;;   (looking-back
-;;    (concat
-;;     "\\\\"
-;;     (regexp-opt dynexp-macros-to-fold)
-;;     "{[^}]+}")
-;;    (line-beginning-position)))
+	       (point) pos)))))
 
 (defun dynexp--looking-back-macro-to-fold-p ()
   "Look back for a macro that needs to be folded."
@@ -297,31 +283,25 @@ If no space precedes the cursor and we can expand the
 abbreviation, then do so.  Otherwise, simply insert a space.  If
 the expansion ends with \"%!!!\", then delete that."
   (interactive)
-      					; If there's no space behind
-					; us, then expand, delete any
-					; spurious "%!!!", and insert
-					; a space.  Otherwise, simply
-					; insert a space.
-  (if (and
-       abbrev-mode
-       (not (looking-back " " 1))
-       (expand-abbrev))
-      (cond
-       ((looking-back "%!!!" 4)
-        (search-backward "%!!!")
-        (replace-match ""))
-       ((looking-back "%!!!mmm" 7)
-        (search-backward "%!!!mmm")
-        (replace-match "")
-                                        ; The following hack seems necessary to avoid putting
-                                        ; abbrev-mode in a buffer-local broken state.  Not sure why
-                                        ; that happens.
-        (run-at-time
-         "0.01 sec"
-         nil
-         #'dynexp--mmm-parse-LaTeX-environment))
-       (t
-        (insert " ")))
+  ;; If there's no space behind us, then expand, delete any spurious
+  ;; "%!!!", and insert a space.  Otherwise, simply insert a space.
+  (if (and abbrev-mode
+           (not (looking-back " " 1))
+           (expand-abbrev))
+      (cond ((looking-back "%!!!" 4)
+             (search-backward "%!!!")
+             (replace-match ""))
+            ((looking-back "%!!!mmm" 7)
+             (search-backward "%!!!mmm")
+             (replace-match "")
+             ;; This next hack somehow avoids putting abbrev-mode in a
+             ;; buffer-local broken state.
+             (run-at-time
+              "0.01 sec"
+              nil
+              #'dynexp--mmm-parse-LaTeX-environment))
+            (t
+             (insert " ")))
     (insert " ")))
 
 ;;;###autoload
@@ -331,7 +311,6 @@ the expansion ends with \"%!!!\", then delete that."
     (error "Abbrev table does not exist"))
   (dolist (abbrev abbrevs)
     (define-abbrev table (car abbrev) (cadr abbrev) (caddr abbrev))))
-
 
 (provide 'dynexp)
 ;;; dynexp.el ends here
