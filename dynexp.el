@@ -136,22 +136,6 @@ If FOLD is non-nil, then fold the macro after inserting it."
     ;; (replace-match "%!!!")
     ))
 
-(defcustom dynexp-expand-here-p nil
-  "Whether to expand the abbreviation at point.
-This should be either nil or a function that returns a boolean."
-  :type '(choice
-          (const :tag "Always expand" t)
-          (function :tag "Custom function"))
-  :group 'dynexp)
-
-(defun dynexp--conditional-expand-abbrev ()
-  "Expand abbrev at point, conditional on `dynexp-expand-here-p'.
-Expand the abbrev unless `dynexp-expand-here-p' is a function
-with return value nil."
-  (unless (and (functionp dynexp-expand-here-p)
-               (not (funcall dynexp-expand-here-p)))
-    (expand-abbrev)))
-
 ;;;###autoload
 (defun dynexp-next ()
   "Expand abbrev, remove <++> placeholders, fold LaTeX macros."
@@ -163,7 +147,7 @@ with return value nil."
                     (equal ?\  (aref (recent-keys) (- len 2)))
                     (looking-back " " 1))))
     (delete-char -1))
-  (dynexp--conditional-expand-abbrev)
+  (expand-abbrev)
   (let ((start (point))
         (start-in-latex-section-env (dynexp--in-latex-section-env-p))
 	       (start-texmathp (texmathp)))
@@ -314,7 +298,7 @@ the expansion ends with \"%!!!\", then delete that."
   ;; "%!!!", and insert a space.  Otherwise, simply insert a space.
   (if (and abbrev-mode
            (not (looking-back " " 1))
-           (dynexp--conditional-expand-abbrev))
+           (expand-abbrev))
       (cond ((looking-back "%!!!" 4)
              (search-backward "%!!!")
              (replace-match ""))
