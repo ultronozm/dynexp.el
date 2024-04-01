@@ -193,49 +193,53 @@ If FOLD is non-nil, then fold the macro after inserting it."
 TODO: relevance of BEG?"
   (when-let
       ((type (save-excursion
-	       (goto-char beg)
-	       (and
-		(looking-at "\\\\\\([^{]+\\)")
-		(match-string 1)))))
+               (goto-char beg)
+               (and
+                (looking-at "\\\\\\([^{]+\\)")
+                (match-string 1)))))
     (let ((beginnings (list beg))
-	  (end (save-excursion
-		 (goto-char beg)
-		 (forward-sexp 2)
-		 (point))))
+          (end (save-excursion
+                 (goto-char beg)
+                 (forward-sexp 2)
+                 (point))))
       (save-excursion
-	(goto-char beg)
-	(while (re-search-forward "[[:space:]]*\\$[^$]*\\$[[:space:]]*" end t)
-	  (let ((old-segment-end (match-beginning 0))
-		(old-segment-conclusion "}")
-		(new-segment-begin (match-end 0))
-		(new-segment-introduction (format "\\%s{" type)))
-	    (goto-char new-segment-begin)
-	    (insert new-segment-introduction)
-	    (goto-char old-segment-end)
-	    (insert old-segment-conclusion)
-	    (setq beg (+ new-segment-begin (length old-segment-conclusion)))
-	    (setq end (+ end (length new-segment-introduction) (length old-segment-conclusion)))
-	    (goto-char beg)
-	    (setq beginnings (append beginnings (list beg))))))
+        (goto-char beg)
+        (while (re-search-forward "[[:space:]]*\\$[^$]*\\$[[:space:]]*" end t)
+          (let ((old-segment-end (match-beginning 0))
+                (old-segment-conclusion "}")
+                (new-segment-begin (match-end 0))
+                (new-segment-introduction (format "\\%s{" type)))
+            (goto-char new-segment-begin)
+            (insert new-segment-introduction)
+            (goto-char old-segment-end)
+            (insert old-segment-conclusion)
+            (setq beg (+ new-segment-begin (length old-segment-conclusion)))
+            (setq end (+ end (length new-segment-introduction)
+                         (length old-segment-conclusion)))
+            (goto-char beg)
+            (setq beginnings (append beginnings (list beg))))))
       (let ((offset 0))
-	(dotimes (i (length beginnings))
-	  (setf (nth i beginnings) (- (nth i beginnings) offset))
-	  (let ((b (nth i beginnings)))
-	    (goto-char b)
-	    (let ((e (save-excursion
-		       (forward-sexp 2)
-		       (point))))
-	      (when (and (looking-at
-			  (concat
-			   "\\\\"
-			   type
-			   "{\\([[:space:]]*\\)}"))
-			 (= (match-end 0) e))
-		(let ((old-length (length (match-string 0)))
-		      (new-length (length (match-string 1))))
-		  (replace-match (match-string 1))
-		  (setq offset (+ offset
-				  (- old-length new-length)))))))))
+        (dotimes (i (length beginnings))
+          (setf (nth i beginnings)
+                (- (nth i beginnings)
+                   offset))
+          (let ((b (nth i beginnings)))
+            (goto-char b)
+            (let ((e (save-excursion
+                       (forward-sexp 2)
+                       (point))))
+              (when (and (looking-at
+                          (concat
+                           "\\\\"
+                           type
+                           "{\\([[:space:]]*\\)}"))
+                         (= (match-end 0)
+                            e))
+                (let ((old-length (length (match-string 0)))
+                      (new-length (length (match-string 1))))
+                  (replace-match (match-string 1))
+                  (setq offset (+ offset
+                                  (- old-length new-length)))))))))
       beginnings)))
 
 (defun dynexp--in-latex-section-env-p ()
