@@ -193,7 +193,7 @@ If FOLD is non-nil, then fold the macro after inserting it."
              (boundp 'czm-tex-fold--verb-regex)
              (looking-back czm-tex-fold--verb-regex (line-beginning-position)))
         (czm-tex-fold--create-misc-overlay (match-beginning 0) (match-end 0)
-                                           (match-string 2)))))))
+                                           (match-string 1)))))))
 
 (defun dynexp-split-macro (beg)
   "Split macro at point and fold the first part.
