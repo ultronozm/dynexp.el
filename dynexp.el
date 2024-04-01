@@ -55,6 +55,8 @@ Example:
   (dynexp--core :fold t))
 
 (cl-defun dynexp-fold-and-mmm-parse ()
+  "Expand, fold, and parse mmm.
+Inserts \"mmm\" to cooperate with `dynexp-space'."
   (dynexp--core :fold t)
   (insert "mmm"))
 
@@ -187,7 +189,7 @@ If FOLD is non-nil, then fold the macro after inserting it."
             (when TeX-fold-mode
               (TeX-fold-macro)))
 	         (goto-char end)))
-       ((and (fboundp #'czm-tex-fold--create-misc-overlay)
+       ((and (fboundp 'czm-tex-fold--create-misc-overlay)
              (looking-back "\\\\verb\\(.\\)\\([^\\1]*\\)\\1" (line-beginning-position)))
         (czm-tex-fold--create-misc-overlay (match-beginning 0) (match-end 0)
                                            (match-string 2)))))))
