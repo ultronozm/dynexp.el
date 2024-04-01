@@ -186,7 +186,11 @@ If FOLD is non-nil, then fold the macro after inserting it."
 	           (goto-char b)
             (when TeX-fold-mode
               (TeX-fold-macro)))
-	         (goto-char end)))))))
+	         (goto-char end)))
+       ((and (fboundp #'czm-tex-fold--create-misc-overlay)
+             (looking-back "\\\\verb\\(.\\)\\([^\\1]*\\)\\1" (line-beginning-position)))
+        (czm-tex-fold--create-misc-overlay (match-beginning 0) (match-end 0)
+                                           (match-string 2)))))))
 
 (defun dynexp-split-macro (beg)
   "Split macro at point and fold the first part.

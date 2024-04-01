@@ -3462,7 +3462,7 @@ Text goes here
    ("vil" "\\varinjlim" nil)
    ("voila" "voil{'a}" nil)
    ("vpl" "\\varprojlim" nil)
-   ("vrb" "\\verb" nil)
+   ("vrb" "<+START+>\\verb|<+++>|<++><+END+>" dynexp)
    ("vskp" "\\vskip 12pt" nil)
    ("vsp" "<+START+>\\vspace{<+++>}<++><+END+>" dynexp)
    ("vspu" "<+START+>\\vspace{<+++>}<++><+END+>" dynexp)
