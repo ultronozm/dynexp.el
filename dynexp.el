@@ -299,10 +299,10 @@ the expansion ends with \"%!!!\", then delete that."
   (if (and abbrev-mode
            (not (looking-back " " 1))
            (expand-abbrev))
-      (cond ((looking-back "%!!!" 4)
+      (cond ((looking-back "%!!!" (max (- (point) 4) (point-min)))
              (search-backward "%!!!")
              (replace-match ""))
-            ((looking-back "%!!!mmm" 7)
+            ((looking-back "%!!!mmm" (max (- (point) 7) (point-min)))
              (search-backward "%!!!mmm")
              (replace-match "")
              ;; This next hack somehow avoids putting abbrev-mode in a
