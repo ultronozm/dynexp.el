@@ -1290,7 +1290,6 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
 " nil)
    ("excb" "\\end{xcb}
 " nil)
-   ("ez" "= 0" nil)
    ("f12" "\\frac{1}{2}" nil)
    ("f13" "\\frac{1}{3}" nil)
    ("f14" "\\frac{1}{4}" nil)
@@ -1343,6 +1342,8 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("isomorphims" "isomorphism" nil)
    ("subspcae" "subspace" nil)
    ("gc" "\\gcd" nil)
+   ("gcdu" "<+START+>\\gcd(<+++>)<++><+END+>" dynexp)
+   ("lcmu" "<+START+>\\lcm(<+++>)<++><+END+>" dynexp)
    ("gce" "\\`{E}" nil)
    ("ge" "\\`{e}" nil)
    ("gij" "g_{ij}" nil)
@@ -1831,6 +1832,7 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("mfrk" "<+START+>\\mathfrak{<+++>}<++><+END+>" dynexp)
    ("mfrku" "<+START+>\\mathfrak{<+++>}<++><+END+>" dynexp)
    ("mgt" "\\gg" nil)
+   ("mmgt" "\\gg" nil)
    ("mi" "-" nil)
    ("mi1" "- 1" nil)
    ("midx" "\\makeindex" nil)
@@ -1840,6 +1842,7 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("mlem" "\\newtheorem{lemma}{Lemma}
 " nil)
    ("mlt" "\\ll" nil)
+   ("mmlt" "\\lll" nil)
    ("lta" "\\lessapprox" nil)
    ("gta" "\\gtrapprox" nil)
    ("mn" "\\min" nil)
@@ -1862,6 +1865,8 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("mttu" "<+START+>\\mathtt{<+++>}<++><+END+>" dynexp)
    ("mvb" "{\\mathversion{bold} $ $}" nil)
    ("mx" "\\max" nil)
+   ("maxu" "<+START+>\\max(<+++>)<++><+END+>" dynexp)
+   ("minu" "<+START+>\\min(<+++>)<++><+END+>" dynexp)
    ("mx2bk" "<+START+><+TAB+>\\begin{bmatrix}
 <+TAB+><+++> & <++> \\\\
 <+TAB+><++> & <++> \\\\
@@ -2342,6 +2347,7 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("pidx" "\\printindex" nil)
    ("pl" "+" nil)
    ("plm" "\\pm" nil)
+   ("pmu" "<+START+>\\pmod{<+++>}<++><+END+>" dynexp)
    ("pmbu" "\\mathop{\\pmb{}}" nil)
    ("pnd" "\\#" nil)
    ("pni1" "\\prod^{n}_{i = 1}" nil)
