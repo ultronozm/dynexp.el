@@ -9,14 +9,19 @@
  (if (>= (string-to-number AUCTeX-version) 13.3)
      LaTeX-mode-abbrev-table
    latex-mode-abbrev-table)
- '(
+ `(
    ("00p" "(0,0)" dynexp-delete-leading-space)
    ("03p" "(0, 0, 0)" dynexp-delete-leading-space)
    ("0p" "(0)" dynexp-delete-leading-space)
    ("1ou" "<+START+>\\frac{1}{<+++>}<++><+END+>" dynexp)
    ("AA" "\\mathbb{A}" nil)
    ("Bigo" "<+START+>\\O\\left(<+++>\\right)<++><+END+>" dynexp)
+   ("II" "\\mathbb{I}" nil)
+   ("dII" "$\\mathbb{I}$" nil)
+   ("oII" "(\\mathbb{I})" nil)
+   ("BB" "\\mathbb{B}" nil)
    ("CC" "\\mathbb{C}" nil)
+   ("TT" "\\mathbb{T}" nil)
    ("Calderon" "Calder{\\'o}n" nil)
    ("Cech" "{\\v C}ech" nil)
    ("DD" "\\mathbb{D}" nil)
@@ -390,6 +395,7 @@
    ("bfk" "\\mathbf{k}" nil)
    ("bfl" "<+START+>\\left\\lfloor <+++> \\right\\rfloor<++><+END+>" dynexp)
    ("bflr" "<+START+>\\left\\lfloor <+++> \\right\\rfloor<++><+END+>" dynexp)
+   ("lflr" "<+START+>\\left\\lfloor <+++> \\right\\rfloor<++><+END+>" dynexp)
    ("bfll" "<+START+><+TAB+>\\begin{flushleft}
 <+TAB+><+++>
 <+TAB+>\\end{flushleft}<++><+END+>" dynexp)
@@ -644,6 +650,8 @@ Publisher." nil)
    ("d9" "$9$" nil)
    ("dAA" "$\\mathbb{A}$" nil)
    ("dPP" "$\\mathbb{P}$" nil)
+   ("dBB" "$\\mathbb{B}$" nil)
+   ("dTT" "$\\mathbb{T}$" nil)
    ("dCC" "$\\mathbb{C}$" nil)
    ("dGG" "$\\mathbb{G}$" nil)
    ("dHH" "$\\mathbb{H}$" nil)
@@ -1434,6 +1442,7 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("h12" "^{1/2}" dynexp-delete-leading-space)
    ("h13" "^{1/3}" dynexp-delete-leading-space)
    ("h14" "^{1/4}" dynexp-delete-leading-space)
+   ("h34" "^{3/4}" dynexp-delete-leading-space)
    ("l12" "_{1/2}" dynexp-delete-leading-space)
    ("l13" "_{1/3}" dynexp-delete-leading-space)
    ("l14" "_{1/4}" dynexp-delete-leading-space)
@@ -1505,6 +1514,7 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("hm12" "^{-1/2}" dynexp-delete-leading-space)
    ("hm13" "^{-1/3}" dynexp-delete-leading-space)
    ("hm14" "^{-1/4}" dynexp-delete-leading-space)
+   ("hm34" "^{-3/4}" dynexp-delete-leading-space)
    ("hm2" "^{-2}" dynexp-delete-leading-space)
    ("hmi" "^-" dynexp-delete-leading-space)
    ("hmo" "^{-1}" dynexp-delete-leading-space)
@@ -1514,6 +1524,8 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("hpl" "^+" dynexp-delete-leading-space)
    ("hpm" "^{\\pm}" dynexp-delete-leading-space)
    ("hplm" "^{\\pm}" dynexp-delete-leading-space)
+   ("hmip" "^{\\mp}" dynexp-delete-leading-space)
+   ("hmp" "^{\\mp}" dynexp-delete-leading-space)
    ("hpr" "^\\prime" dynexp-delete-leading-space)
    ("hprp" "^\\perp" dynexp-delete-leading-space)
    ("prp" "^\\perp" dynexp-delete-leading-space)
@@ -1740,7 +1752,8 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("lora" "\\longrightarrow" nil)
    ("lp" "_p" dynexp-delete-leading-space)
    ("lpl" "_+" dynexp-delete-leading-space)
-   ("lpm" "_{\\pm}" nil)
+   ("lpm" "_{\\pm}" dynexp-delete-leading-space)
+   ("lmp" "_{\\mp}" dynexp-delete-leading-space)
    ("lq" "_q" dynexp-delete-leading-space)
    ("lr" "_r" dynexp-delete-leading-space)
    ("lra" "\\leftrightarrow" nil)
@@ -1908,6 +1921,11 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
 <+TAB+><++> & <++> & <++> \\\\
 <+TAB+><++> & <++> & <++> \\\\
 <+TAB+>\\end{pmatrix}<++><+END+>" dynexp)
+   ("mx3pu" "<+START+><+TAB+>\\begin{pmatrix}
+<+TAB+>1 & <+++> & <++> \\\\
+<+TAB+>0 & 1 & <++> \\\\
+<+TAB+>0 & 0 & 1 \\\\
+<+TAB+>\\end{pmatrix}<++><+END+>" dynexp)
    ("mx4c" "<+START+><+TAB+>\\begin{pmatrix}
 <+TAB+><+++>  \\\\
 <+TAB+><++>  \\\\
@@ -2034,6 +2052,8 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("o9" "(9)" dynexp-delete-leading-space)
    ("oAA" "(\\mathbb{A})" dynexp-delete-leading-space)
    ("oCC" "(\\mathbb{C})" dynexp-delete-leading-space)
+   ("oBB" "(\\mathbb{B})" dynexp-delete-leading-space)
+   ("oTT" "(\\mathbb{T})" dynexp-delete-leading-space)
    ("oHH" "(\\mathbb{H})" dynexp-delete-leading-space)
    ("oNN" "(\\mathbb{N})" dynexp-delete-leading-space)
    ("oQQ" "(\\mathbb{Q})" dynexp-delete-leading-space)
