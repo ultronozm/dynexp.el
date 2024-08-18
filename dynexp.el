@@ -64,10 +64,18 @@ Inserts \"mmm\" to cooperate with `dynexp-space'."
   "Delete leading space.
 Example:
     (\"cu\" \"^3\" dynexp-delete-leading-space)"
-  (save-excursion
-    (goto-char last-abbrev-location)
-    (while (looking-back "[[:space:]]+" (line-beginning-position))
-      (replace-match ""))))
+  (if (texmathp)
+      (save-excursion
+        (goto-char last-abbrev-location)
+        (while (looking-back "[[:space:]]+" (line-beginning-position))
+          (replace-match "")))
+    (dynexp-cancel)))
+
+(defun dynexp-cancel ()
+  "Cancel expansion."
+  (interactive)
+  (backward-delete-char (- (point) last-abbrev-location))
+  (insert last-abbrev-text))
 
 (defun dynexp-delete-leading-space-dynexp ()
   "Delete leading space, then expand.
@@ -140,12 +148,14 @@ If FOLD is non-nil, then fold the macro after inserting it."
 (defun dynexp-next ()
   "Expand abbrev, remove <++> placeholders, fold LaTeX macros."
   (interactive)
-  (when (and (member last-command '(self-insert-command dynexp-space))
-             (let ((_keys (recent-keys))
-                   (len (length (recent-keys))))
-               (and (>= len 2)
-                    (equal ?\  (aref (recent-keys) (- len 2)))
-                    (looking-back " " 1))))
+  (when (and
+         (texmathp)
+         (member last-command '(self-insert-command dynexp-space))
+         (let ((_keys (recent-keys))
+               (len (length (recent-keys))))
+           (and (>= len 2)
+                (equal ?\  (aref (recent-keys) (- len 2)))
+                (looking-back " " 1))))
     (delete-char -1))
   (expand-abbrev)
   (let ((start (point))
