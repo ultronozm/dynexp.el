@@ -1666,7 +1666,6 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("l8" "_8" dynexp-delete-leading-space)
    ("l9" "_9" dynexp-delete-leading-space)
    ("la" "_a" dynexp-delete-leading-space)
-   ("lam" "L_A{}^\\mu" nil)
    ("lb" "_b" dynexp-delete-leading-space)
    ("lbl" "<+START+>\\label{<+++>}<++><+END+>" dynexp)
    ("lblu" "<+START+>\\label{<+++>}<++><+END+>" dynexp)
@@ -1726,15 +1725,15 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("li00" "\\lim_{(x,y) \\rightarrow (0,0)}" nil)
    ("liai" "\\lim_{a \\rightarrow \\infty}" nil)
    ;; ("lied" "\\pounds" nil)
-   ("lifni" "_\\infty" nil)
+   ("lifni" "_\\infty" dynexp-delete-leading-space)
    ("lij" "_{ij}" dynexp-delete-leading-space)
    ("lijk" "_{ijk}" dynexp-delete-leading-space)
    ("limi" "\\liminf" nil)
    ("limm" "\\lim" nil)
    ("lims" "\\limsup" nil)
    ("limu" "<+START+>\\lim_{<+++>}<++><+END+>" dynexp)
-   ("linfi" "_\\infty" nil)
-   ("lminfi" "_{-\\infty}" nil)
+   ("linfi" "_\\infty" dynexp-delete-leading-space)
+   ("lminfi" "_{-\\infty}" dynexp-delete-leading-space)
    ("lixl0" "\\lim_{x \\rightarrow x_0}" nil)
    ("lj" "_j" dynexp-delete-leading-space)
    ("ljk" "_{jk}" dynexp-delete-leading-space)
@@ -1761,7 +1760,7 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("lsa" "\\leftsquigarrow" nil)
    ("lscl" "_{\\ell}" dynexp-delete-leading-space)
    ("hscl" "^{\\ell}" dynexp-delete-leading-space)
-   ("lst" "_\\ast" nil)
+   ("lst" "_\\ast" dynexp-delete-leading-space)
    ("lt" "_t" dynexp-delete-leading-space)
    ("lte" "\\leq" nil)
    ("tlte" "\\trianglelefteqslant" nil)
@@ -1897,6 +1896,11 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
 <+TAB+>-1 & 0 \\\\
 <+TAB+>\\end{bmatrix}<++><+END+>" dynexp)
    ("mx3b" "<+START+><+TAB+>\\begin{bmatrix}
+<+TAB+><+++> & <++> & <++> \\\\
+<+TAB+><++> & <++> & <++> \\\\
+<+TAB+><++> & <++> & <++> \\\\
+<+TAB+>\\end{bmatrix}<++><+END+>" dynexp)
+   ("mx3bk" "<+START+><+TAB+>\\begin{bmatrix}
 <+TAB+><+++> & <++> & <++> \\\\
 <+TAB+><++> & <++> & <++> \\\\
 <+TAB+><++> & <++> & <++> \\\\
@@ -2271,6 +2275,7 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("opk" "(k)" dynexp-delete-leading-space)
    ("opl" "\\oplus" nil)
    ("bigopl" "\\bigoplus" nil)
+   ("bigoti" "\\bigotimes" nil)
    ("opn" "(n)" dynexp-delete-leading-space)
    ("opnu" "<+START+>\\operatorname{<+++>}<++><+END+>" dynexp)
    ("opr" "(r)" dynexp-delete-leading-space)
