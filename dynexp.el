@@ -333,5 +333,26 @@ the expansion ends with \"%!!!\", then delete that."
   (dolist (abbrev abbrevs)
     (define-abbrev table (car abbrev) (cadr abbrev) (caddr abbrev))))
 
+(defcustom dynexp-auto-expand-list '()
+  "List of abbrevs to auto-expand under `dynexp-auto-expand-mode'.")
+
+(defun dynexp-auto--expand ()
+  "Expand abbrevs from `dynexp-auto-expand-list' if point is at word end."
+  (let* ((bounds (bounds-of-thing-at-point 'word))
+         (word-end (cdr bounds))
+         (word (and bounds (buffer-substring-no-properties (car bounds) word-end))))
+    (when (and word
+               (= (point) word-end)  ; Check if point is at word end
+               (member word dynexp-auto-expand-list))
+      (dynexp-space))))
+
+;;;###autoload
+(define-minor-mode dynexp-auto-expand-mode
+  "Minor mode to automatically expand certain abbrevs."
+  :lighter " AutoExp"
+  (if dynexp-auto-expand-mode
+      (add-hook 'post-self-insert-hook #'dynexp-auto--expand nil t)
+    (remove-hook 'post-self-insert-hook #'dynexp-auto--expand t)))
+
 (provide 'dynexp)
 ;;; dynexp.el ends here

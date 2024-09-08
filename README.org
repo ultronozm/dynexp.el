@@ -95,3 +95,25 @@ The package file =lisp/abbrevs.el= contains a few thousand abbrevs that I've acc
 
 You can create new expansion templates by modifying =lisp/abbrevs.el=.  It's often convenient to mimic an existing expansion template.
 
+* Auto-expansion
+This package now includes an auto-expansion feature that allows certain abbrevs to be expanded automatically without the need to press =SPC=.  This may be useful for common abbreviations.
+
+** Setup
+To use this feature:
+
+1. Enable =dynexp-auto-expand-mode= in the buffers of interest.  For instance, to enable it in your LaTeX buffers, add the following to your init file:
+
+   #+begin_src elisp
+   (add-hook 'LaTeX-mode-hook 'dynexp-auto-expand-mode)
+   #+end_src
+
+2. Customize the =dynexp-auto-expand-list= variable to include the abbrevs you want to auto-expand. For example:
+
+   #+begin_src elisp
+   (setq dynexp-auto-expand-list '("zx" "bdp" "bthm"))
+   #+end_src
+
+   This will cause the abbrevs "zx", "bdp", and "bthm" to expand automatically as soon as you finish typing them, without needing to press =SPC=.
+
+** Usage
+With =dynexp-auto-expand-mode= enabled and =dynexp-auto-expand-list= configured, simply type any abbrev included in the list. It will expand automatically when you finish typing it, saving you the extra step of pressing =SPC=.
