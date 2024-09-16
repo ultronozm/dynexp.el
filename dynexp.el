@@ -49,9 +49,9 @@
 (cl-defun dynexp-fold ()
   "Expand and then fold.
 Example:
-    (\"bthm\" \"<+START+><+TAB+>\\begin{theorem}
+    (\"bthm\" \"<+TAB+>\\begin{theorem}
 <+TAB+><+++>
-<+TAB+>\\end{theorem}<++><+END+>\" dynexp-fold)"
+<+TAB+>\\end{theorem}<++>\" dynexp-fold)"
   (dynexp--core :fold t))
 
 (cl-defun dynexp-fold-and-mmm-parse ()
@@ -80,7 +80,7 @@ Example:
 (defun dynexp-delete-leading-space-dynexp ()
   "Delete leading space, then expand.
 Example:
-    (\"hu\" \"<+START+>^{<+++>}<++><+END+>\" dynexp-delete-leading-space-dynexp)"
+    (\"hu\" \"^{<+++>}<++>\" dynexp-delete-leading-space-dynexp)"
   (save-excursion
     (goto-char last-abbrev-location)
     (while (looking-back "[[:space:]]+" (line-beginning-position))
@@ -96,53 +96,42 @@ Example:
   "Core function for dynamic expansion.
 If FOLD is non-nil, then fold the macro after inserting it."
   (interactive)
-  (let (bound
-	       start end
-	       _fold-pos)
-    (search-backward "<+END+>")
-    (replace-match "")
-    (setq bound (point))
-    ;; set end to new marker at point
-    (setq end (point-marker))
-    (search-backward "<+START+>")
-    (replace-match "")
-    (setq start (point))
+  (let ((start last-abbrev-location)
+        (end (point-marker)))
+
+    ;; Clear <+START+> and <+END+> for backwards compatibility
     (save-excursion
-      (while (search-forward "<+TAB+>" bound t)
-	       (progn
-	         (replace-match "")
-	         (when (and (looking-at-p "\\\\begin")
-		                   (not (looking-back "^[[:space:]]*" (line-beginning-position))))
-	           (newline-and-indent))
-	         ;; (indent-for-tab-command)
-	         )))
-    ;; (when fold
-    ;;   (setq fold-pos (point)))
+      (goto-char start)
+      (when (search-forward "<+START+>" (marker-position end) t)
+        (replace-match ""))
+      (goto-char (marker-position end))
+      (when (search-backward "<+END+>" start t)
+        (replace-match "")))
+
+    (goto-char start)
+    (save-excursion
+      (while (search-forward "<+TAB+>" (marker-position end) t)
+        (replace-match "")
+        (when (and (looking-at-p "\\\\begin")
+                   (not (looking-back "^[[:space:]]*" (line-beginning-position))))
+          (newline-and-indent))))
+
     (search-forward "<+++>")
     (replace-match "")
     (forward-char)
     (backward-char)
     (when (and TeX-fold-mode
-	              (looking-back "\\\\item " (line-beginning-position)))
+               (looking-back "\\\\item " (line-beginning-position)))
       (save-excursion
-	       (goto-char (match-beginning 0))
-	       (TeX-fold-macro)))
-    ;; (when fold-pos
-    ;;   (save-excursion
-    ;; 	(goto-char fold-pos)
-    ;; 	(TeX-fold-macro))
-    ;;   (backward-char))
+        (goto-char (match-beginning 0))
+        (TeX-fold-macro)))
 
-    ;; convert end back to a point from a marker
-    (setq end (marker-position end))
     (when (and TeX-fold-mode fold)
       (TeX-fold-region start (point))
-      (TeX-fold-region (point)
-                       end))
+      (TeX-fold-region (point) (marker-position end)))
 
     (insert "%!!!")
-    ;; (replace-match "%!!!")
-    ))
+    (set-marker end nil)))
 
 ;;;###autoload
 (defun dynexp-next ()
@@ -160,45 +149,45 @@ If FOLD is non-nil, then fold the macro after inserting it."
   (expand-abbrev)
   (let ((start (point))
         (start-in-latex-section-env (dynexp--in-latex-section-env-p))
-	       (start-texmathp (texmathp)))
+        (start-texmathp (texmathp)))
     (when (search-forward "<++>" nil t)
       (replace-match ""))
     (let ((end-in-latex-section-env (dynexp--in-latex-section-env-p)))
       (cond
        ((and start-texmathp
-	            (not (texmathp))
-	            (equal (car texmathp-why)
+             (not (texmathp))
+             (equal (car texmathp-why)
                     "$"))
-	       (let ((beg (cdr texmathp-why))
-	             (end
-	              (save-excursion
-		               (goto-char (cdr texmathp-why))
-		               (forward-char 1)
-		               (search-forward "$"))))
-	         (replace-region-contents
-	          (1+ beg)
-	          (1- end)
-	          (lambda (s)
-	            (with-temp-buffer
-	              (insert s)
-	              (goto-char (point-min))
-	              (while (re-search-forward "\\s-*_\\s-*" end t)
-		               (replace-match "_" t t))
-	              (buffer-substring-no-properties (point-min)
+        (let ((beg (cdr texmathp-why))
+              (end
+               (save-excursion
+                 (goto-char (cdr texmathp-why))
+                 (forward-char 1)
+                 (search-forward "$"))))
+          (replace-region-contents
+           (1+ beg)
+           (1- end)
+           (lambda (s)
+             (with-temp-buffer
+               (insert s)
+               (goto-char (point-min))
+               (while (re-search-forward "\\s-*_\\s-*" end t)
+                 (replace-match "_" t t))
+               (buffer-substring-no-properties (point-min)
                                                (point-max)))))))
        ((and start-in-latex-section-env (not end-in-latex-section-env))
-	       (save-excursion
+        (save-excursion
           (goto-char start)
           (when TeX-fold-mode
             (TeX-fold-macro))))
        ((dynexp--looking-back-macro-to-fold-p)
-	       (let ((end (point-marker))
-	             (beginnings (dynexp-split-macro (match-beginning 0))))
-	         (dolist (b beginnings)
-	           (goto-char b)
+        (let ((end (point-marker))
+              (beginnings (dynexp-split-macro (match-beginning 0))))
+          (dolist (b beginnings)
+            (goto-char b)
             (when TeX-fold-mode
               (TeX-fold-macro)))
-	         (goto-char end)))
+          (goto-char end)))
        ((and (fboundp 'czm-tex-fold--create-misc-overlay)
              (boundp 'czm-tex-fold--verb-regex)
              (looking-back czm-tex-fold--verb-regex (line-beginning-position)))
@@ -272,7 +261,7 @@ TODO: relevance of BEG?"
                  LaTeX-section-list))
         "{[^}]*$")
        (buffer-substring-no-properties
-	       (point) pos)))))
+        (point) pos)))))
 
 (defun dynexp--looking-back-macro-to-fold-p ()
   "Look back for a macro that needs to be folded."

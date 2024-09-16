@@ -13,9 +13,9 @@
    ("00p" "(0,0)" dynexp-delete-leading-space)
    ("03p" "(0, 0, 0)" dynexp-delete-leading-space)
    ("0p" "(0)" dynexp-delete-leading-space)
-   ("1ou" "<+START+>\\frac{1}{<+++>}<++><+END+>" dynexp)
+   ("1ou" "\\frac{1}{<+++>}<++>" dynexp)
    ("AA" "\\mathbb{A}" nil)
-   ("Bigo" "<+START+>\\O\\left(<+++>\\right)<++><+END+>" dynexp)
+   ("Bigo" "\\O\\left(<+++>\\right)<++>" dynexp)
    ("II" "\\mathbb{I}" nil)
    ("dII" "$\\mathbb{I}$" nil)
    ("oII" "(\\mathbb{I})" nil)
@@ -50,13 +50,13 @@
    ("Salie" "Sali{\\'e}" nil)
    ("ZZ" "\\mathbb{Z}" nil)
    ("PP" "\\mathbb{P}" nil)
-   ("absu" "<+START+>\\lvert <+++> \\rvert<++><+END+>" dynexp)
+   ("absu" "\\lvert <+++> \\rvert<++>" dynexp)
    ("ace" "\\'{E}" nil)
    ("ada" "& = &" nil)
    ("ae" "\\'{e}" nil)
    ("ag" "\\arg" nil)
    ("ale" "\\aleph" nil)
-   ("alu" "<+START+>\\alert{<+++>}<++><+END+>" dynexp)
+   ("alu" "\\alert{<+++>}<++>" dynexp)
    ("amp" "&" nil)
    ("angl" "\\angle" nil)
    ("aplb" "\\mathbf{a} + \\mathbf{b}" nil)
@@ -84,33 +84,33 @@
    ("b8" "\\mathbf{8}" nil)
    ("b9" "\\mathbf{9}" nil)
    ("ba" "\\mathbf{a}" nil)
-   ("bac" "<+START+><+TAB+>\\begin{acknowledgment}
+   ("bac" "<+TAB+>\\begin{acknowledgment}
 <+TAB+><+++>
-<+TAB+>\\end{acknowledgment}<++><+END+>" dynexp-fold)
-   ("bal" "<+START+><+TAB+>\\begin{align}
+<+TAB+>\\end{acknowledgment}<++>" dynexp-fold)
+   ("bal" "<+TAB+>\\begin{align}
 <+TAB+><+++>
-<+TAB+>\\end{align}<++><+END+>" dynexp)
-   ("bala" "<+START+><+TAB+>\\begin{alignat}{}
+<+TAB+>\\end{align}<++>" dynexp)
+   ("bala" "<+TAB+>\\begin{alignat}{}
 <+TAB+><+++>
-<+TAB+>\\end{alignat}<++><+END+>" dynexp)
-   ("balas" "<+START+><+TAB+>\\begin{alignat*}{}
+<+TAB+>\\end{alignat}<++>" dynexp)
+   ("balas" "<+TAB+>\\begin{alignat*}{}
 <+TAB+><+++>
-<+TAB+>\\end{alignat*}<++><+END+>" dynexp)
-   ("bald" "<+START+><+TAB+>\\begin{aligned}
+<+TAB+>\\end{alignat*}<++>" dynexp)
+   ("bald" "<+TAB+>\\begin{aligned}
 <+TAB+><+++>
-<+TAB+>\\end{aligned}<++><+END+>" dynexp)
-   ("balda" "<+START+><+TAB+>\\begin{alignedat}{}
+<+TAB+>\\end{aligned}<++>" dynexp)
+   ("balda" "<+TAB+>\\begin{alignedat}{}
 <+TAB+><+++>
-<+TAB+>\\end{alignedat}<++><+END+>" dynexp)
-   ("balg" "<+START+><+TAB+>\\begin{algorithm}
+<+TAB+>\\end{alignedat}<++>" dynexp)
+   ("balg" "<+TAB+>\\begin{algorithm}
 <+TAB+><+++>
-<+TAB+>\\end{algorithm}<++><+END+>" dynexp-fold)
-   ("bals" "<+START+><+TAB+>\\begin{align*}
+<+TAB+>\\end{algorithm}<++>" dynexp-fold)
+   ("bals" "<+TAB+>\\begin{align*}
 <+TAB+><+++>
-<+TAB+>\\end{align*}<++><+END+>" dynexp)
-   ("bans" "<+START+><+TAB+>\\begin{answer}
+<+TAB+>\\end{align*}<++>" dynexp)
+   ("bans" "<+TAB+>\\begin{answer}
 <+TAB+><+++>
-<+TAB+>\\end{answer}<++><+END+>" dynexp-fold)
+<+TAB+>\\end{answer}<++>" dynexp-fold)
    ("bb" "\\mathbf{b}" nil)
    ("bfb" "\\mathbf{b}" nil)
    ("bbca" "\\mathbb{A}" nil)
@@ -269,12 +269,12 @@
    ("bbcz3" "\\mathbb{Z}^3" nil)
    ("bbczm" "\\mathbb{Z}^m" nil)
    ("bbczn" "\\mathbb{Z}^n" nil)
-   ("bbib" "<+START+>\\begin{thebibliography}{<+++>}<++><+END+>" dynexp)
-   ("bbu" "<+START+>\\mathbb{<+++>}<++><+END+>" dynexp)
+   ("bbib" "\\begin{thebibliography}{<+++>}<++>" dynexp)
+   ("bbu" "\\mathbb{<+++>}<++>" dynexp)
    ("bca" "\\mathbf{A}" nil)
-   ("bcas" "<+START+><+TAB+>\\begin{cases}
+   ("bcas" "<+TAB+>\\begin{cases}
 <+TAB+><+++> & <++>
-<+TAB+>\\end{cases}<++><+END+>" dynexp)
+<+TAB+>\\end{cases}<++>" dynexp)
    ("bcb" "\\mathbf{B}" nil)
    ("bcc" "\\mathbf{C}" nil)
    ("bcd" "\\mathbf{D}" nil)
@@ -286,38 +286,38 @@
    ("bcj" "\\mathbf{J}" nil)
    ("bck" "\\mathbf{K}" nil)
    ("bcl" "\\mathbf{L}" nil)
-   ("bclm" "<+START+><+TAB+>\\begin{claim}
+   ("bclm" "<+TAB+>\\begin{claim}
 <+TAB+><+++>
-<+TAB+>\\end{claim}<++><+END+>" dynexp-fold)
+<+TAB+>\\end{claim}<++>" dynexp-fold)
    ("bcm" "\\mathbf{M}" nil)
-   ("bcmnt" "<+START+><+TAB+>\\begin{comment}
+   ("bcmnt" "<+TAB+>\\begin{comment}
 <+TAB+><+++>
-<+TAB+>\\end{comment}<++><+END+>" dynexp)
+<+TAB+>\\end{comment}<++>" dynexp)
    ("bcn" "\\mathbf{N}" nil)
-   ("bcncl" "<+START+><+TAB+>\\begin{conclusion}
+   ("bcncl" "<+TAB+>\\begin{conclusion}
 <+TAB+><+++>
-<+TAB+>\\end{conclusion}<++><+END+>" dynexp-fold)
-   ("bcnd" "<+START+><+TAB+>\\begin{condition}
+<+TAB+>\\end{conclusion}<++>" dynexp-fold)
+   ("bcnd" "<+TAB+>\\begin{condition}
 <+TAB+><+++>
-<+TAB+>\\end{condition}<++><+END+>" dynexp)
-   ("bcnj" "<+START+><+TAB+>\\begin{conjecture}
+<+TAB+>\\end{condition}<++>" dynexp)
+   ("bcnj" "<+TAB+>\\begin{conjecture}
 <+TAB+><+++>
-<+TAB+>\\end{conjecture}<++><+END+>" dynexp-fold)
+<+TAB+>\\end{conjecture}<++>" dynexp-fold)
    ("bco" "\\mathbf{O}" nil)
-   ("bcor" "<+START+><+TAB+><+TAB+>\\begin{corollary}
+   ("bcor" "<+TAB+><+TAB+>\\begin{corollary}
 <+TAB+><+TAB+><+++>
-<+TAB+><+TAB+>\\end{corollary}<++><+END+>" dynexp-fold)
+<+TAB+><+TAB+>\\end{corollary}<++>" dynexp-fold)
    ("bcp" "\\mathbf{P}" nil)
    ("bcq" "\\mathbf{Q}" nil)
    ("bcr" "\\mathbf{R}" nil)
-   ("bcrit" "<+START+><+TAB+>\\begin{criterion}
+   ("bcrit" "<+TAB+>\\begin{criterion}
 <+TAB+><+++>
-<+TAB+>\\end{criterion}<++><+END+>" dynexp-fold)
+<+TAB+>\\end{criterion}<++>" dynexp-fold)
    ("bcs" "\\mathbf{S}" nil)
    ("bct" "\\mathbf{T}" nil)
-   ("bctr" "<+START+><+TAB+>\\begin{center}
+   ("bctr" "<+TAB+>\\begin{center}
 <+TAB+><+++>
-<+TAB+>\\end{center}<++><+END+>" dynexp)
+<+TAB+>\\end{center}<++>" dynexp)
    ("bcu" "\\mathbf{U}" nil)
    ("bcv" "\\mathbf{V}" nil)
    ("bcw" "\\mathbf{W}" nil)
@@ -325,98 +325,98 @@
    ("bcy" "\\mathbf{Y}" nil)
    ("bcz" "\\mathbf{Z}" nil)
    ("bd" "\\mathbf{d}" nil)
-   ("bdfn" "<+START+><+TAB+>\\begin{definition}
+   ("bdfn" "<+TAB+>\\begin{definition}
 <+TAB+><+++>
-<+TAB+>\\end{definition}<++><+END+>" dynexp-fold)
+<+TAB+>\\end{definition}<++>" dynexp-fold)
    ("bdju" "\\bigsqcup" nil)
-   ("bdma" "<+START+><+TAB+>\\begin{displaymath}
+   ("bdma" "<+TAB+>\\begin{displaymath}
 <+TAB+><+++>
-<+TAB+>\\end{displaymath}<++><+END+>" dynexp)
+<+TAB+>\\end{displaymath}<++>" dynexp)
    ("bdo" "\\begin{document}" nil)
-   ("bdp" "<+START+><+TAB+>\\begin{equation*}
+   ("bdp" "<+TAB+>\\begin{equation*}
 <+TAB+><+++>
-<+TAB+>\\end{equation*}<++><+END+>" dynexp)
-   ("bms" "<+START+><+TAB+>\\begin{minted}{sage}
+<+TAB+>\\end{equation*}<++>" dynexp)
+   ("bms" "<+TAB+>\\begin{minted}{sage}
 <+++>
-<+TAB+>\\end{minted}<+END+>" dynexp-fold-and-mmm-parse)
+<+TAB+>\\end{minted}" dynexp-fold-and-mmm-parse)
    ("ceq" "" czm-tex-edit-repeat-most-recent-equation)
    ("cp" "" czm-tex-edit-repeat-most-recent-equation)
    ("cal" "" czm-tex-edit-repeat-align-segment)
    ("bds" "\\dotsb" nil)
-   ("bea" "<+START+><+TAB+>\\begin{array}{ccc}
+   ("bea" "<+TAB+>\\begin{array}{ccc}
 <+TAB+><+++>
-<+TAB+>\\end{array}<++><+END+>" dynexp-fold)
+<+TAB+>\\end{array}<++>" dynexp-fold)
    ("bee" "\\mathbf{e}" nil)
    ("bel1" "\\mathbf{e}_1" nil)
    ("bel2" "\\mathbf{e}_2" nil)
    ("bel3" "\\mathbf{e}_3" nil)
    ("beln" "\\mathbf{e}_n" nil)
-   ("ben" "<+START+><+TAB+>\\begin{enumerate}
+   ("ben" "<+TAB+>\\begin{enumerate}
 <+TAB+>\\item <+++>
-<+TAB+>\\end{enumerate}<++><+END+>" dynexp-fold)
-   ("beni" "<+START+><+TAB+>\\begin{enumerate}[(i)]
+<+TAB+>\\end{enumerate}<++>" dynexp-fold)
+   ("beni" "<+TAB+>\\begin{enumerate}[(i)]
 <+TAB+>\\item <+++>
-<+TAB+>\\end{enumerate}<++><+END+>" dynexp-fold)
-   ("bena" "<+START+><+TAB+>\\begin{enumerate}[(a)]
+<+TAB+>\\end{enumerate}<++>" dynexp-fold)
+   ("bena" "<+TAB+>\\begin{enumerate}[(a)]
 <+TAB+>\\item <+++>
-<+TAB+>\\end{enumerate}<++><+END+>" dynexp-fold)
-   ("beq" "<+START+><+TAB+>\\begin{equation}
+<+TAB+>\\end{enumerate}<++>" dynexp-fold)
+   ("beq" "<+TAB+>\\begin{equation}
 <+TAB+><+++>
-<+TAB+>\\end{equation}<++><+END+>" dynexp)
-   ("beqs" "<+START+>\\begin{equation*}
+<+TAB+>\\end{equation}<++>" dynexp)
+   ("beqs" "\\begin{equation*}
 <+TAB+><+++>
-<+TAB+>\\end{equation*}<++><+END+>" dynexp)
-   ("besb" "<+START+><+TAB+>\\begin{Sb}
+<+TAB+>\\end{equation*}<++>" dynexp)
+   ("besb" "<+TAB+>\\begin{Sb}
 <+TAB+><+++>
-<+TAB+>\\end{Sb}<++><+END+>" dynexp)
-   ("besp" "<+START+><+TAB+>\\begin{Sp}
+<+TAB+>\\end{Sb}<++>" dynexp)
+   ("besp" "<+TAB+>\\begin{Sp}
 <+TAB+><+++>
-<+TAB+>\\end{Sp}<++><+END+>" dynexp)
-   ("bex" "<+START+><+TAB+>\\begin{example}
+<+TAB+>\\end{Sp}<++>" dynexp)
+   ("bex" "<+TAB+>\\begin{example}
 <+TAB+><+++>
-<+TAB+>\\end{example}<++><+END+>" dynexp-fold)
-   ("bexb" "<+START+><+TAB+>\\begin{exampleblock}{<+++>}
+<+TAB+>\\end{example}<++>" dynexp-fold)
+   ("bexb" "<+TAB+>\\begin{exampleblock}{<+++>}
 <+TAB+>\\begin{itemize}
 <+TAB+>\\item <++>
 <+TAB+>\\end{itemize}
-<+TAB+>\\end{exampleblock}<++><+END+>" dynexp)
-   ("bexe" "<+START+><+TAB+>\\begin{exercise}
+<+TAB+>\\end{exampleblock}<++>" dynexp)
+   ("bexe" "<+TAB+>\\begin{exercise}
 <+TAB+><+++>
-<+TAB+>\\end{exercise}<++><+END+>" dynexp-fold)
+<+TAB+>\\end{exercise}<++>" dynexp-fold)
    ("bfa" "\\mathbf{a}" nil)
    ("bfc" "\\mathbf{c}" nil)
    ("bfe" "\\mathbf{e}" nil)
    ("bff" "\\mathbf{f}" nil)
    ("bfi" "\\mathbf{i}" nil)
-   ("bfig" "<+START+><+TAB+>\\begin{figure}
+   ("bfig" "<+TAB+>\\begin{figure}
 <+TAB+><+++>
-<+TAB+>\\end{figure}<++><+END+>" dynexp)
-   ("bfiu" "<+START+>{\\bfi <+++>}<++><+END+>" dynexp)
+<+TAB+>\\end{figure}<++>" dynexp)
+   ("bfiu" "{\\bfi <+++>}<++>" dynexp)
    ("bfj" "\\mathbf{j}" nil)
    ("bfk" "\\mathbf{k}" nil)
-   ("bfl" "<+START+>\\left\\lfloor <+++> \\right\\rfloor<++><+END+>" dynexp)
-   ("bflr" "<+START+>\\left\\lfloor <+++> \\right\\rfloor<++><+END+>" dynexp)
-   ("lflr" "<+START+>\\left\\lfloor <+++> \\right\\rfloor<++><+END+>" dynexp)
-   ("bfll" "<+START+><+TAB+>\\begin{flushleft}
+   ("bfl" "\\left\\lfloor <+++> \\right\\rfloor<++>" dynexp)
+   ("bflr" "\\left\\lfloor <+++> \\right\\rfloor<++>" dynexp)
+   ("lflr" "\\left\\lfloor <+++> \\right\\rfloor<++>" dynexp)
+   ("bfll" "<+TAB+>\\begin{flushleft}
 <+TAB+><+++>
-<+TAB+>\\end{flushleft}<++><+END+>" dynexp)
-   ;; ("bflr" "<+START+><+TAB+>\\begin{flushright}
+<+TAB+>\\end{flushleft}<++>" dynexp)
+   ;; ("bflr" "<+TAB+>\\begin{flushright}
    ;; <+TAB+><+++>
-   ;; <+TAB+>\\end{flushright}<++><+END+>" dynexp)
-   ("bfu" "<+START+>\\textbf{<+++>}<++><+END+>" dynexp)
+   ;; <+TAB+>\\end{flushright}<++>" dynexp)
+   ("bfu" "\\textbf{<+++>}<++>" dynexp)
    ("bg" "\\mathbf{g}" nil)
-   ("bga" "<+START+><+TAB+>\\begin{gather}
+   ("bga" "<+TAB+>\\begin{gather}
 <+TAB+><+++>
-<+TAB+>\\end{gather}<++><+END+>" dynexp)
-   ("bgad" "<+START+><+TAB+>\\begin{gathered}
+<+TAB+>\\end{gather}<++>" dynexp)
+   ("bgad" "<+TAB+>\\begin{gathered}
 <+TAB+><+++>
-<+TAB+>\\end{gathered}<++><+END+>" dynexp)
-   ("bgas" "<+START+><+TAB+>\\begin{gather*}
+<+TAB+>\\end{gathered}<++>" dynexp)
+   ("bgas" "<+TAB+>\\begin{gather*}
 <+TAB+><+++>
-<+TAB+>\\end{gather*}<++><+END+>" dynexp)
-   ("bgo" "<+START+>\\O(<+++>)<++><+END+>" dynexp)
+<+TAB+>\\end{gather*}<++>" dynexp)
+   ("bgo" "\\O(<+++>)<++>" dynexp)
    ("bgo1" "\\O(1)" nil)
-   ("bgop" "<+START+>\\O\\left(<+++>\\right)<++><+END+>" dynexp)
+   ("bgop" "\\O\\left(<+++>\\right)<++>" dynexp)
    ("bh" "\\mathbf{h}" nil)
    ("bibia" "\\bibitem[]{}
 Author [year]
@@ -426,130 +426,130 @@ Title.
 Author [year]
 {\\it Title.\\/}
 Publisher." nil)
-   ("bigo" "<+START+>\\O(<+++>)<++><+END+>" dynexp)
+   ("bigo" "\\O(<+++>)<++>" dynexp)
    ("bigo1" "\\O(1)" nil)
-   ("bigop" "<+START+>\\O\\left(<+++>\\right)<++><+END+>" dynexp)
+   ("bigop" "\\O\\left(<+++>\\right)<++>" dynexp)
    ("bints" "\\bigcap" nil)
-   ("bitm" "<+START+><+TAB+>\\begin{itemize}
+   ("bitm" "<+TAB+>\\begin{itemize}
 <+TAB+>\\item <+++>
-<+TAB+>\\end{itemize}<++><+END+>" dynexp-fold)
+<+TAB+>\\end{itemize}<++>" dynexp-fold)
    ("bj" "\\mathbf{j}" nil)
    ("bk" "\\mathbf{k}" nil)
    ("bksl" "\\" nil)
    ("bl" "\\mathbf{l}" nil)
    ("blackl" "\\quad\\blacklozenge" nil)
-   ("blem" "<+START+><+TAB+><+TAB+>\\begin{lemma}
+   ("blem" "<+TAB+><+TAB+>\\begin{lemma}
 <+TAB+><+TAB+><+++>
-<+TAB+><+TAB+>\\end{lemma}<++><+END+>" dynexp-fold)
-   ("blk" "<+START+><+TAB+>\\begin{block}{<+++>}
+<+TAB+><+TAB+>\\end{lemma}<++>" dynexp-fold)
+   ("blk" "<+TAB+>\\begin{block}{<+++>}
 <+TAB+>\\begin{itemize}
 <+TAB+>\\item <++>
 <+TAB+>\\end{itemize}
-<+TAB+>\\end{block}<++><+END+>" dynexp)
+<+TAB+>\\end{block}<++>" dynexp)
    ("blskp" "\\baselineskip" nil)
    ("blstr" "\\renewcommand{\\baselinestretch}{1.5}" nil)
    ("blt" "\\bullet" nil)
    ("hblt" "^{\\bullet}" dynexp-delete-leading-space)
    ("bm" "\\mathbf{m}" nil)
-   ("bma" "<+START+><+TAB+>\\begin{math}
+   ("bma" "<+TAB+>\\begin{math}
 <+TAB+><+++>
-<+TAB+>\\end{math}<++><+END+>" dynexp)
-   ("bmlt" "<+START+><+TAB+>\\begin{multline}
+<+TAB+>\\end{math}<++>" dynexp)
+   ("bmlt" "<+TAB+>\\begin{multline}
 <+TAB+><+++>
-<+TAB+>\\end{multline}<++><+END+>" dynexp)
-   ("bmlts" "<+START+><+TAB+>\\begin{multline*}
+<+TAB+>\\end{multline}<++>" dynexp)
+   ("bmlts" "<+TAB+>\\begin{multline*}
 <+TAB+><+++>
-<+TAB+>\\end{multline*}<++><+END+>" dynexp)
+<+TAB+>\\end{multline*}<++>" dynexp)
    ("bmpg" "\\begin{minipage}{\\textwidth}" nil)
    ("bn" "\\mathbf{n}" nil)
-   ("bno" "<+START+>\\binom{<+++>}{<++>}<++><+END+>" dynexp)
-   ("bnota" "<+START+><+TAB+>\\begin{notation}
+   ("bno" "\\binom{<+++>}{<++>}<++>" dynexp)
+   ("bnota" "<+TAB+>\\begin{notation}
 <+TAB+><+++>
-<+TAB+>\\end{notation}<++><+END+>" dynexp-fold)
-   ("bnote" "<+START+><+TAB+>\\begin{note}
+<+TAB+>\\end{notation}<++>" dynexp-fold)
+   ("bnote" "<+TAB+>\\begin{note}
 <+TAB+><+++>
-<+TAB+>\\end{note}<++><+END+>" dynexp-fold)
+<+TAB+>\\end{note}<++>" dynexp-fold)
    ("bo" "\\mathbf{o}" nil)
    ("bopl" "\\boxplus" nil)
    ("bp" "\\mathbf{p}" nil)
-   ("bprf" "<+START+><+TAB+>\\begin{proof}
+   ("bprf" "<+TAB+>\\begin{proof}
 <+TAB+><+++>
-<+TAB+>\\end{proof}<++><+END+>" dynexp-fold)
-   ("bprob" "<+START+><+TAB+>\\begin{problem}
+<+TAB+>\\end{proof}<++>" dynexp-fold)
+   ("bprob" "<+TAB+>\\begin{problem}
 <+TAB+><+++>
-<+TAB+>\\end{problem}<++><+END+>" dynexp-fold)
-   ("bprop" "<+START+><+TAB+>\\begin{proposition}
+<+TAB+>\\end{problem}<++>" dynexp-fold)
+   ("bprop" "<+TAB+>\\begin{proposition}
 <+TAB+><+++>
-<+TAB+>\\end{proposition}<++><+END+>" dynexp-fold)
+<+TAB+>\\end{proposition}<++>" dynexp-fold)
    ("bq" "\\mathbf{q}" nil)
-   ("bqa" "<+START+><+TAB+>\\begin{eqnarray}
+   ("bqa" "<+TAB+>\\begin{eqnarray}
 <+TAB+><+++>
-<+TAB+>\\end{eqnarray}<++><+END+>" dynexp)
-   ("bqal" "<+START+>\\begin{eqnarray}\\label{eqn:<+++>}<++><+END+>" dynexp)
-   ("bqas" "<+START+><+TAB+>\\begin{eqnarray*}
+<+TAB+>\\end{eqnarray}<++>" dynexp)
+   ("bqal" "\\begin{eqnarray}\\label{eqn:<+++>}<++>" dynexp)
+   ("bqas" "<+TAB+>\\begin{eqnarray*}
 <+TAB+><+++>
-<+TAB+>\\end{eqnarray*}<++><+END+>" dynexp)
-   ("bqm" "<+START+>``<+++>''<++><+END+>" dynexp)
-   ("qt" "<+START+>``<+++>''<++><+END+>" dynexp)
-   ("bqst" "<+START+><+TAB+>\\begin{question}
+<+TAB+>\\end{eqnarray*}<++>" dynexp)
+   ("bqm" "``<+++>''<++>" dynexp)
+   ("qt" "``<+++>''<++>" dynexp)
+   ("bqst" "<+TAB+>\\begin{question}
 <+TAB+><+++>
-<+TAB+>\\end{question}<++><+END+>" dynexp-fold)
-   ("bqt" "<+START+><+TAB+>\\begin{quotation}
+<+TAB+>\\end{question}<++>" dynexp-fold)
+   ("bqt" "<+TAB+>\\begin{quotation}
 <+TAB+><+++>
-<+TAB+>\\end{quotation}<++><+END+>" dynexp)
-   ("bques" "<+START+><+TAB+>\\begin{question}
+<+TAB+>\\end{quotation}<++>" dynexp)
+   ("bques" "<+TAB+>\\begin{question}
 <+TAB+><+++>
-<+TAB+>\\end{question}<++><+END+>" dynexp-fold)
+<+TAB+>\\end{question}<++>" dynexp-fold)
    ("br" "\\mathbf{r}" nil)
-   ("brmk" "<+START+><+TAB+>\\begin{remark}
+   ("brmk" "<+TAB+>\\begin{remark}
 <+TAB+><+++>
-<+TAB+>\\end{remark}<++><+END+>" dynexp-fold)
+<+TAB+>\\end{remark}<++>" dynexp-fold)
    ("bs" "\\mathbf{s}" nil)
    ("bskp" "\\bigskip" nil)
    ("bsl" "\\backslash" nil)
-   ("bsol" "<+START+><+TAB+>\\begin{solution}
+   ("bsol" "<+TAB+>\\begin{solution}
 <+TAB+><+++>
-<+TAB+>\\end{solution}<++><+END+>" dynexp)
-   ("bsplt" "<+START+><+TAB+>\\begin{split}
+<+TAB+>\\end{solution}<++>" dynexp)
+   ("bsplt" "<+TAB+>\\begin{split}
 <+TAB+><+++>
-<+TAB+>\\end{split}<++><+END+>" dynexp)
-   ("bsum" "<+START+><+TAB+>\\begin{summary}
+<+TAB+>\\end{split}<++>" dynexp)
+   ("bsum" "<+TAB+>\\begin{summary}
 <+TAB+><+++>
-<+TAB+>\\end{summary}<++><+END+>" dynexp)
-   ("bsy" "<+START+>\\boldsymbol{<+++>}<++><+END+>" dynexp)
-   ("bsyu" "<+START+>\\boldsymbol{<+++>}<++><+END+>" dynexp)
+<+TAB+>\\end{summary}<++>" dynexp)
+   ("bsy" "\\boldsymbol{<+++>}<++>" dynexp)
+   ("bsyu" "\\boldsymbol{<+++>}<++>" dynexp)
    ("bt" "\\mathbf{t}" nil)
-   ("btab" "<+START+><+TAB+>\\begin{table}
+   ("btab" "<+TAB+>\\begin{table}
 <+TAB+><+++>
-<+TAB+>\\end{table}<++><+END+>" dynexp)
-   ("btb" "<+START+><+TAB+>\\begin{tabbing}
+<+TAB+>\\end{table}<++>" dynexp)
+   ("btb" "<+TAB+>\\begin{tabbing}
 <+TAB+><+++>
-<+TAB+>\\end{tabbing}<++><+END+>" dynexp)
-   ("bthm" "<+START+><+TAB+>\\begin{theorem}
+<+TAB+>\\end{tabbing}<++>" dynexp)
+   ("bthm" "<+TAB+>\\begin{theorem}
 <+TAB+><+++>
-<+TAB+>\\end{theorem}<++><+END+>" dynexp-fold)
-   ("btr" "<+START+><+TAB+>\\begin{tabular}{|c|c|}
+<+TAB+>\\end{theorem}<++>" dynexp-fold)
+   ("btr" "<+TAB+>\\begin{tabular}{|c|c|}
 <+TAB+><+++>
-<+TAB+>\\end{tabular}<++><+END+>" dynexp)
+<+TAB+>\\end{tabular}<++>" dynexp)
    ("bu" "\\mathbf{u}" nil)
    ("buni" "\\bigcup" nil)
    ("bv" "\\mathbf{v}" nil)
-   ("bvrb" "<+START+><+TAB+>\\begin{verbatim}
+   ("bvrb" "<+TAB+>\\begin{verbatim}
 <+TAB+><+++>
-<+TAB+>\\end{verbatim}<++><+END+>" dynexp-fold)
+<+TAB+>\\end{verbatim}<++>" dynexp-fold)
    ("bw" "\\mathbf{w}" nil)
    ("bx" "\\mathbf{x}" nil)
-   ("bxca" "<+START+><+TAB+>\\begin{xca}
+   ("bxca" "<+TAB+>\\begin{xca}
 <+TAB+><+++>
-<+TAB+>\\end{xca}<++><+END+>" dynexp)
-   ("bxcb" "<+START+><+TAB+>\\begin{xcb}
+<+TAB+>\\end{xca}<++>" dynexp)
+   ("bxcb" "<+TAB+>\\begin{xcb}
 <+TAB+><+++>
-<+TAB+>\\end{xcb}<++><+END+>" dynexp)
+<+TAB+>\\end{xcb}<++>" dynexp)
    ("byy" "\\mathbf{y}" nil)
    ("bz" "\\mathbf{z}" nil)
-   ("capt" "<+START+>\\caption{<+++>}<++><+END+>" dynexp)
-   ("captu" "<+START+>\\caption{<+++>}<++><+END+>" dynexp)
-   ("cau" "<+START+>\\mathcal{<+++>}<++><+END+>" dynexp)
+   ("capt" "\\caption{<+++>}<++>" dynexp)
+   ("captu" "\\caption{<+++>}<++>" dynexp)
+   ("cau" "\\mathcal{<+++>}<++>" dynexp)
    ("cbx" "      %========================================================%
       %                                                        %
       %========================================================%
@@ -581,39 +581,39 @@ Publisher." nil)
    ("ccy" "\\mathcal{Y}" nil)
    ("ccz" "\\mathcal{Z}" nil)
    ("cd" "D" nil)
-   ("cdli" "<+START+><+TAB+>\\begin{equation*}
+   ("cdli" "<+TAB+>\\begin{equation*}
 <+TAB+>\\begin{CD}         
 <+TAB+>0 @>>> <+++> @><++>>><++> @><++>>> <++> @><++>>> <++> @>>>0
 <+TAB+>\\end{CD} 
 <+TAB+>\\end{equation*}
-<+TAB+><++><+END+>" dynexp)
+<+TAB+><++>" dynexp)
    ("cdo" "\\cdot" nil)
    ;; ("cdp" "\\cleardoublepage" nil)
    ("cds" "\\dotsc" nil)
-   ("cdsq" "<+START+><+TAB+>\\begin{equation*}
+   ("cdsq" "<+TAB+>\\begin{equation*}
 <+TAB+>\\begin{CD}         
 <+TAB+><+++> @><++>>><++>\\\\
 <+TAB+>@V<++>VV  @VV<++>V \\\\
 <+TAB+><++> @>><++>><++>\\\\
 <+TAB+>\\end{CD}
 <+TAB+>\\end{equation*}
-<+TAB+><++><+END+>" dynexp)
-   ("cdu" "<+START+><+TAB+>\\[
+<+TAB+><++>" dynexp)
+   ("cdu" "<+TAB+>\\[
 <+TAB+>\\begin{CD}
 <+TAB+><+++>
 <+TAB+>\\end{CD}<++>
-<+TAB+>\\]<+END+>" dynexp)
-   ("cei" "<+START+>\\lceil <+++> \\rceil<++><+END+>" dynexp)
+<+TAB+>\\]" dynexp)
+   ("cei" "\\lceil <+++> \\rceil<++>" dynexp)
    ("cir" "\\circ" nil)
-   ("cit" "<+START+>\\cite{<+++>}<++><+END+>" dynexp)
+   ("cit" "\\cite{<+++>}<++>" dynexp)
    ("citp" "(\\cite{})" dynexp-delete-leading-space)
-   ("citu" "<+START+>\\cite{<+++>}<++><+END+>" dynexp)
+   ("citu" "\\cite{<+++>}<++>" dynexp)
    ("cla" "\\circlearrowleft" nil)
    ("cld" "%-----------------------------------------------------------------------
 " nil)
    ("cldd" "%=======================================================================
 " nil)
-   ("clin" "<+START+>\\centerline{<+++>}<++><+END+>" dynexp)
+   ("clin" "\\centerline{<+++>}<++>" dynexp)
    ("coph" "\\cos \\phi" nil)
    ("coq" "\\cos^2" nil)
    ("coth" "\\cos \\theta" nil)
@@ -878,7 +878,7 @@ Publisher." nil)
    ("dbq" "$\\mathbf{q}$" nil)
    ("dbr" "$\\mathbf{r}$" nil)
    ("dbs" "$\\mathbf{s}$" nil)
-   ("dbsy" "<+START+>$\\boldsymbol{<+++>}<++><+END+>" dynexp)
+   ("dbsy" "$\\boldsymbol{<+++>}<++>" dynexp)
    ("dbsyu" "$\\boldsymbol{}$" nil)
    ("dbt" "$\\mathbf{t}$" nil)
    ("dbu" "$\\mathbf{u}$" nil)
@@ -1151,7 +1151,7 @@ Publisher." nil)
    ("eb" "}" nil)
    ("ebib" "\\end{thebibliography}" nil)
    ("ebk" "]" nil)
-   ("ecas" "<+START+><+TAB+>\\end{cases}<+++><+END+>" dynexp)
+   ("ecas" "<+TAB+>\\end{cases}<+++>" dynexp)
    ("eclm" "\\end{claim}
 " nil)
    ("ecmnt" "\\end{comment}" nil)
@@ -1185,7 +1185,7 @@ Publisher." nil)
    ("efig" "\\end{figure}" nil)
    ("efll" "\\end{flushleft}" nil)
    ("eflr" "\\end{flushright}" nil)
-   ("efu" "<+START+>\\efrac{<+++>}{<++>}<++><+END+>" dynexp)
+   ("efu" "\\efrac{<+++>}{<++>}<++>" dynexp)
    ("ega" "\\end{gather}
 " nil)
    ("egad" "\\end{gathered}
@@ -1204,13 +1204,13 @@ Publisher." nil)
    ("emp" "\\varnothing" nil)
    ("empa" "\\emptyset" nil)
    ("empg" "\\end{minipage}" nil)
-   ("xdo" "<+START+>\\externaldocument{<+++>}<++><+END+>" dynexp)
+   ("xdo" "\\externaldocument{<+++>}<++>" dynexp)
    ("en" "\\operatorname{End}" nil)
    ("au" "\\operatorname{Aut}" nil)
    ("sy" "\\operatorname{Sym}" nil)
    ("nd" "\\operatorname{Ind}" nil)
-   ("emu" "<+START+>\\emph{<+++>}<++><+END+>" dynexp)
-   ("rsp" "<+START+>(resp.\\ <+++>)<++><+END+>" dynexp)
+   ("emu" "\\emph{<+++>}<++>" dynexp)
+   ("rsp" "(resp.\\ <+++>)<++>" dynexp)
    ("enota" "\\end{notation}
 " nil)
    ("enote" "\\end{note}
@@ -1312,9 +1312,9 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("tf23" "\\tfrac{2}{3}" nil)
    ("tf32" "\\tfrac{3}{2}" nil)
    ("fa" "\\forall" nil)
-   ("fbm" "<+START+><+TAB+>\\fbox{\\begin{minipage}{.9\\linewidth}
+   ("fbm" "<+TAB+>\\fbox{\\begin{minipage}{.9\\linewidth}
 <+++>
-<+TAB+>\\end{minipage}}<++><+END+>" dynexp)
+<+TAB+>\\end{minipage}}<++>" dynexp)
    ("fdbfi" "\\newcommand{\\bfi}{\\bfseries\\itshape}" nil)
    ("fddt" "\\frac{d}{dt}" nil)
    ("fdudt" "\\frac{du}{dt}" nil)
@@ -1327,8 +1327,8 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
 \\caption{\\label{}}
 \\end{center}
 \\end{figure}" nil)
-   ("fl" "<+START+>\\lfloor <+++> \\rfloor<++><+END+>" dynexp)
-   ("flr" "<+START+>\\lfloor <+++> \\rfloor<++><+END+>" dynexp)
+   ("fl" "\\lfloor <+++> \\rfloor<++>" dynexp)
+   ("flr" "\\lfloor <+++> \\rfloor<++>" dynexp)
    ("flt" "\\flat" nil)
    ("fof" "}{" nil)
    ("fpdu" "\\frac{\\partial}{\\partial" nil)
@@ -1336,25 +1336,25 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
         {\\partial x \\partial y}" nil)
    ("fpt" "\\frac{\\partial^3}
         {\\partial x \\partial y \\partial z}" nil)
-   ("fpu" "<+START+>\\frac{\\partial}{\\partial <+++>}<++><+END+>" dynexp)
+   ("fpu" "\\frac{\\partial}{\\partial <+++>}<++>" dynexp)
    ("fpx" "\\frac{\\partial}{\\partial x}" nil)
    ("fpy" "\\frac{\\partial}{\\partial y}" nil)
    ("fpzx" "\\frac{\\partial z}{\\partial x}" nil)
    ("frbox" "\\fbox{\\parbox{2.0in}{\\centerline{\\large \\bf type header} text }}" nil)
    ("frboxn" "\\fbox{\\parbox{2.0in}{{\\large \\bf Note: \\,} text }}" nil)
-   ("fru" "<+START+><+TAB+>\\frame{\\frametitle{<+++>}
+   ("fru" "<+TAB+>\\frame{\\frametitle{<+++>}
 <+TAB+><++>
-<+TAB+>}<+END+>" dynexp)
-   ("ftn" "<+START+>\\footnote{<+++>}<++><+END+>" dynexp)
-   ("ftnu" "<+START+>\\footnote{<+++>}<++><+END+>" dynexp)
-   ("fu" "<+START+>\\frac{<+++>}{<++>}<++><+END+>" dynexp)
-   ("zu" "<+START+>\\Of{<+++>}{<++>}<++><+END+>" dynexp)
+<+TAB+>}" dynexp)
+   ("ftn" "\\footnote{<+++>}<++>" dynexp)
+   ("ftnu" "\\footnote{<+++>}<++>" dynexp)
+   ("fu" "\\frac{<+++>}{<++>}<++>" dynexp)
+   ("zu" "\\Of{<+++>}{<++>}<++>" dynexp)
    ("functino" "function" nil)
    ("isomorphims" "isomorphism" nil)
    ("subspcae" "subspace" nil)
    ("gc" "\\gcd" nil)
-   ("gcdu" "<+START+>\\gcd(<+++>)<++><+END+>" dynexp)
-   ("lcmu" "<+START+>\\lcm(<+++>)<++><+END+>" dynexp)
+   ("gcdu" "\\gcd(<+++>)<++>" dynexp)
+   ("lcmu" "\\lcm(<+++>)<++>" dynexp)
    ("gce" "\\`{E}" nil)
    ("ge" "\\`{e}" nil)
    ("gij" "g_{ij}" nil)
@@ -1501,7 +1501,7 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("hg" "^g" dynexp-delete-leading-space)
    ("hh" "^h" dynexp-delete-leading-space)
    ("hht" "{}^t" dynexp)
-   ("hhu" "<+START+>{}^{<+++>}<++><+END+>" dynexp)
+   ("hhu" "{}^{<+++>}<++>" dynexp)
    ("hi" "^i" dynexp-delete-leading-space)
    ("hifni" "^\\infty" dynexp-delete-leading-space)
    ("hij" "^{ij}" dynexp-delete-leading-space)
@@ -1538,12 +1538,12 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("hs" "^s" dynexp-delete-leading-space)
    ("hshp" "^\\sharp" dynexp-delete-leading-space)
    ("hskp" "\\hskip 2in" nil)
-   ("hsp" "<+START+>\\hspace{<+++>}<++><+END+>" dynexp)
-   ("hspu" "<+START+>\\hspace{<+++>}<++><+END+>" dynexp)
+   ("hsp" "\\hspace{<+++>}<++>" dynexp)
+   ("hspu" "\\hspace{<+++>}<++>" dynexp)
    ("hst" "^\\ast" dynexp-delete-leading-space)
    ("ht" "^t" dynexp-delete-leading-space)
    ("hti" "^\\times" dynexp-delete-leading-space)
-   ;; ("sl2" "<+START+>\\mathrm{SL}_2<+END+>" dynexp-delete-leading-space-dynexp)
+   ;; ("sl2" "\\mathrm{SL}_2" dynexp-delete-leading-space-dynexp)
    ("sl2" "\\mathrm{SL}_2" nil)
    ("sl3" "\\mathrm{SL}_3" nil)
    ("sln" "\\mathrm{SL}_n" nil)
@@ -1558,10 +1558,10 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("pglm" "\\mathrm{PGL}_m" nil)
    ("tra" "\\trace" nil)
    ("trn" "\\transpose" nil)
-   ("slu" "<+START+>\\mathrm{SL}_{<+++>}<++><+END+>" dynexp-delete-leading-space-dynexp)
-   ("pglu" "<+START+>\\mathrm{PGL}_{<+++>}<++><+END+>" dynexp-delete-leading-space-dynexp)
-   ("glu" "<+START+>\\mathrm{GL}_{<+++>}<++><+END+>" dynexp-delete-leading-space-dynexp)
-   ("hu" "<+START+>^{<+++>}<++><+END+>" dynexp-delete-leading-space-dynexp)
+   ("slu" "\\mathrm{SL}_{<+++>}<++>" dynexp-delete-leading-space-dynexp)
+   ("pglu" "\\mathrm{PGL}_{<+++>}<++>" dynexp-delete-leading-space-dynexp)
+   ("glu" "\\mathrm{GL}_{<+++>}<++>" dynexp-delete-leading-space-dynexp)
+   ("hu" "^{<+++>}<++>" dynexp-delete-leading-space-dynexp)
    ("huu" "^u" dynexp-delete-leading-space)
    ("huc" "^c" dynexp-delete-leading-space)
    ("hv" "^v" dynexp-delete-leading-space)
@@ -1615,11 +1615,11 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("i10" "\\int^1_0" nil)
    ("i2xp0" "\\int^{2 \\pi}_0" nil)
    ("iba" "\\int^b_a" nil)
-   ("idx" "<+START+>\\index{<+++>}<++><+END+>" dynexp)
-   ("idxu" "<+START+>\\index{<+++>}<++><+END+>" dynexp)
+   ("idx" "\\index{<+++>}<++>" dynexp)
+   ("idxu" "\\index{<+++>}<++>" dynexp)
    ("ifni" "\\infty" nil)
-   ("igr" "<+START+>\\includegraphics{<+++>}<++><+END+>" dynexp)
-   ("igru" "<+START+>\\includegraphics{<+++>}<++><+END+>" dynexp)
+   ("igr" "\\includegraphics{<+++>}<++>" dynexp)
+   ("igru" "\\includegraphics{<+++>}<++>" dynexp)
    ("iinf" "\\int^\\infty_{- \\infty}" nil)
    ("ilcd" "\\int_D" nil)
    ("illu" "\\begin{figure}
@@ -1639,22 +1639,22 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("intd" "\\int \\!\\!\\! \\int" nil)
    ("ints" "\\cap" nil)
    ("intt" "\\int \\!\\!\\! \\int \\!\\!\\! \\int" nil)
-   ("intxt" "<+START+>\\intertext{<+++>}<++><+END+>" dynexp)
-   ("intxtu" "<+START+>\\intertext{<+++>}<++><+END+>" dynexp)
+   ("intxt" "\\intertext{<+++>}<++>" dynexp)
+   ("intxtu" "\\intertext{<+++>}<++>" dynexp)
    ("ir3" "\\int_{\\mathbb{R}^3}" nil)
    ("iso" "\\cong" nil)
-   ("itk" "<+START+><+TAB+>\\int_{
+   ("itk" "<+TAB+>\\int_{
 <+TAB+>\\substack{
 <+TAB+><+++> 
 <+TAB+>}
-<+TAB+>}<++><+END+>" dynexp)
-   ("itm" "<+START+><+TAB+>\\item <+++><+END+>" dynexp)
-   ("itmu" "<+START+><+TAB+>\\item[<+++>] <++><+END+>" dynexp)
-   ("itu" "<+START+>{\\it<+++>}<++><+END+>" dynexp)
+<+TAB+>}<++>" dynexp)
+   ("itm" "<+TAB+>\\item <+++>" dynexp)
+   ("itmu" "<+TAB+>\\item[<+++>] <++>" dynexp)
+   ("itu" "{\\it<+++>}<++>" dynexp)
    ("iu" "\\int" nil)
-   ("iul" "<+START+><+TAB+>\\int_{
+   ("iul" "<+TAB+>\\int_{
 <+TAB+><+++> 
-<+TAB+>}<++><+END+>" dynexp)
+<+TAB+>}<++>" dynexp)
    ("kr" "\\ker" nil)
    ("l0" "_0" dynexp-delete-leading-space)
    ("l1" "_1" dynexp-delete-leading-space)
@@ -1670,8 +1670,8 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("l9" "_9" dynexp-delete-leading-space)
    ("la" "_a" dynexp-delete-leading-space)
    ("lb" "_b" dynexp-delete-leading-space)
-   ("lbl" "<+START+>\\label{<+++>}<++><+END+>" dynexp)
-   ("lblu" "<+START+>\\label{<+++>}<++><+END+>" dynexp)
+   ("lbl" "\\label{<+++>}<++>" dynexp)
+   ("lblu" "\\label{<+++>}<++>" dynexp)
    ("lbrk" "\\linebreak" nil)
    ("lc" "_c" dynexp-delete-leading-space)
    ("lca" "_A" dynexp-delete-leading-space)
@@ -1707,10 +1707,10 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("usign" "using" nil)
    ("lea" "\\leftarrow" nil)
    ("lla" "\\leftleftarrows" nil)
-   ("lebk" "<+START+>\\left[ <+++> \\right]<++><+END+>" dynexp)
-   ("lebr" "<+START+>\\left\\{ <+++> \\right\\}<++><+END+>" dynexp)
-   ("lel" "<+START+>\\left\\langle <+++> \\right\\rangle<++><+END+>" dynexp)
-   ("lep" "<+START+>\\left( <+++> \\right)<++><+END+>" dynexp)
+   ("lebk" "\\left[ <+++> \\right]<++>" dynexp)
+   ("lebr" "\\left\\{ <+++> \\right\\}<++>" dynexp)
+   ("lel" "\\left\\langle <+++> \\right\\rangle<++>" dynexp)
+   ("lep" "\\left( <+++> \\right)<++>" dynexp)
    ("lequ" "\\begin{eqnarray}
 \\lefteqn{} \\nonumber \\\\
 & &
@@ -1734,18 +1734,18 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("limi" "\\liminf" nil)
    ("limm" "\\lim" nil)
    ("lims" "\\limsup" nil)
-   ("limu" "<+START+>\\lim_{<+++>}<++><+END+>" dynexp)
+   ("limu" "\\lim_{<+++>}<++>" dynexp)
    ("linfi" "_\\infty" dynexp-delete-leading-space)
    ("lminfi" "_{-\\infty}" dynexp-delete-leading-space)
    ("lixl0" "\\lim_{x \\rightarrow x_0}" nil)
    ("lj" "_j" dynexp-delete-leading-space)
    ("ljk" "_{jk}" dynexp-delete-leading-space)
    ("lk" "_k" dynexp-delete-leading-space)
-   ("llb" "<+START+>\\{<+++>\\}<++><+END+>" dynexp)
-   ("lld" "<+START+>\\left\\langle \\! \\left\\langle <+++> \\right\\rangle \\! \\right\\langle<++><+END+>" dynexp)
-   ("lle" "<+START+>\\langle <+++> \\rangle<++><+END+>" dynexp)
-   ("llin" "<+START+>\\leftline{<+++>}<++><+END+>" dynexp)
-   ("llt" "<+START+>\\left\\langle \\! \\left\\langle \\! \\left\\langle <+++> \\right\\rangle \\! \\right\\rangle \\! \\left\\rangle<++><+END+>" dynexp)
+   ("llb" "\\{<+++>\\}<++>" dynexp)
+   ("lld" "\\left\\langle \\! \\left\\langle <+++> \\right\\rangle \\! \\right\\langle<++>" dynexp)
+   ("lle" "\\langle <+++> \\rangle<++>" dynexp)
+   ("llin" "\\leftline{<+++>}<++>" dynexp)
+   ("llt" "\\left\\langle \\! \\left\\langle \\! \\left\\langle <+++> \\right\\rangle \\! \\right\\rangle \\! \\left\\rangle<++>" dynexp)
    ("lm" "_m" dynexp-delete-leading-space)
    ("lmi" "_-" dynexp-delete-leading-space)
    ("ln" "_n" dynexp-delete-leading-space)
@@ -1771,7 +1771,7 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("tlt" "\\triangleleft" nil)
    ("tgt" "\\triangleright" nil)
    ("lti" "\\ltimes" nil)
-   ("ltx" "<+START+>\\documentclass[reqno]{amsart} \\input{common.tex}
+   ("ltx" "\\documentclass[reqno]{amsart} \\input{common.tex}
 
 \\begin{document}
 
@@ -1779,14 +1779,14 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
 
 \\bibliography{refs}{} \\bibliographystyle{plain}
 \\end{document}
-<+END+>" dynexp-fold)
-   ("lu" "<+START+>_{<+++>}<++><+END+>" dynexp-delete-leading-space-dynexp)
+" dynexp-fold)
+   ("lu" "_{<+++>}<++>" dynexp-delete-leading-space-dynexp)
    ("lucm" "_M" dynexp-delete-leading-space)
    ("lul" "_l" dynexp-delete-leading-space)
    ("luu" "_u" dynexp-delete-leading-space)
    ("lv" "_v" dynexp-delete-leading-space)
-   ("lve" "<+START+>\\left\\lvert <+++> \\right\\rvert<++><+END+>" dynexp)
-   ("lve" "<+START+>\\left| <+++> \\right|<++><+END+>" dynexp)
+   ("lve" "\\left\\lvert <+++> \\right\\rvert<++>" dynexp)
+   ("lve" "\\left| <+++> \\right|<++>" dynexp)
    ("lvst" "_\\star" dynexp-delete-leading-space)
    ("lw" "_w" dynexp-delete-leading-space)
    ("lx" "_x" dynexp-delete-leading-space)
@@ -1832,28 +1832,28 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("lxz" "_\\zeta" dynexp-delete-leading-space)
    ("ly" "_y" dynexp-delete-leading-space)
    ("lz" "_z" dynexp-delete-leading-space)
-   ("mbbu" "<+START+>\\mathbb{<+++>}<++><+END+>" dynexp)
-   ("mbb" "<+START+>\\mathbb{<+++>}<++><+END+>" dynexp)
-   ("mbf" "<+START+>\\mathbf{<+++>}<++><+END+>" dynexp)
-   ("mbfu" "<+START+>\\mathbf{<+++>}<++><+END+>" dynexp)
-   ("mbx" "<+START+>\\mbox{<+++>}<++><+END+>" dynexp)
-   ("mbxu" "<+START+>\\mbox{<+++>}<++><+END+>" dynexp)
-   ("mcal" "<+START+>\\mathcal{<+++>}<++><+END+>" dynexp)
-   ("mcalu" "<+START+>\\mathcal{<+++>}<++><+END+>" dynexp)
+   ("mbbu" "\\mathbb{<+++>}<++>" dynexp)
+   ("mbb" "\\mathbb{<+++>}<++>" dynexp)
+   ("mbf" "\\mathbf{<+++>}<++>" dynexp)
+   ("mbfu" "\\mathbf{<+++>}<++>" dynexp)
+   ("mbx" "\\mbox{<+++>}<++>" dynexp)
+   ("mbxu" "\\mbox{<+++>}<++>" dynexp)
+   ("mcal" "\\mathcal{<+++>}<++>" dynexp)
+   ("mcalu" "\\mathcal{<+++>}<++>" dynexp)
    ("mcor" "\\newtheorem{corollary}{Corollary}
 " nil)
    ("mdfn" "\\newtheorem{definition}{Definition}
 " nil)
-   ("mfrk" "<+START+>\\mathfrak{<+++>}<++><+END+>" dynexp)
-   ("mfrku" "<+START+>\\mathfrak{<+++>}<++><+END+>" dynexp)
+   ("mfrk" "\\mathfrak{<+++>}<++>" dynexp)
+   ("mfrku" "\\mathfrak{<+++>}<++>" dynexp)
    ("mgt" "\\gg" nil)
    ("mmgt" "\\gg" nil)
    ("mi" "-" nil)
    ("mi1" "- 1" nil)
    ("midx" "\\makeindex" nil)
    ("mip" "\\mp" nil)
-   ("mit" "<+START+>\\mathit{<+++>}<++><+END+>" dynexp)
-   ("mitu" "<+START+>\\mathit{<+++>}<++><+END+>" dynexp)
+   ("mit" "\\mathit{<+++>}<++>" dynexp)
+   ("mitu" "\\mathit{<+++>}<++>" dynexp)
    ("mlem" "\\newtheorem{lemma}{Lemma}
 " nil)
    ("mlt" "\\ll" nil)
@@ -1862,188 +1862,188 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("gta" "\\gtrapprox" nil)
    ("mn" "\\min" nil)
    ("mo" "-1" nil)
-   ("mopu" "<+START+>\\mathop{<+++>}<++><+END+>" dynexp)
+   ("mopu" "\\mathop{<+++>}<++>" dynexp)
    ("mprop" "\\newtheorem{proposition}{Proposition}
 " nil)
-   ("mrkb" "<+START+>\\markboth{<+++>}{<++>}<++><+END+>" dynexp)
-   ("mrkbu" "<+START+>\\markboth{<+++>}<++><+END+>" dynexp)
-   ("mrm" "<+START+>\\mathrm{<+++>}<++><+END+>" dynexp)
-   ("mrg" "<+START+>\\mathring{<+++>}<++><+END+>" dynexp)
-   ("mrmu" "<+START+>\\mathrm{<+++>}<++><+END+>" dynexp)
-   ("msf" "<+START+>\\mathsf{<+++>}<++><+END+>" dynexp)
-   ("msfu" "<+START+>\\mathsf{<+++>}<++><+END+>" dynexp)
+   ("mrkb" "\\markboth{<+++>}{<++>}<++>" dynexp)
+   ("mrkbu" "\\markboth{<+++>}<++>" dynexp)
+   ("mrm" "\\mathrm{<+++>}<++>" dynexp)
+   ("mrg" "\\mathring{<+++>}<++>" dynexp)
+   ("mrmu" "\\mathrm{<+++>}<++>" dynexp)
+   ("msf" "\\mathsf{<+++>}<++>" dynexp)
+   ("msfu" "\\mathsf{<+++>}<++>" dynexp)
    ("mskp" "\\medskip" nil)
    ("msp" "\\:" nil)
    ("mthm" "\\newtheorem{theorem}{Theorem}
 " nil)
-   ("mtt" "<+START+>\\mathtt{<+++>}<++><+END+>" dynexp)
-   ("mttu" "<+START+>\\mathtt{<+++>}<++><+END+>" dynexp)
+   ("mtt" "\\mathtt{<+++>}<++>" dynexp)
+   ("mttu" "\\mathtt{<+++>}<++>" dynexp)
    ("mvb" "{\\mathversion{bold} $ $}" nil)
    ("mx" "\\max" nil)
-   ("maxu" "<+START+>\\max(<+++>)<++><+END+>" dynexp)
-   ("minu" "<+START+>\\min(<+++>)<++><+END+>" dynexp)
-   ("mx2bk" "<+START+><+TAB+>\\begin{bmatrix}
+   ("maxu" "\\max(<+++>)<++>" dynexp)
+   ("minu" "\\min(<+++>)<++>" dynexp)
+   ("mx2bk" "<+TAB+>\\begin{bmatrix}
 <+TAB+><+++> & <++> \\\\
 <+TAB+><++> & <++> \\\\
-<+TAB+>\\end{bmatrix}<++><+END+>" dynexp)
-   ("mx2i" "<+START+><+TAB+>\\begin{bmatrix}
+<+TAB+>\\end{bmatrix}<++>" dynexp)
+   ("mx2i" "<+TAB+>\\begin{bmatrix}
 <+TAB+>1 & 0 \\\\
 <+TAB+>0 & 1 \\\\
-<+TAB+>\\end{bmatrix}<++><+END+>" dynexp)
-   ("mx2p" "<+START+><+TAB+>\\begin{pmatrix}
+<+TAB+>\\end{bmatrix}<++>" dynexp)
+   ("mx2p" "<+TAB+>\\begin{pmatrix}
 <+TAB+><+++> & <++> \\\\
 <+TAB+><++> & <++> \\\\
-<+TAB+>\\end{pmatrix}<++><+END+>" dynexp)
-   ("mx2s" "<+START+><+TAB+>\\begin{bmatrix}
+<+TAB+>\\end{pmatrix}<++>" dynexp)
+   ("mx2s" "<+TAB+>\\begin{bmatrix}
 <+TAB+> 0 & 1 \\\\
 <+TAB+>-1 & 0 \\\\
-<+TAB+>\\end{bmatrix}<++><+END+>" dynexp)
-   ("mx3b" "<+START+><+TAB+>\\begin{bmatrix}
+<+TAB+>\\end{bmatrix}<++>" dynexp)
+   ("mx3b" "<+TAB+>\\begin{bmatrix}
 <+TAB+><+++> & <++> & <++> \\\\
 <+TAB+><++> & <++> & <++> \\\\
 <+TAB+><++> & <++> & <++> \\\\
-<+TAB+>\\end{bmatrix}<++><+END+>" dynexp)
-   ("mx3bk" "<+START+><+TAB+>\\begin{bmatrix}
+<+TAB+>\\end{bmatrix}<++>" dynexp)
+   ("mx3bk" "<+TAB+>\\begin{bmatrix}
 <+TAB+><+++> & <++> & <++> \\\\
 <+TAB+><++> & <++> & <++> \\\\
 <+TAB+><++> & <++> & <++> \\\\
-<+TAB+>\\end{bmatrix}<++><+END+>" dynexp)
-   ("mx3b35pt" "<+START+><+TAB+>\\begin{bmatrix}
+<+TAB+>\\end{bmatrix}<++>" dynexp)
+   ("mx3b35pt" "<+TAB+>\\begin{bmatrix}
 <+TAB+><+++> & <++> & <++> \\\\ [35pt]
 <+TAB+><++> & <++> & <++> \\\\ [35pt]
 <+TAB+><++> & <++> & <++> \\\\
-<+TAB+>\\end{bmatrix}<++><+END+>" dynexp)
-   ("mx3d" "<+START+><+TAB+>\\left| \\begin{matrix}
+<+TAB+>\\end{bmatrix}<++>" dynexp)
+   ("mx3d" "<+TAB+>\\left| \\begin{matrix}
 <+TAB+><+++> & <++> & <++> \\\\
 <+TAB+><++> & <++> & <++> \\\\
 <+TAB+><++> & <++> & <++> \\\\
-<+TAB+>\\end{matrix} \\right|<++><+END+>" dynexp)
-   ("mx3i" "<+START+><+TAB+>\\begin{pmatrix}
+<+TAB+>\\end{matrix} \\right|<++>" dynexp)
+   ("mx3i" "<+TAB+>\\begin{pmatrix}
 <+TAB+> 1 & 0 & 0 \\\\
 <+TAB+> 0 & 1 & 0 \\\\
 <+TAB+> 0 & 0 & 1 \\\\
-<+TAB+>\\end{pmatrix}<++><+END+>" dynexp)
-   ("mx3p" "<+START+><+TAB+>\\begin{pmatrix}
+<+TAB+>\\end{pmatrix}<++>" dynexp)
+   ("mx3p" "<+TAB+>\\begin{pmatrix}
 <+TAB+><+++> & <++> & <++> \\\\
 <+TAB+><++> & <++> & <++> \\\\
 <+TAB+><++> & <++> & <++> \\\\
-<+TAB+>\\end{pmatrix}<++><+END+>" dynexp)
-   ("mx3pu" "<+START+><+TAB+>\\begin{pmatrix}
+<+TAB+>\\end{pmatrix}<++>" dynexp)
+   ("mx3pu" "<+TAB+>\\begin{pmatrix}
 <+TAB+>1 & <+++> & <++> \\\\
 <+TAB+>0 & 1 & <++> \\\\
 <+TAB+>0 & 0 & 1 \\\\
-<+TAB+>\\end{pmatrix}<++><+END+>" dynexp)
-   ("mx4c" "<+START+><+TAB+>\\begin{pmatrix}
+<+TAB+>\\end{pmatrix}<++>" dynexp)
+   ("mx4c" "<+TAB+>\\begin{pmatrix}
 <+TAB+><+++>  \\\\
 <+TAB+><++>  \\\\
 <+TAB+><++>  \\\\
 <+TAB+><++> \\\\
-<+TAB+>\\end{pmatrix}<++><+END+>" dynexp)
-   ("mx4p" "<+START+><+TAB+>\\begin{pmatrix}
+<+TAB+>\\end{pmatrix}<++>" dynexp)
+   ("mx4p" "<+TAB+>\\begin{pmatrix}
 <+TAB+><+++> & <++> & <++> & <++> \\\\
 <+TAB+><++> & <++> & <++> & <++> \\\\
 <+TAB+><++> & <++> & <++> & <++> \\\\
 <+TAB+><++> & <++> & <++> & <++> \\\\
-<+TAB+>\\end{pmatrix}<++><+END+>" dynexp)
-   ("mx5c" "<+START+><+TAB+>\\begin{pmatrix}
+<+TAB+>\\end{pmatrix}<++>" dynexp)
+   ("mx5c" "<+TAB+>\\begin{pmatrix}
 <+TAB+><+++>  \\\\
 <+TAB+><++>  \\\\
 <+TAB+><++>  \\\\
 <+TAB+><++>  \\\\
 <+TAB+><++> \\\\
-<+TAB+>\\end{pmatrix}<++><+END+>" dynexp)
-   ("mx5p" "<+START+><+TAB+>\\begin{pmatrix}
+<+TAB+>\\end{pmatrix}<++>" dynexp)
+   ("mx5p" "<+TAB+>\\begin{pmatrix}
 <+TAB+><+++> & <++> & <++> & <++> & <++> \\\\
 <+TAB+><++> & <++> & <++> & <++> & <++> \\\\
 <+TAB+><++> & <++> & <++> & <++> & <++> \\\\
 <+TAB+><++> & <++> & <++> & <++> & <++> \\\\
 <+TAB+><++> & <++> & <++> & <++> & <++> \\\\
-<+TAB+>\\end{pmatrix}<++><+END+>" dynexp)
-   ("mxbu" "<+START+><+TAB+>\\begin{bmatrix}
+<+TAB+>\\end{pmatrix}<++>" dynexp)
+   ("mxbu" "<+TAB+>\\begin{bmatrix}
 <+TAB+><+++>&<++>\\\\
 <+TAB+><++>&<++> \\\\
-<+TAB+>\\end{bmatrix}<++><+END+>" dynexp)
-   ("mxc" "<+START+><+TAB+>\\begin{pmatrix}
+<+TAB+>\\end{bmatrix}<++>" dynexp)
+   ("mxc" "<+TAB+>\\begin{pmatrix}
 <+TAB+><+++>  \\\\
 <+TAB+><++>  \\\\
 <+TAB+><++> \\\\
-<+TAB+>\\end{pmatrix}<++><+END+>" dynexp)
-   ("mxc2" "<+START+><+TAB+>\\begin{pmatrix}
+<+TAB+>\\end{pmatrix}<++>" dynexp)
+   ("mxc2" "<+TAB+>\\begin{pmatrix}
 <+TAB+><+++>  \\\\
 <+TAB+><++>  \\\\
-<+TAB+>\\end{pmatrix}<++><+END+>" dynexp)
-   ("mx2c" "<+START+><+TAB+>\\begin{pmatrix}
+<+TAB+>\\end{pmatrix}<++>" dynexp)
+   ("mx2c" "<+TAB+>\\begin{pmatrix}
 <+TAB+><+++>  \\\\
 <+TAB+><++>  \\\\
-<+TAB+>\\end{pmatrix}<++><+END+>" dynexp)
-   ("mxr" "<+START+><+TAB+>\\begin{pmatrix}
+<+TAB+>\\end{pmatrix}<++>" dynexp)
+   ("mxr" "<+TAB+>\\begin{pmatrix}
 <+TAB+><+++> & <++> & <++> \\\\
-<+TAB+>\\end{pmatrix}<++><+END+>" dynexp)
-   ("mxcb" "<+START+><+TAB+>\\begin{bmatrix}
+<+TAB+>\\end{pmatrix}<++>" dynexp)
+   ("mxcb" "<+TAB+>\\begin{bmatrix}
 <+TAB+><+++>  \\\\
 <+TAB+><++> \\\\
-<+TAB+>\\end{bmatrix}<++><+END+>" dynexp)
-   ("mxcvu" "<+START+><+TAB+>\\begin{Vmatrix}
+<+TAB+>\\end{bmatrix}<++>" dynexp)
+   ("mxcvu" "<+TAB+>\\begin{Vmatrix}
 <+TAB+><+++>&<++>\\\\
 <+TAB+><++>&<++> \\\\
-<+TAB+>\\end{Vmatrix}<++><+END+>" dynexp)
-   ("mxpu" "<+START+><+TAB+>\\begin{pmatrix}
+<+TAB+>\\end{Vmatrix}<++>" dynexp)
+   ("mxpu" "<+TAB+>\\begin{pmatrix}
 <+TAB+><+++>&<++>\\\\
 <+TAB+><++>&<++> \\\\
-<+TAB+>\\end{pmatrix}<++><+END+>" dynexp)
-   ("mxsbu" "<+START+><+TAB+>\\left[
+<+TAB+>\\end{pmatrix}<++>" dynexp)
+   ("mxsbu" "<+TAB+>\\left[
 <+TAB+>\\begin{smallmatrix}
 <+TAB+><+++>&<++>\\\\
 <+TAB+><++>&<++> \\\\
 <+TAB+>\\end{smallmatrix}
-\\right]<++><+END+>" dynexp)
-   ("mxspu" "<+START+><+TAB+>\\left(
+\\right]<++>" dynexp)
+   ("mxspu" "<+TAB+>\\left(
 <+TAB+>\\begin{smallmatrix}
 <+TAB+><+++>&<++>\\\\
 <+TAB+><++>&<++> \\\\
 <+TAB+>\\end{smallmatrix}
-\\right)<++><+END+>" dynexp)
-   ("mxsu" "<+START+><+TAB+>\\begin{smallmatrix}
+\\right)<++>" dynexp)
+   ("mxsu" "<+TAB+>\\begin{smallmatrix}
 <+TAB+><+++>&<++>\\\\
 <+TAB+><++>&<++> \\\\
-<+TAB+>\\end{smallmatrix}<++><+END+>" dynexp)
-   ("mxu" "<+START+><+TAB+>\\begin{matrix}
+<+TAB+>\\end{smallmatrix}<++>" dynexp)
+   ("mxu" "<+TAB+>\\begin{matrix}
 <+TAB+><+++>&<++>\\\\
 <+TAB+><++>&<++> \\\\
-<+TAB+>\\end{matrix}<++><+END+>" dynexp)
-   ("mxvu" "<+START+><+TAB+>\\begin{vmatrix}
+<+TAB+>\\end{matrix}<++>" dynexp)
+   ("mxvu" "<+TAB+>\\begin{vmatrix}
 <+TAB+><+++>&<++>\\\\
 <+TAB+><++>&<++> \\\\
-<+TAB+>\\end{vmatrix}<++><+END+>" dynexp)
+<+TAB+>\\end{vmatrix}<++>" dynexp)
    ("na" "\\nabla" nil)
-   ("nal" " \\\\<+START+>
-<+TAB+><+++> &= <++><+END+>" dynexp)
-   ("nca" "<+START+>\\\\
-<+TAB+><+++> & <++><+END+>" dynexp)
-   ("ncmd" "<+START+>\\newcommand{<+++>}{<++>}<++><+END+>" dynexp)
-   ("ncmdu" "<+START+>\\newcommand{<+++>}<++><+END+>" dynexp)
+   ("nal" " \\\\
+<+TAB+><+++> &= <++>" dynexp)
+   ("nca" "\\\\
+<+TAB+><+++> & <++>" dynexp)
+   ("ncmd" "\\newcommand{<+++>}{<++>}<++>" dynexp)
+   ("ncmdu" "\\newcommand{<+++>}<++>" dynexp)
    ("ndsp" "\\! \\!" nil)
    ("ne" "\\neq" nil)
    ("neo" "\\notin" nil)
-   ("nitm" "<+START+>
-<+TAB+>\\item <+++><+END+>" dynexp)
+   ("nitm" "
+<+TAB+>\\item <+++>" dynexp)
    ("nl" "\\\\" nil)
    ("nle" "\\\\ 
  &=&" nil)
    ("nlin" "\\newline" nil)
    ("nll" "\\null" nil)
-   ("nmu" "<+START+>\\lVert <+++> \\rVert<++><+END+>" dynexp)
+   ("nmu" "\\lVert <+++> \\rVert<++>" dynexp)
    ("noi" "\\noindent" nil)
    ("nolim" "\\nolimits" nil)
    ("nonu" "\\nonumber" nil)
    ("np" "\\newpage" nil)
-   ("nqa" " \\\\<+START+>
-<+TAB+>&<+++>& <++><+END+>" dynexp)
-   ("nqae" " \\\\<+START+>
-<+TAB+>&=& <+++><+END+>" dynexp)
+   ("nqa" " \\\\
+<+TAB+>&<+++>& <++>" dynexp)
+   ("nqae" " \\\\
+<+TAB+>&=& <+++>" dynexp)
    ("nr2" "\\sqrt[n]{2}" nil)
    ("nrbu" "\\lVert\\mathbf{u}\\rVert" nil)
-   ("nrmu" "<+START+>\\lVert <+++> \\rVert<++><+END+>" dynexp)
+   ("nrmu" "\\lVert <+++> \\rVert<++>" dynexp)
    ("nsp" "\\!" nil)
    ("ntg" "\\notag" nil)
    ("nvb" "\\nmid" nil)
@@ -2068,7 +2068,7 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("oSS" "(\\mathbb{S})" dynexp-delete-leading-space)
    ("oZZ" "(\\mathbb{Z})" dynexp-delete-leading-space)
    ("oa" "(a)" dynexp-delete-leading-space)
-   ("ob" "<+START+>{<+++>}<++><+END+>" dynexp)
+   ("ob" "{<+++>}<++>" dynexp)
    ("oba" "\\bar{a}" nil)
    ("obbca" "(\\mathbb{A})" dynexp-delete-leading-space)
    ("obbcb" "(\\mathbb{B})" dynexp-delete-leading-space)
@@ -2086,13 +2086,13 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("obbct" "(\\mathbb{T})" dynexp-delete-leading-space)
    ("obbcz" "(\\mathbb{Z})" dynexp-delete-leading-space)
    ("obd" "\\bar{d}" nil)
-   ("obk" "<+START+>[<+++>]<++><+END+>" dynexp-delete-leading-space-dynexp)
-   ("obkk" "<+START+>\\lbracket<+++>\\rbracket<++><+END+>" dynexp)
+   ("obk" "[<+++>]<++>" dynexp-delete-leading-space-dynexp)
+   ("obkk" "\\lbracket<+++>\\rbracket<++>" dynexp)
    ("obp" "\\bar{p}" nil)
    ("obq" "\\bar{q}" nil)
    ("obr" "\\bar{r}" nil)
    ("obs" "\\bar{s}" nil)
-   ("obu" "<+START+>\\bar{<+++>}<++><+END+>" dynexp)
+   ("obu" "\\bar{<+++>}<++>" dynexp)
    ("obx" "\\bar{x}" nil)
    ("obxa" "\\bar{\\alpha}" nil)
    ("obxb" "\\bar{\\beta}" nil)
@@ -2129,7 +2129,7 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("ocr" "(R)" dynexp-delete-leading-space)
    ("ocs" "(S)" dynexp-delete-leading-space)
    ("oct" "(T)" dynexp-delete-leading-space)
-   ("ocu" "<+START+>\\check{<+++>}<++><+END+>" dynexp)
+   ("ocu" "\\check{<+++>}<++>" dynexp)
    ("ocuu" "(U)" dynexp-delete-leading-space)
    ("ocv" "(V)" dynexp-delete-leading-space)
    ("ocw" "(W)" dynexp-delete-leading-space)
@@ -2141,7 +2141,7 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("oddq" "\\ddot{q}" nil)
    ("oddr" "\\ddot{r}" nil)
    ;; ("odds" "\\ddot{s}" nil)
-   ("oddu" "<+START+>\\ddot{<+++>}<++><+END+>" dynexp)
+   ("oddu" "\\ddot{<+++>}<++>" dynexp)
    ("oddx" "\\ddot{x}" nil)
    ("oddxa" "\\ddot{\\alpha}" nil)
    ("oddxb" "\\ddot{\\beta}" nil)
@@ -2152,7 +2152,7 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("odq" "\\dot{q}" nil)
    ("odr" "\\dot{r}" nil)
    ("ods" "\\dot{s}" nil)
-   ("odu" "<+START+>\\dot{<+++>}<++><+END+>" dynexp)
+   ("odu" "\\dot{<+++>}<++>" dynexp)
    ("odx" "\\dot{x}" nil)
    ("odxa" "\\dot{\\alpha}" nil)
    ("odxb" "\\dot{\\beta}" nil)
@@ -2170,7 +2170,7 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("ohq" "\\hat{q}" nil)
    ("ohr" "\\hat{r}" nil)
    ("ohs" "\\hat{s}" nil)
-   ("ohu" "<+START+>\\hat{<+++>}<++><+END+>" dynexp)
+   ("ohu" "\\hat{<+++>}<++>" dynexp)
    ("ohx" "\\hat{x}" nil)
    ("ohxa" "\\hat{\\alpha}" nil)
    ("ohxb" "\\hat{\\beta}" nil)
@@ -2187,7 +2187,7 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("olr" "\\overline{r}" nil)
    ("olra" "\\Leftrightarrow" nil)
    ("ols" "\\overline{s}" nil)
-   ("olu" "<+START+>\\overline{<+++>}<++><+END+>" dynexp)
+   ("olu" "\\overline{<+++>}<++>" dynexp)
    ("oluu" "\\overline{u}" nil)
    ("olx" "\\overline{x}" nil)
    ("olxa" "\\overline{\\alpha}" nil)
@@ -2198,7 +2198,7 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("om" "(m)" dynexp-delete-leading-space)
    ("omi" "\\ominus" nil)
    ("oo" "(o)" dynexp-delete-leading-space)
-   ("op" "<+START+>(<+++>)<++><+END+>" dynexp-delete-leading-space-dynexp)
+   ("op" "(<+++>)<++>" dynexp-delete-leading-space-dynexp)
    ("opad" "\\operatorname{ad}" nil)
    ("opb" "(b)" dynexp-delete-leading-space)
    ("opa" "(a)" dynexp-delete-leading-space)
@@ -2240,7 +2240,7 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("opchar" "\\operatorname{char}" nil)
    ("opchom" "\\operatorname{Hom}" nil)
    ("opci" "\\mathbb{I}" nil)
-   ("opcimu" "<+START+>\\operatorname{Im}(<+++>)<++><+END+>" dynexp)
+   ("opcimu" "\\operatorname{Im}(<+++>)<++>" dynexp)
    ("opcimz" "\\operatorname{Im}(z)" nil)
    ("opcjac" "\\operatorname{Jac}" nil)
    ("opclie" "\\operatorname{Lie}" nil)
@@ -2256,7 +2256,7 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("opcram" "\\operatorname{Ram}" nil)
    ("opcrank" "\\operatorname{Rank}" nil)
    ("opcres" "\\operatorname{Res}" nil)
-   ("opcreu" "<+START+>\\operatorname{Re}(<+++>)<++><+END+>" dynexp)
+   ("opcreu" "\\operatorname{Re}(<+++>)<++>" dynexp)
    ("opcrez" "\\operatorname{Re}(z)" nil)
    ("opcrm" "\\mathbb{R}^m" nil)
    ("opcrn" "\\mathbb{R}^n" nil)
@@ -2280,7 +2280,7 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("bigopl" "\\bigoplus" nil)
    ("bigoti" "\\bigotimes" nil)
    ("opn" "(n)" dynexp-delete-leading-space)
-   ("opnu" "<+START+>\\operatorname{<+++>}<++><+END+>" dynexp)
+   ("opnu" "\\operatorname{<+++>}<++>" dynexp)
    ("opr" "(r)" dynexp-delete-leading-space)
    ("oph" "(h)" dynexp-delete-leading-space)
    ("oprank" "\\operatorname{rank}" nil)
@@ -2290,28 +2290,28 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("opsl" "\\operatorname{sl}" nil)
    ("opso3" "\\operatorname{so(3)}" nil)
    ("opsq" "\\operatorname{sq}" nil)
-   ("opu" "<+START+>\\mathbb{<+++>}<++><+END+>" dynexp)
+   ("opu" "\\mathbb{<+++>}<++>" dynexp)
    ("oq" "(q)" dynexp-delete-leading-space)
    ("os" "(s)" dynexp-delete-leading-space)
    ("ot" "(t)" dynexp-delete-leading-space)
    ("oti" "\\otimes" nil)
    ("boti" "\\boxtimes" nil)
-   ("otu" "<+START+>\\tilde{<+++>}<++><+END+>" dynexp)
-   ("owtu" "<+START+>\\widetilde{<+++>}<++><+END+>" dynexp)
+   ("otu" "\\tilde{<+++>}<++>" dynexp)
+   ("owtu" "\\widetilde{<+++>}<++>" dynexp)
    ("ou" "(u)" dynexp-delete-leading-space)
    ("ov" "(v)" dynexp-delete-leading-space)
    ("ova" "\\vec{a}" nil)
    ("ovb" "\\vec{b}" nil)
    ("ovc" "\\vec{c}" nil)
-   ("ovst" "<+START+>\\overset{}{<+++>}<++><+END+>" dynexp)
+   ("ovst" "\\overset{}{<+++>}<++>" dynexp)
    ("ovstcpp" "\\overset{\\longrightarrow}{\\text{PP}}" nil)
    ("ovstcpq" "\\overset{\\longrightarrow}{\\text{PQ}}" nil)
-   ("ovsu" "<+START+>\\overset{<+++>}<++><+END+>" dynexp)
-   ("ovu" "<+START+>\\vec{<+++>}<++><+END+>" dynexp)
+   ("ovsu" "\\overset{<+++>}<++>" dynexp)
+   ("ovu" "\\vec{<+++>}<++>" dynexp)
    ("ovv" "\\vec{v}" nil)
    ("ovw" "\\vec{w}" nil)
    ("ow" "(w)" dynexp-delete-leading-space)
-   ("owhu" "<+START+>\\widehat{<+++>}<++><+END+>" dynexp)
+   ("owhu" "\\widehat{<+++>}<++>" dynexp)
    ("ox" "(x)" dynexp-delete-leading-space)
    ("oxa" "(\\alpha)" dynexp-delete-leading-space)
    ("oxb" "(\\beta)" dynexp-delete-leading-space)
@@ -2355,12 +2355,12 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("oxz" "(\\zeta)" dynexp-delete-leading-space)
    ("oy" "(y)" dynexp-delete-leading-space)
    ("oz" "(z)" dynexp-delete-leading-space)
-   ("parau" "<+START+>\\paragraph{<+++>}<++><+END+>" dynexp)
+   ("parau" "\\paragraph{<+++>}<++>" dynexp)
    ("pd" "\\partial" nil)
-   ("pdsc" "<+START+><+++>
-<+TAB+>\\,\\frac{d s}{2 \\pi i}<++><+END+>" dynexp)
-   ("pdti" "<+START+><+++>
-<+TAB+>\\,d^\\times<++><+END+>" dynexp)
+   ("pdsc" "<+++>
+<+TAB+>\\,\\frac{d s}{2 \\pi i}<++>" dynexp)
+   ("pdti" "<+++>
+<+TAB+>\\,d^\\times<++>" dynexp)
    ("pdzy" "\\partial z/\\partial y" nil)
    ("pgna" "\\pagenumbering{arabic}" nil)
    ("pgnr" "\\pagenumbering{roman}" nil)
@@ -2375,42 +2375,42 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("pidx" "\\printindex" nil)
    ("pl" "+" nil)
    ("plm" "\\pm" nil)
-   ("pmu" "<+START+>\\pmod{<+++>}<++><+END+>" dynexp)
+   ("pmu" "\\pmod{<+++>}<++>" dynexp)
    ("pmbu" "\\mathop{\\pmb{}}" nil)
    ("pnd" "\\#" nil)
    ("pni1" "\\prod^{n}_{i = 1}" nil)
-   ("pnu" "<+START+>\\pn{<+++>}<++><+END+>" dynexp)
+   ("pnu" "\\pn{<+++>}<++>" dynexp)
    ("ppt" "\\propto" nil)
    ("prc" "\\prec" nil)
    ("prm" "\\prime" nil)
    ("pru" "\\prod" nil)
-   ("prul" "<+START+><+TAB+>\\prod_{
+   ("prul" "<+TAB+>\\prod_{
 <+TAB+><+++> 
-<+TAB+>}<++><+END+>" dynexp)
+<+TAB+>}<++>" dynexp)
    ("ps" "\\P" nil)
-   ("psdg" "<+START+><+++>
-<+TAB+>\\,d g<++><+END+>" dynexp)
-   ("psds" "<+START+><+++>
-<+TAB+>\\,d s<++><+END+>" dynexp)
-   ("psdt" "<+START+><+++>
-<+TAB+>\\,d t<++><+END+>" dynexp)
-   ("psdu" "<+START+><+++>
-<+TAB+>\\,d u<++><+END+>" dynexp)
-   ("psdv" "<+START+><+++>
-<+TAB+>\\,d v<++><+END+>" dynexp)
-   ("psdw" "<+START+><+++>
-<+TAB+>\\,d w<++><+END+>" dynexp)
-   ("psdx" "<+START+><+++>
-<+TAB+>\\,d x<++><+END+>" dynexp)
-   ("psdy" "<+START+><+++>
-<+TAB+>\\,d y<++><+END+>" dynexp)
-   ("psdz" "<+START+><+++>
-<+TAB+>\\,d z<++><+END+>" dynexp)
-   ("ptk" "<+START+><+TAB+>\\prod_{
+   ("psdg" "<+++>
+<+TAB+>\\,d g<++>" dynexp)
+   ("psds" "<+++>
+<+TAB+>\\,d s<++>" dynexp)
+   ("psdt" "<+++>
+<+TAB+>\\,d t<++>" dynexp)
+   ("psdu" "<+++>
+<+TAB+>\\,d u<++>" dynexp)
+   ("psdv" "<+++>
+<+TAB+>\\,d v<++>" dynexp)
+   ("psdw" "<+++>
+<+TAB+>\\,d w<++>" dynexp)
+   ("psdx" "<+++>
+<+TAB+>\\,d x<++>" dynexp)
+   ("psdy" "<+++>
+<+TAB+>\\,d y<++>" dynexp)
+   ("psdz" "<+++>
+<+TAB+>\\,d z<++>" dynexp)
+   ("ptk" "<+TAB+>\\prod_{
 <+TAB+>\\substack{
 <+TAB+><+++> 
 <+TAB+>}
-<+TAB+>}<++><+END+>" dynexp)
+<+TAB+>}<++>" dynexp)
    ("isomrophism" "isomorphism" nil)
    ("bsq" "\\blacksquare" nil)
    ("qbsq" "\\quad\\blacksquare" nil)
@@ -2425,15 +2425,15 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("qesq" "\\quad\\square" nil)
    ("qetd" "\\quad\\bigtriangledown" nil)
    ("qqd" "\\qquad" nil)
-   ("qru" "<+START+>\\qr{<+++>}{<++>}<++><+END+>" dynexp)
+   ("qru" "\\qr{<+++>}{<++>}<++>" dynexp)
    ("ra" "\\rightarrow" nil)
    ("rra" "\\rightrightarrows" nil)
    ("rai" "\\hookrightarrow" nil)
    ("ras" "\\twoheadrightarrow" nil)
-   ("rcmd" "<+START+>\\renewcommand{<+++>}{<++>}<++><+END+>" dynexp)
+   ("rcmd" "\\renewcommand{<+++>}{<++>}<++>" dynexp)
    ("rcmdl" "\\renewcommand{\\labelenumi}{\\em $($\\roman{enumi}$)$}" nil)
-   ("rcmdu" "<+START+>\\renewcommand{<+++>}<++><+END+>" dynexp)
-   ("rcqeds" "<+START+>\\renewcommand{qedsymbol}{<+++>}<++><+END+>" dynexp)
+   ("rcmdu" "\\renewcommand{<+++>}<++>" dynexp)
+   ("rcqeds" "\\renewcommand{qedsymbol}{<+++>}<++>" dynexp)
    ("rdo" "\\right." nil)
    ("rea" "\\Re" nil)
    ("refia" "\\item Author [year]
@@ -2443,7 +2443,7 @@ Title.
 {\\it Title.\\/}
 Publisher." nil)
    ("refp" "(\\ref{})" dynexp-delete-leading-space)
-   ("refu" "<+START+>\\ref{<+++>}<++><+END+>" dynexp)
+   ("refu" "\\ref{<+++>}<++>" dynexp)
    ("reo" "\\ni" nil)
    ("ribk" "\\right]" nil)
    ("ribr" "\\right\\}" nil)
@@ -2451,20 +2451,20 @@ Publisher." nil)
    ("rir" "\\right\\rangle" nil)
    ("rlb" "\\}" nil)
    ("rle" "\\rangle" nil)
-   ("rlin" "<+START+>\\rightline{<+++>}<++><+END+>" dynexp)
-   ("rmu" "<+START+>{\\rm<+++>}<++><+END+>" dynexp)
+   ("rlin" "\\rightline{<+++>}<++>" dynexp)
+   ("rmu" "{\\rm<+++>}<++>" dynexp)
    ("rpl" "\\mathbb{R}_+" nil)
    ("rplt" "\\mathbb{R}_+^times" nil)
    ("rrd" "\\right\\rangle \\! \\right\\rangle" nil)
    ("rrt" "\\right\\rangle \\! \\right\\rangle \\! \\right\\rangle" nil)
    ("rsa" "\\rightsquigarrow" nil)
-   ("rtgu" "<+START+>\\raisetag{<+++>}<++><+END+>" dynexp)
+   ("rtgu" "\\raisetag{<+++>}<++>" dynexp)
    ("rti" "\\rtimes" nil)
    ("rve" "\\right\\rvert" nil)
    ("scc" "\\succ" nil)
    ("scl" "\\ell" nil)
    ("dscl" "$\\ell$" nil)
-   ("scu" "<+START+>{\\sc <+++>}<++><+END+>" dynexp)
+   ("scu" "{\\sc <+++>}<++>" dynexp)
    ("sd" "\\, d" nil)
    ("sdg" "\\,d g" nil)
    ("sdp" "\\,\\circledS\\," nil)
@@ -2477,37 +2477,37 @@ Publisher." nil)
    ("sdx" "\\,d x" nil)
    ("sdy" "\\,d y" nil)
    ("sdz" "\\,d z" nil)
-   ("setc" "<+START+>\\setcounter{<+++>}{<++>}<++><+END+>" dynexp)
-   ("setcu" "<+START+>\\setcounter{<+++>}<++><+END+>" dynexp)
+   ("setc" "\\setcounter{<+++>}{<++>}<++>" dynexp)
+   ("setcu" "\\setcounter{<+++>}<++>" dynexp)
    ("setlu" "\\left\\{ \\left.  \\!\\right|
      \\right\\}" nil)
    ("setm" "\\setminus" nil)
-   ("bsetu" "<+START+>\\left\\{ <+++> \\middle\\vert <++> \\right\\}<++><+EnD+>" dynexp)
-   ("setu" "<+START+>\\left\\{ <+++> \\middle\\vert <++> \\right\\}<++><+EnD+>" dynexp)
-   ("sfu" "<+START+>{\\sf <+++>}<++><+END+>" dynexp)
+   ("bsetu" "\\left\\{ <+++> \\middle\\vert <++> \\right\\}<++><+EnD+>" dynexp)
+   ("setu" "\\left\\{ <+++> \\middle\\vert <++> \\right\\}<++><+EnD+>" dynexp)
+   ("sfu" "{\\sf <+++>}<++>" dynexp)
    ("shl" "A^i_{\\;a}" nil)
    ("shp" "\\sharp" nil)
    ("sih" "\\sinh" nil)
    ("siph" "\\sin \\phi" nil)
    ("siq" "\\sin^2" nil)
    ("sith" "\\sin \\theta" nil)
-   ;; ("sln" "<+START+>\\setlength{<+++>}{<++>}<++><+END+>" dynexp)
-   ("slnu" "<+START+>\\setlength{<+++>}<++><+END+>" dynexp)
-   ;; ("slu" "<+START+>{\\sl<+++>}<++><+END+>" dynexp)
-   ("smb" "<+START+>\\smash[b]{<+++>}<++><+END+>" dynexp)
-   ("smt" "<+START+>\\smash[t]{<+++>}<++><+END+>" dynexp)
+   ;; ("sln" "\\setlength{<+++>}{<++>}<++>" dynexp)
+   ("slnu" "\\setlength{<+++>}<++>" dynexp)
+   ;; ("slu" "{\\sl<+++>}<++>" dynexp)
+   ("smb" "\\smash[b]{<+++>}<++>" dynexp)
+   ("smt" "\\smash[t]{<+++>}<++>" dynexp)
    ("smu" "\\sum" nil)
-   ("smul" "<+START+><+TAB+>\\sum_{
+   ("smul" "<+TAB+>\\sum_{
 <+TAB+><+++> 
-<+TAB+>}<++><+END+>" dynexp)
-   ("sn" "<+START+>\\section{<+++>}
-<++><+END+>" dynexp)
+<+TAB+>}<++>" dynexp)
+   ("sn" "\\section{<+++>}
+<++>" dynexp)
    ("sni1" "\\sum^{n}_{i = 1}" nil)
-   ("sns" "<+START+>\\section*{<+++>}
-<++><+END+>" dynexp)
+   ("sns" "\\section*{<+++>}
+<++>" dynexp)
    ("snsref" "\\section*{References}" nil)
    ("spi" "\\setlength{\\parindent}{0em}" nil)
-   ("spn" "<+START+>\\setcounter{page}{<+++>}<++><+END+>" dynexp)
+   ("spn" "\\setcounter{page}{<+++>}<++>" dynexp)
    ("sps" "\\setlength{\\parskip1.5ex plus 0.5ex minus 0.5ex}" nil)
    ("sq" "^2" dynexp-delete-leading-space)
    ("sq10" "\\sqrt{10}" nil)
@@ -2515,21 +2515,21 @@ Publisher." nil)
    ("sq3" "\\sqrt{3}" nil)
    ("sq5" "\\sqrt{5}" nil)
    ("sq7" "\\sqrt{7}" nil)
-   ("squ" "<+START+>\\sqrt{<+++>}<++><+END+>" dynexp)
+   ("squ" "\\sqrt{<+++>}<++>" dynexp)
    ("sqxp" "\\sqrt{\\pi}" nil)
    ("sskp" "\\smallskip" nil)
-   ("ssn" "<+START+>\\subsection{<+++>}
-<++><+END+>" dynexp)
-   ("ssns" "<+START+>\\subsection*{<+++>}
-<++><+END+>" dynexp)
+   ("ssn" "\\subsection{<+++>}
+<++>" dynexp)
+   ("ssns" "\\subsection*{<+++>}
+<++>" dynexp)
    ("ssp" "\\," nil)
-   ("sssn" "<+START+>\\subsubsection{<+++>}
-<++><+END+>" dynexp)
-   ("sssns" "<+START+>\\subsubsection*{<+++>}
-<++><+END+>" dynexp)
+   ("sssn" "\\subsubsection{<+++>}
+<++>" dynexp)
+   ("sssns" "\\subsubsection*{<+++>}
+<++>" dynexp)
    ("sssz" " \\scriptscriptstyle" nil)
-   ("sst" "<+START+>\\sideset{}{<+++>}<++><+END+>" dynexp)
-   ("sstu" "<+START+>\\sideset{<+++>}<++><+END+>" dynexp)
+   ("sst" "\\sideset{}{<+++>}<++>" dynexp)
+   ("sstu" "\\sideset{<+++>}<++>" dynexp)
    ("ssz" " \\scriptstyle" nil)
    ("stk" "" czm-tex-edit-substackify)
    ("sube" "\\subseteq" nil)
@@ -2704,7 +2704,7 @@ xxxxxxxxxxx\\= xxxxxxxxxxx\\= xxxxxxxxxxx\\= \\kill
 items      \\> for        \\> row        \\> one      \\\\
 items      \\> for        \\> row        \\> two      \\\\
 \\end{tabbing}" nil)
-   ("tdu" "<+START+>\\todo{<+++>}<++><+END+>" dynexp)
+   ("tdu" "\\todo{<+++>}<++>" dynexp)
    ("te" "\\exists" nil)
    ("teabs" "\\begin{abstract}
 Text goes here
@@ -3285,12 +3285,12 @@ Text goes here
 \\item   %use ``biba'' to fill in ref. items
 \\end{description}" nil)
    ("tfpdu" "\\tfrac{\\partial}{\\partial" nil)
-   ("tfu" "<+START+>\\tfrac{<+++>}{<++>}<++><+END+>" dynexp)
-   ("tg" "<+START+>\\tag{<+++>}<++><+END+>" dynexp)
+   ("tfu" "\\tfrac{<+++>}{<++>}<++>" dynexp)
+   ("tg" "\\tag{<+++>}<++>" dynexp)
    ("tgqeds" "\\tag*{\\qedsymbol}" nil)
-   ("tgs" "<+START+>\\tag*{<+++>}<++><+END+>" dynexp)
-   ("tgsu" "<+START+>\\tag*{<+++>}<++><+END+>" dynexp)
-   ("tgu" "<+START+>\\tag{<+++>}<++><+END+>" dynexp)
+   ("tgs" "\\tag*{<+++>}<++>" dynexp)
+   ("tgsu" "\\tag*{<+++>}<++>" dynexp)
+   ("tgu" "\\tag{<+++>}<++>" dynexp)
    ("thaf" "\\tfrac{1}{2}" nil)
    ("thmsty" "           \\theoremstyle{plain} %--default
         \\newtheorem{theorem}             {Theorem}  [section]
@@ -3320,9 +3320,9 @@ Text goes here
         \\newtheorem{notation}            {Notation}
 " nil)
    ("ti" "\\times" nil)
-   ("tk" "<+START+><+TAB+>\\substack{
+   ("tk" "<+TAB+>\\substack{
 <+TAB+><+++> 
-<+TAB+>}<++><+END+>" dynexp)
+<+TAB+>}<++>" dynexp)
    ("tn" "\\tan" nil)
    ("tnh" "\\tanh" nil)
    ("triap" "(a_1, a_2, a_3)" dynexp-delete-leading-space)
@@ -3332,38 +3332,38 @@ Text goes here
    ("tsq" "T^\\ast Q" nil)
    ("tsqq" "T^{\\ast}_{q} Q" nil)
    ("tsz" " \\textstyle" nil)
-   ("ttu" "<+START+>{\\tt<+++>}<++><+END+>" dynexp)
-   ("txi" "<+START+>\\text{ if } <+++><+END+>" dynexp)
-   ("txo" "<+START+>\\text{ otherwise<+++>}<++><+END+>" dynexp)
-   ("txt" "<+START+>\\text{<+++>}<++><+END+>" dynexp)
-   ("txtit" "<+START+>\\textit{<+++>}<++><+END+>" dynexp)
-   ("txtbf" "<+START+>\\textbf{<+++>}<++><+END+>" dynexp)
-   ("txtitu" "<+START+>\\textit{<+++>}<++><+END+>" dynexp)
+   ("ttu" "{\\tt<+++>}<++>" dynexp)
+   ("txi" "\\text{ if } <+++>" dynexp)
+   ("txo" "\\text{ otherwise<+++>}<++>" dynexp)
+   ("txt" "\\text{<+++>}<++>" dynexp)
+   ("txtit" "\\textit{<+++>}<++>" dynexp)
+   ("txtbf" "\\textbf{<+++>}<++>" dynexp)
+   ("txtitu" "\\textit{<+++>}<++>" dynexp)
    ("txtqa" "\\quad \\text{and}\\quad" nil)
    ("txtqu" "\\quad\\text{}\\quad" nil)
-   ("txtrm" "<+START+>\\textrm{<+++>}<++><+END+>" dynexp)
-   ("txtrmu" "<+START+>\\textrm{<+++>}<++><+END+>" dynexp)
-   ("txtsc" "<+START+>\\textsc{<+++>}<++><+END+>" dynexp)
-   ("txtscu" "<+START+>\\textsc{<+++>}<++><+END+>" dynexp)
-   ("txtsf" "<+START+>\\textsf{<+++>}<++><+END+>" dynexp)
-   ("txtsfu" "<+START+>\\textsf{<+++>}<++><+END+>" dynexp)
-   ("txtsl" "<+START+>\\textsl{<+++>}<++><+END+>" dynexp)
+   ("txtrm" "\\textrm{<+++>}<++>" dynexp)
+   ("txtrmu" "\\textrm{<+++>}<++>" dynexp)
+   ("txtsc" "\\textsc{<+++>}<++>" dynexp)
+   ("txtscu" "\\textsc{<+++>}<++>" dynexp)
+   ("txtsf" "\\textsf{<+++>}<++>" dynexp)
+   ("txtsfu" "\\textsf{<+++>}<++>" dynexp)
+   ("txtsl" "\\textsl{<+++>}<++>" dynexp)
    ("txtslu" "\\textsl{text slanting inside math mode" nil)
-   ("txtsty" "<+START+>\\textstyle{<+++>}<++><+END+>" dynexp)
-   ("txtstyu" "<+START+>\\textstyle{<+++>}<++><+END+>" dynexp)
-   ("txttt" "<+START+>\\texttt{<+++>}<++><+END+>" dynexp)
-   ("txtttu" "<+START+>\\texttt{<+++>}<++><+END+>" dynexp)
-   ("txtu" "<+START+>\\text{<+++>}<++><+END+>" dynexp)
-   ("txtup" "<+START+>\\textup{<+++>}<++><+END+>" dynexp)
-   ("txtupu" "<+START+>\\textup{<+++>}<++><+END+>" dynexp)
-   ("txu" "<+START+>\\text{<+++>}<++><+END+>" dynexp)
+   ("txtsty" "\\textstyle{<+++>}<++>" dynexp)
+   ("txtstyu" "\\textstyle{<+++>}<++>" dynexp)
+   ("txttt" "\\texttt{<+++>}<++>" dynexp)
+   ("txtttu" "\\texttt{<+++>}<++>" dynexp)
+   ("txtu" "\\text{<+++>}<++>" dynexp)
+   ("txtup" "\\textup{<+++>}<++>" dynexp)
+   ("txtupu" "\\textup{<+++>}<++>" dynexp)
+   ("txu" "\\text{<+++>}<++>" dynexp)
    ("ua" "\\\"{a}" nil)
-   ("ubr" "<+START+><+TAB+>\\underbrace
+   ("ubr" "<+TAB+>\\underbrace
 <+TAB+>{
 <+TAB+><+++>
 <+TAB+>}_{
 <+TAB+><++>
-<+TAB+>}<++><+END+>" dynexp)
+<+TAB+>}<++>" dynexp)
    ("ula" "\\underline{a}" nil)
    ("ulca" "\\underline{A}" nil)
    ("dula" "$\\underline{a}$" nil)
@@ -3471,21 +3471,21 @@ Text goes here
    ("uco" "\\\"{O}" nil)
    ("ucu" "\\\"{U}" nil)
    ("uhr" "\\upharpoonright" nil)
-   ("ulu" "<+START+>\\underline{<+++>}<++><+END+>" dynexp)
+   ("ulu" "\\underline{<+++>}<++>" dynexp)
    ("uni" "\\cup" nil)
    ("uni1" "\\bigcup^{n}_{i = 1}" nil)
-   ("unst" "<+START+>\\underset{}{<+++>}<++><+END+>" dynexp)
-   ("unstu" "<+START+>\\underset{<+++>}<++><+END+>" dynexp)
+   ("unst" "\\underset{}{<+++>}<++>" dynexp)
+   ("unstu" "\\underset{<+++>}<++>" dynexp)
    ("uo" "\\\"{o}" nil)
    ("upa" "\\uparrow" nil)
    ("doa" "\\downarrow" nil)
-   ("upkg" "<+START+>\\usepackage{<+++>}<++><+END+>" dynexp)
+   ("upkg" "\\usepackage{<+++>}<++>" dynexp)
    ("upkgams" "\\usepackage{amsmath,amssymb,eufrak,amsthm,amscd}" nil)
    ("upkgclr" "\\usepackage{color}" nil)
    ("upkgeuc" "\\usepackage{eucal}" nil)
    ("upkgeuf" "\\usepackage{eufrak}" nil)
    ("upkggr" "\\usepackage{graphicx}" nil)
-   ("upkgu" "<+START+>\\usepackage{<+++>}<++><+END+>" dynexp)
+   ("upkgu" "\\usepackage{<+++>}<++>" dynexp)
    ("upkgvrb" "\\usepackage{verbatim}" nil)
    ("uu" "\\\"{u}" nil)
    ("vb" "\\mid" nil)
@@ -3496,10 +3496,10 @@ Text goes here
    ("vil" "\\varinjlim" nil)
    ("voila" "voil{'a}" nil)
    ("vpl" "\\varprojlim" nil)
-   ("vrb" "<+START+>\\verb|<+++>|<++><+END+>" dynexp)
+   ("vrb" "\\verb|<+++>|<++>" dynexp)
    ("vskp" "\\vskip 12pt" nil)
-   ("vsp" "<+START+>\\vspace{<+++>}<++><+END+>" dynexp)
-   ("vspu" "<+START+>\\vspace{<+++>}<++><+END+>" dynexp)
+   ("vsp" "\\vspace{<+++>}<++>" dynexp)
+   ("vspu" "\\vspace{<+++>}<++>" dynexp)
    ("wace" "accelerate" nil)
    ("wacn" "acceleration" nil)
    ("wacs" "accelerates" nil)
@@ -3565,14 +3565,14 @@ Text goes here
    ("xcu" "\\Upsilon" nil)
    ("xcx" "\\Xi" nil)
    ("xd" "\\delta" nil)
-   ("xdra" "<+START+>\\xdashrightarrow{<+++>}<++><+END+>" dynexp)
+   ("xdra" "\\xdashrightarrow{<+++>}<++>" dynexp)
    ("xe" "\\eps" nil)
    ("xet" "\\eta" nil)
    ("xg" "\\gamma" nil)
    ("xio" "\\iota" nil)
    ("xk" "\\kappa" nil)
    ("xl" "\\lambda" nil)
-   ("xla" "<+START+>\\xleftarrow{<+++>}<++><+END+>" dynexp)
+   ("xla" "\\xleftarrow{<+++>}<++>" dynexp)
    ("xln" "x_n" nil)
    ("xm" "\\mu" nil)
    ("xn" "\\nu" nil)
@@ -3583,7 +3583,7 @@ Text goes here
    ("xpyq" "x^2 + y^2" nil)
    ("xq" "x^2" nil)
    ("xr" "\\rho" nil)
-   ("xra" "<+START+>\\xrightarrow{<+++>}<++><+END+>" dynexp)
+   ("xra" "\\xrightarrow{<+++>}<++>" dynexp)
    ("xs" "\\sigma" nil)
    ("xt" "\\tau" nil)
    ("xth" "\\theta" nil)
@@ -3600,10 +3600,10 @@ Text goes here
    ("xz" "\\zeta" nil)
    ("yln" "y_n" nil)
    ("yq" "y^2" nil)
-   ("zc" "<+START+><+TAB+>\\begin{equation*}
+   ("zc" "<+TAB+>\\begin{equation*}
 <+TAB+><+++>
-<+TAB+>\\end{equation*}<++><+END+>" dynexp)
+<+TAB+>\\end{equation*}<++>" dynexp)
    ("zln" "z_n" nil)
    ("zq" "z^2" nil)
-   ("zx" "<+START+>$<+++>$<++><+END+>" dynexp)
+   ("zx" "$<+++>$<++>" dynexp)
    ))
