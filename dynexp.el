@@ -329,7 +329,8 @@ the expansion ends with \"%!!!\", then delete that."
     (define-abbrev table (car abbrev) (cadr abbrev) (caddr abbrev))))
 
 (defcustom dynexp-auto-expand-list '()
-  "List of abbrevs to auto-expand under `dynexp-auto-expand-mode'.")
+  "List of abbrevs to auto-expand under `dynexp-auto-expand-mode'."
+  :type '(repeat string))
 
 (defun dynexp-auto--expand ()
   "Expand abbrevs from `dynexp-auto-expand-list' if point is at word end."
