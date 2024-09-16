@@ -105,7 +105,8 @@ If FOLD is non-nil, then fold the macro after inserting it."
   (let ((start last-abbrev-location)
         (end (point-marker)))
 
-    ;; Clear <+START+> and <+END+> for backwards compatibility
+    ;; Clear <+START+> and <+END+> for compatibility with older
+    ;; versions of this package.
     (save-excursion
       (goto-char start)
       (when (search-forward "<+START+>" (marker-position end) t)
