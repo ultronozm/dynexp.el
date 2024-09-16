@@ -25,7 +25,8 @@
 
 ;; This package provides completion features similar in spirit to what
 ;; is offered by the popular packages `CDLaTeX' and `YASnippet' and
-;; the built-in `Skeleton' language.  See the README for details.
+;; the built-in `Skeleton' and 'tempo' packages.  See the README for
+;; details.
 
 ;;; Code:
 
