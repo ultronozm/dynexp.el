@@ -81,11 +81,16 @@ Example:
   "Delete leading space, then expand.
 Example:
     (\"hu\" \"^{<+++>}<++>\" dynexp-delete-leading-space-dynexp)"
-  (save-excursion
-    (goto-char last-abbrev-location)
-    (while (looking-back "[[:space:]]+" (line-beginning-position))
-      (replace-match "")))
-  (dynexp--core))
+  (if (texmathp)
+      (progn
+        (save-excursion
+          (goto-char last-abbrev-location)
+          (save-excursion
+            (while (looking-back "[[:space:]]+" (line-beginning-position))
+              (replace-match ""))
+            (setq last-abbrev-location (point))))
+        (dynexp--core))
+    (dynexp-cancel)))
 
 ;;;###autoload
 (defun dynexp ()
