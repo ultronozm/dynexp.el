@@ -44,26 +44,25 @@ The main export of this package is a certain abbrev hook function =dynexp= that 
     _
   \end{theorem}<++>"
   #+end_example
-  The underscore _ is not actually present -- I have used it just to indicate where the cursor is positioned.  When I'm done writing the contents of the theorem, I hit =TAB= (bound to =dynexp-next=), which positions the cursor just beyond the theorem environment, like so:
+  The underscore _ indicates where the cursor is positioned.  When I'm done writing the contents of the theorem, I hit =TAB= (bound to =dynexp-next=), which moves the cursor just beyond the theorem environment, like so:
   #+begin_example
   \begin{theorem}
     (Contents of my cool theorem.)
   \end{theorem}_
   #+end_example
   
-2. The abbrev "zx" expands to
+2. The abbrev "zx" (easy to type on my keyboard) expands to
    #+begin_example
    $<+++>$<++>
    #+end_example
-   which =dynexp= then postprocesses to
+   which =dynexp= postprocesses to
    #+begin_example
    $_$<++>
    #+end_example
-   I then type some inline math. When I'm done, I hit =TAB= to position the cursor just beyond the second dollar delimiter:
+   After typing some inline math, I hit =TAB= to move the cursor just beyond the second dollar delimiter:
    #+begin_example
    $x=y$_
    #+end_example
-   The point here is that with my keyboard layout (US), zx is very easy to type.
 
 3. The abbrev "mx3p" expands to
    #+begin_src example
@@ -90,9 +89,9 @@ The recipe is likely clear:
 
 There are a few variants of the hook function =dynexp=, e.g., =dynexp-fold=, which expands the abbreviation template and applies =TeX-fold-region= to it.
 
-The package file =lisp/abbrevs.el= contains a few thousand abbrevs that I've accumulated over the years.  As a base, I started with FasTeX (http://www.cds.caltech.edu/~fastex/fastex.html), specifically, the FasTeX shortcuts for Emacs released by Ari Stern.
+The package file =lisp/dynexp-abbrevs.el= contains a few thousand abbrevs that I've accumulated over the years.  As a base, I started with FasTeX (http://www.cds.caltech.edu/~fastex/fastex.html), specifically, the FasTeX shortcuts for Emacs released by Ari Stern.
 
-You can create new expansion templates by modifying =lisp/abbrevs.el=.  It's often convenient to mimic an existing expansion template.
+You can create new expansion templates by modifying =lisp/dynexp-abbrevs.el=.  It's often convenient to mimic an existing expansion template.
 
 * Auto-expansion
 This package now includes an auto-expansion feature that allows certain abbrevs to be expanded automatically without the need to press =SPC=.  This may be useful for common abbreviations.
