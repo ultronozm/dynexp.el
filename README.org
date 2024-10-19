@@ -2,7 +2,7 @@
 #+author: Paul Nelson
 
 * Overview
-This package provides completion features that allow for the rapid entry of, e.g., various LaTeX constructs (environments, macros, symbols, subscripts, ...).  It does so by leveraging Emacs' familiar abbrev mechanism, extending it with a simple markup language (=<+++>=, =<++>=, =<+TAB+>=) and a suite of post-processing functions.  This approach differs from that of popular packages such as [[https://github.com/cdominik/cdlatex][CDLaTeX]] and [[https://github.com/joaotavora/yasnippet][YASnippet]] (or the built-in [[https://www.gnu.org/software/emacs/manual/html_node/autotype/Skeleton-Language.html][Skeleton language]] and [[https://www.emacswiki.org/emacs/TempoMode][Tempo mode]]), which introduce their own expansion systems.
+This package provides completion features that allow for the rapid entry of, e.g., various LaTeX constructs (environments, macros, symbols, subscripts, ...).  It does so by leveraging Emacs' familiar abbrev mechanism, extending it with a simple markup language (=<+++>=, =<++>=) and a suite of post-processing functions.  This approach differs from that of popular packages such as [[https://github.com/cdominik/cdlatex][CDLaTeX]] and [[https://github.com/joaotavora/yasnippet][YASnippet]] (or the built-in [[https://www.gnu.org/software/emacs/manual/html_node/autotype/Skeleton-Language.html][Skeleton language]] and [[https://www.emacswiki.org/emacs/TempoMode][Tempo mode]]), which introduce their own expansion systems.
 
 * Configuration
 This package requires [[https://www.gnu.org/software/auctex/manual/auctex/Installation.html#Installation][AUCTeX]] (to carry out the macro folding), so install that first.
@@ -33,9 +33,9 @@ The main export of this package is a certain abbrev hook function =dynexp= that 
 
 1. I use "bthm" as an abbrev for theorem environments.  When I type "bthm" in a LaTeX buffer followed by =SPC= (bound to =dynexp-space=), it expands to the following abbrev:
   #+begin_example
-  <+TAB+>\begin{theorem}
-  <+TAB+><+++>
-  <+TAB+>\end{theorem}<++>"
+  \begin{theorem}
+  <+++>
+  \end{theorem}<++>"
   #+end_example
 
   The function =dynexp= postprocesses this expansion, transforming it into the following:
@@ -66,11 +66,11 @@ The main export of this package is a certain abbrev hook function =dynexp= that 
 
 3. The abbrev "mx3p" expands to
    #+begin_src example
-   <+TAB+>\begin{pmatrix}
-   <+TAB+><+++> & <++> & <++> \\
-   <+TAB+><++> & <++> & <++> \\
-   <+TAB+><++> & <++> & <++> \\
-   <+TAB+>\end{pmatrix}<++>
+   \begin{pmatrix}
+   <+++> & <++> & <++> \\
+   <++> & <++> & <++> \\
+   <++> & <++> & <++> \\
+   \end{pmatrix}<++>
    #+end_src
    which =dynexp= postprocesses to
    #+begin_src example
@@ -83,7 +83,6 @@ The main export of this package is a certain abbrev hook function =dynexp= that 
    I can then fill in the matrix one entry at a time, using =TAB= to navigate.
 
 The recipe is likely clear:
-- =<+TAB+>= indicates where we should apply suitable indentation,
 - =<+++>= is where the cursor should be positioned after the expansion, and
 - =<++>= is left intact by the expansion, but used to denote "positions of interest" that are "eaten up" by =dynexp-next=.
 

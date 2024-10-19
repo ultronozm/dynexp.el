@@ -51,13 +51,10 @@
 (defconst dynexp-markup-poi "<++>"
   "Markup indicating a point of interest in dynexp expansion.")
 
-(defconst dynexp-markup-tab "<+TAB+>"
-  "Markup indicating a tab stop in dynexp expansion.")
-
-(defvar dynexp-after-tab-hook nil
+(defvar dynexp-at-begin-hook nil
   "Hook run after processing each tab marker in dynexp expansion.
 The hook functions are called with no arguments, with point at the
-location where the tab marker was removed.")
+beginning of the inserted expansion.")
 
 (defvar dynexp-after-start-hook nil
   "Hook run after processing the start marker in dynexp expansion.
@@ -76,18 +73,6 @@ which are the start and end positions of the expanded region.")
 (defvar-local dynexp--last-expanded-abbrev nil
   "The last abbrev that was expanded using dynexp.")
 
-(defun dynexp--compat (start end)
-  "Clear <+START+> and <+END+> markers.
-This is for the sake of compatibility with older versions of the
-`dynexp' package."
-  (save-excursion
-    (goto-char start)
-    (when (search-forward "<+START+>" (marker-position end) t)
-      (replace-match ""))
-    (goto-char (marker-position end))
-    (when (search-backward "<+END+>" start t)
-      (replace-match ""))))
-
 ;;;###autoload
 (defun dynexp ()
   "Core function for dynamic expansion.
@@ -96,13 +81,10 @@ If FOLD is non-nil, then fold the macro after inserting it."
   (let ((start last-abbrev-location)
         (end (point-marker)))
 
-    (dynexp--compat start end)
-
     (goto-char start)
+    (run-hooks 'dynexp-at-begin-hook)
     (save-excursion
-      (while (search-forward dynexp-markup-tab (marker-position end) t)
-        (replace-match "")
-        (run-hooks 'dynexp-after-tab-hook)
+      (while (re-search-forward "[\n\r]" (marker-position end) t)
         (indent-for-tab-command)))
 
     (search-forward dynexp-markup-start)
@@ -398,7 +380,7 @@ START is the position post-expansion."
 
 (defun dynexp-latex-setup ()
   "Set up dynexp hooks for LaTeX mode."
-  (add-hook 'dynexp-after-tab-hook #'dynexp-latex-newline-before-begin nil t)
+  (add-hook 'dynexp-at-begin-hook #'dynexp-latex-newline-before-begin nil t)
   (add-hook 'dynexp-after-start-hook #'dynexp-latex-after-start nil t)
   (add-hook 'dynexp-next-pre-expand-hook #'dynexp-latex-next-pre-expand nil t)
   (add-hook 'dynexp-next-post-expand-hook #'dynexp-latex-next-post-expand nil t)
