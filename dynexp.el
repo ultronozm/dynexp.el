@@ -54,102 +54,64 @@
 (defconst dynexp-markup-tab "<+TAB+>"
   "Markup indicating a tab stop in dynexp expansion.")
 
+(defvar dynexp-after-tab-hook nil
+  "Hook run after processing each tab marker in dynexp expansion.
+The hook functions are called with no arguments, with point at the
+location where the tab marker was removed.")
+
+(defvar dynexp-after-start-hook nil
+  "Hook run after processing the start marker in dynexp expansion.
+The hook functions are called with two arguments: START and END,
+which are the start and end positions of the expanded region.")
+
+(defvar dynexp-next-pre-expand-hook nil
+  "Hook run before expansion in `dynexp-next`.")
+
+(defvar dynexp-next-post-expand-hook nil
+  "Hook run after expansion in `dynexp-next`.")
+
+(defvar dynexp-space-hook nil
+  "Hook run after expansion in `dynexp-space`.")
+
+
 (defvar-local dynexp--last-expanded-abbrev nil
   "The last abbrev that was expanded using dynexp.")
 
-(defun dynexp--core (&optional fold)
+(defun dynexp--compat ()
+  "Clear <+START+> and <+END+> markers.
+This is for the sake of compatibility with older versions of the
+`dynexp' package."
+  (save-excursion
+    (goto-char start)
+    (when (search-forward "<+START+>" (marker-position end) t)
+      (replace-match ""))
+    (goto-char (marker-position end))
+    (when (search-backward "<+END+>" start t)
+      (replace-match ""))))
+
+;;;###autoload
+(defun dynexp ()
   "Core function for dynamic expansion.
 If FOLD is non-nil, then fold the macro after inserting it."
   (interactive)
   (let ((start last-abbrev-location)
         (end (point-marker)))
 
-    ;; Clear <+START+> and <+END+> for compatibility with older
-    ;; versions of this package.
-    (save-excursion
-      (goto-char start)
-      (when (search-forward "<+START+>" (marker-position end) t)
-        (replace-match ""))
-      (goto-char (marker-position end))
-      (when (search-backward "<+END+>" start t)
-        (replace-match "")))
+    (dynexp--compat)    
 
     (goto-char start)
     (save-excursion
       (while (search-forward dynexp-markup-tab (marker-position end) t)
         (replace-match "")
-        (when (and (looking-at-p "\\\\begin")
-                   (not (looking-back "^[[:space:]]*" (line-beginning-position))))
-          (newline-and-indent))
+        (run-hooks 'dynexp-after-tab-hook)
         (indent-for-tab-command)))
 
     (search-forward dynexp-markup-start)
     (replace-match "")
-    (forward-char)
-    (backward-char)
-    (when (and TeX-fold-mode
-               (looking-back "\\\\item " (line-beginning-position)))
-      (save-excursion
-        (goto-char (match-beginning 0))
-        (TeX-fold-macro)))
-
-    (when (and TeX-fold-mode fold)
-      (TeX-fold-region start (point))
-      (TeX-fold-region (point) (marker-position end)))
+    (run-hook-with-args 'dynexp-after-start-hook start (marker-position end))
 
     (setq dynexp--last-expanded-abbrev last-abbrev)
     (set-marker end nil)))
-
-;;;###autoload
-(defun dynexp ()
-  "Expand."
-  (dynexp--core))
-
-;;;###autoload
-(defun dynexp-fold ()
-  "Expand and then fold.
-Example:
-    (\"bthm\" \"<+TAB+>\\begin{theorem}
-<+TAB+><+++>
-<+TAB+>\\end{theorem}<++>\" dynexp-fold)"
-  (dynexp--core t))
-
-(defun dynexp-fold-and-mmm-parse ()
-  "Expand, fold, and parse mmm.
-Inserts \"mmm\" to cooperate with `dynexp-space'."
-  (dynexp--core t)
-  (insert "mmm"))
-
-(defun dynexp-cancel ()
-  "Cancel expansion."
-  (interactive)
-  (delete-char (- last-abbrev-location (point)))
-  (insert last-abbrev-text))
-
-(defun dynexp-delete-leading-space ()
-  "Delete leading space.
-Example:
-    (\"cu\" \"^3\" dynexp-delete-leading-space)"
-  (if (texmathp)
-      (save-excursion
-        (goto-char last-abbrev-location)
-        (while (looking-back "[[:space:]]+" (line-beginning-position))
-          (replace-match "")))
-    (dynexp-cancel)))
-
-(defun dynexp-delete-leading-space-dynexp ()
-  "Delete leading space, then expand.
-Example:
-    (\"hu\" \"^{<+++>}<++>\" dynexp-delete-leading-space-dynexp)"
-  (if (texmathp)
-      (progn
-        (save-excursion
-          (goto-char last-abbrev-location)
-          (while (looking-back "[[:space:]]+" (line-beginning-position))
-            (replace-match ""))
-          (setq last-abbrev-location (point)))
-        (dynexp--core))
-    (dynexp-cancel)))
 
 ;;;###autoload
 (defun dynexp-next ()
@@ -211,6 +173,94 @@ Example:
              (looking-back czm-tex-fold--verb-regex (line-beginning-position)))
         (czm-tex-fold--create-misc-overlay (match-beginning 0) (match-end 0)
                                            (match-string 1)))))))
+
+
+;;;###autoload
+(defun dynexp-space ()
+  "Either insert a space, or expand an abbrev.
+Insert trailing spaces only after abbrevs not expanded using `dynexp'."
+  (interactive)
+  (if (and abbrev-mode
+           (not (looking-back " " 1))
+           (expand-abbrev))
+      (progn
+        (unless (eq last-abbrev dynexp--last-expanded-abbrev)
+          (insert " "))
+        (when (looking-back "mmm" (max (- (point) 3) (point-min)))
+          (delete-char -3)
+          (run-at-time
+           "0.01 sec"
+           nil
+           #'dynexp--mmm-parse-LaTeX-environment))
+        (setq dynexp--last-expanded-abbrev nil))
+    (insert " ")))
+
+;;;###autoload
+(defun dynexp-modify-abbrev-table (table abbrevs)
+  "Define abbreviations in TABLE given by ABBREVS."
+  (unless table
+    (error "Abbrev table does not exist"))
+  (dolist (abbrev abbrevs)
+    (define-abbrev table (car abbrev) (cadr abbrev) (caddr abbrev))))
+
+;;; Misc
+
+(defun dynexp-cancel ()
+  "Cancel expansion."
+  (interactive)
+  (delete-char (- last-abbrev-location (point)))
+  (insert last-abbrev-text))
+
+(defun dynexp-delete-leading-space ()
+  "Delete leading space.
+Example:
+    (\"cu\" \"^3\" dynexp-delete-leading-space)"
+  (if (texmathp)
+      (save-excursion
+        (goto-char last-abbrev-location)
+        (while (looking-back "[[:space:]]+" (line-beginning-position))
+          (replace-match "")))
+    (dynexp-cancel)))
+
+(defun dynexp-delete-leading-space-dynexp ()
+  "Delete leading space, then expand.
+Example:
+    (\"hu\" \"^{<+++>}<++>\" dynexp-delete-leading-space-dynexp)"
+  (if (texmathp)
+      (progn
+        (save-excursion
+          (goto-char last-abbrev-location)
+          (while (looking-back "[[:space:]]+" (line-beginning-position))
+            (replace-match ""))
+          (setq last-abbrev-location (point)))
+        (dynexp))
+    (dynexp-cancel)))
+
+;;; Auto-expansion feature
+
+(defcustom dynexp-auto-expand-list '()
+  "List of abbrevs to auto-expand under `dynexp-auto-expand-mode'."
+  :type '(repeat string))
+
+(defun dynexp-auto--expand ()
+  "Expand abbrevs from `dynexp-auto-expand-list' if point is at word end."
+  (let* ((bounds (bounds-of-thing-at-point 'word))
+         (word-end (cdr bounds))
+         (word (and bounds (buffer-substring-no-properties (car bounds) word-end))))
+    (when (and word
+               (= (point) word-end)
+               (member word dynexp-auto-expand-list))
+      (dynexp-space))))
+
+;;;###autoload
+(define-minor-mode dynexp-auto-expand-mode
+  "Minor mode to automatically expand certain abbrevs."
+  :lighter " AutoExp"
+  (if dynexp-auto-expand-mode
+      (add-hook 'post-self-insert-hook #'dynexp-auto--expand nil t)
+    (remove-hook 'post-self-insert-hook #'dynexp-auto--expand t)))
+
+;;; TeX
 
 (defun dynexp-split-macro (beg)
   "Split macro at point and fold the first part.
@@ -304,57 +354,50 @@ TODO: relevance of BEG?"
     (when (fboundp 'mmm-parse-region)
       (mmm-parse-region beg end))))
 
-;;;###autoload
-(defun dynexp-space ()
-  "Either insert a space, or expand an abbrev.
-Insert trailing spaces only after abbrevs not expanded using `dynexp'."
-  (interactive)
-  (if (and abbrev-mode
-           (not (looking-back " " 1))
-           (expand-abbrev))
-      (progn
-        (unless (eq last-abbrev dynexp--last-expanded-abbrev)
-          (insert " "))
-        (when (looking-back "mmm" (max (- (point) 3) (point-min)))
-          (delete-char -3)
-          (run-at-time
-           "0.01 sec"
-           nil
-           #'dynexp--mmm-parse-LaTeX-environment))
-        (setq dynexp--last-expanded-abbrev nil))
-    (insert " ")))
+(defun dynexp-latex-newline-before-begin ()
+  "Insert a newline before \\begin if not at beginning of line."
+  (when (and (looking-at-p "\\\\begin")
+             (not (looking-back "^[[:space:]]*" (line-beginning-position))))
+    (newline-and-indent)))
+
+(defvar dynexp-latex-fold-after-expansion nil
+  "When non-nil, fold the expanded region after expansion.")
+
+(defun dynexp-latex-after-start (start end)
+  "Perform LaTeX-specific operations after expansion start.
+START and END are the start and end positions of the expanded region."
+  (when TeX-fold-mode
+    ;; Fold \item macro if at the beginning of expansion
+    (when (looking-back "\\\\item " (line-beginning-position))
+      (save-excursion
+        (goto-char (match-beginning 0))
+        (TeX-fold-macro)))
+
+    ;; Fold the expanded region if dynexp-latex-fold-after-expansion is non-nil
+    (when dynexp-latex-fold-after-expansion
+      (TeX-fold-region start (point))
+      (TeX-fold-region (point) end))))
+
+(defun dynexp-latex-setup ()
+  (add-hook 'dynexp-after-tab-hook #'dynexp-latex-newline-before-begin nil t)
+  (add-hook 'dynexp-after-start-hook #'dynexp-latex-after-start nil t))
 
 ;;;###autoload
-(defun dynexp-modify-abbrev-table (table abbrevs)
-  "Define abbreviations in TABLE given by ABBREVS."
-  (unless table
-    (error "Abbrev table does not exist"))
-  (dolist (abbrev abbrevs)
-    (define-abbrev table (car abbrev) (cadr abbrev) (caddr abbrev))))
+(defun dynexp-fold ()
+  "Expand and then fold.
+Example:
+    (\"bthm\" \"<+TAB+>\\begin{theorem}
+<+TAB+><+++>
+<+TAB+>\\end{theorem}<++>\" dynexp-fold)"
+  (let ((dynexp-latex-fold-after-expansion t))
+    (dynexp)))
 
-;;; Auto-expansion feature
-
-(defcustom dynexp-auto-expand-list '()
-  "List of abbrevs to auto-expand under `dynexp-auto-expand-mode'."
-  :type '(repeat string))
-
-(defun dynexp-auto--expand ()
-  "Expand abbrevs from `dynexp-auto-expand-list' if point is at word end."
-  (let* ((bounds (bounds-of-thing-at-point 'word))
-         (word-end (cdr bounds))
-         (word (and bounds (buffer-substring-no-properties (car bounds) word-end))))
-    (when (and word
-               (= (point) word-end)
-               (member word dynexp-auto-expand-list))
-      (dynexp-space))))
-
-;;;###autoload
-(define-minor-mode dynexp-auto-expand-mode
-  "Minor mode to automatically expand certain abbrevs."
-  :lighter " AutoExp"
-  (if dynexp-auto-expand-mode
-      (add-hook 'post-self-insert-hook #'dynexp-auto--expand nil t)
-    (remove-hook 'post-self-insert-hook #'dynexp-auto--expand t)))
+(defun dynexp-fold-and-mmm-parse ()
+  "Expand, fold, and parse mmm.
+Inserts \"mmm\" to cooperate with `dynexp-space'."
+  (let ((dynexp-latex-fold-after-expansion t))
+    (dynexp))
+  (insert "mmm"))
 
 (provide 'dynexp)
 ;;; dynexp.el ends here
