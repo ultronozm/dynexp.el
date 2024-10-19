@@ -73,11 +73,10 @@ which are the start and end positions of the expanded region.")
 (defvar dynexp-space-hook nil
   "Hook run after expansion in `dynexp-space`.")
 
-
 (defvar-local dynexp--last-expanded-abbrev nil
   "The last abbrev that was expanded using dynexp.")
 
-(defun dynexp--compat ()
+(defun dynexp--compat (start end)
   "Clear <+START+> and <+END+> markers.
 This is for the sake of compatibility with older versions of the
 `dynexp' package."
@@ -97,7 +96,7 @@ If FOLD is non-nil, then fold the macro after inserting it."
   (let ((start last-abbrev-location)
         (end (point-marker)))
 
-    (dynexp--compat)    
+    (dynexp--compat start end)
 
     (goto-char start)
     (save-excursion
@@ -117,63 +116,12 @@ If FOLD is non-nil, then fold the macro after inserting it."
 (defun dynexp-next ()
   "Expand abbrev, remove <++> placeholders, fold LaTeX macros."
   (interactive)
-  (when (and
-         (texmathp)
-         (member last-command '(self-insert-command dynexp-space))
-         (let ((_keys (recent-keys))
-               (len (length (recent-keys))))
-           (and (>= len 2)
-                (equal ?\  (aref (recent-keys) (- len 2)))
-                (looking-back " " 1))))
-    (delete-char -1))
+  (run-hooks 'dynexp-next-pre-expand-hook)
   (expand-abbrev)
-  (let ((start (point))
-        (start-in-latex-section-env (dynexp--in-latex-section-env-p))
-        (start-texmathp (texmathp)))
+  (let ((start (point)))
     (when (search-forward dynexp-markup-poi nil t)
       (replace-match ""))
-    (let ((end-in-latex-section-env (dynexp--in-latex-section-env-p)))
-      (cond
-       ((and start-texmathp
-             (not (texmathp))
-             (equal (car texmathp-why)
-                    "$"))
-        (let ((beg (cdr texmathp-why))
-              (end
-               (save-excursion
-                 (goto-char (cdr texmathp-why))
-                 (forward-char 1)
-                 (search-forward "$"))))
-          (replace-region-contents
-           (1+ beg)
-           (1- end)
-           (lambda (s)
-             (with-temp-buffer
-               (insert s)
-               (goto-char (point-min))
-               (while (re-search-forward "\\s-*_\\s-*" end t)
-                 (replace-match "_" t t))
-               (buffer-substring-no-properties (point-min)
-                                               (point-max)))))))
-       ((and start-in-latex-section-env (not end-in-latex-section-env))
-        (save-excursion
-          (goto-char start)
-          (when TeX-fold-mode
-            (TeX-fold-macro))))
-       ((dynexp--looking-back-macro-to-fold-p)
-        (let ((end (point-marker))
-              (beginnings (dynexp-split-macro (match-beginning 0))))
-          (dolist (b beginnings)
-            (goto-char b)
-            (when TeX-fold-mode
-              (TeX-fold-macro)))
-          (goto-char end)))
-       ((and (fboundp 'czm-tex-fold--create-misc-overlay)
-             (boundp 'czm-tex-fold--verb-regex)
-             (looking-back czm-tex-fold--verb-regex (line-beginning-position)))
-        (czm-tex-fold--create-misc-overlay (match-beginning 0) (match-end 0)
-                                           (match-string 1)))))))
-
+    (run-hook-with-args 'dynexp-next-post-expand-hook start)))
 
 ;;;###autoload
 (defun dynexp-space ()
@@ -186,12 +134,7 @@ Insert trailing spaces only after abbrevs not expanded using `dynexp'."
       (progn
         (unless (eq last-abbrev dynexp--last-expanded-abbrev)
           (insert " "))
-        (when (looking-back "mmm" (max (- (point) 3) (point-min)))
-          (delete-char -3)
-          (run-at-time
-           "0.01 sec"
-           nil
-           #'dynexp--mmm-parse-LaTeX-environment))
+        (run-hooks 'dynexp-space-hook)
         (setq dynexp--last-expanded-abbrev nil))
     (insert " ")))
 
@@ -203,7 +146,7 @@ Insert trailing spaces only after abbrevs not expanded using `dynexp'."
   (dolist (abbrev abbrevs)
     (define-abbrev table (car abbrev) (cadr abbrev) (caddr abbrev))))
 
-;;; Misc
+;;; Miscellaneous functions
 
 (defun dynexp-cancel ()
   "Cancel expansion."
@@ -378,9 +321,85 @@ START and END are the start and end positions of the expanded region."
       (TeX-fold-region start (point))
       (TeX-fold-region (point) end))))
 
+(defun dynexp-latex-next-pre-expand ()
+  "Pre-expansion function for LaTeX mode in `dynexp-next'."
+  (when (and (texmathp)
+             (member last-command '(self-insert-command dynexp-space))
+             (let ((keys (recent-keys))
+                   (len (length (recent-keys))))
+               (and (>= len 2)
+                    (equal ?\  (aref keys (- len 2)))
+                    (looking-back " " 1))))
+    (delete-char -1)))
+
+(defun dynexp-latex-next-post-expand (start)
+  "Post-expansion function for LaTeX mode in `dynexp-next'.
+START is the position post-expansion."
+  (let ((start-in-latex-section-env
+         (save-excursion
+           (goto-char start)
+           (dynexp--in-latex-section-env-p)))
+        (start-texmathp
+         (save-excursion
+           (goto-char start)
+           (texmathp)))
+        (end-in-latex-section-env
+         (dynexp--in-latex-section-env-p)))
+    (cond
+     ((and start-texmathp
+           (not (texmathp))
+           (equal (car texmathp-why) "$"))
+      (let ((math-start (cdr texmathp-why))
+            (math-end
+             (save-excursion
+               (goto-char (cdr texmathp-why))
+               (forward-char 1)
+               (search-forward "$"))))
+        (replace-region-contents
+         (1+ math-start)
+         (1- math-end)
+         (lambda (s)
+           (with-temp-buffer
+             (insert s)
+             (goto-char (point-min))
+             (while (re-search-forward "\\s-*_\\s-*" nil t)
+               (replace-match "_" t t))
+             (buffer-substring-no-properties (point-min) (point-max)))))))
+     ((and start-in-latex-section-env (not end-in-latex-section-env))
+      (save-excursion
+        (goto-char start)
+        (when TeX-fold-mode
+          (TeX-fold-macro))))
+     ((dynexp--looking-back-macro-to-fold-p)
+      (let ((fold-end (point-marker))
+            (beginnings (dynexp-split-macro (match-beginning 0))))
+        (dolist (b beginnings)
+          (goto-char b)
+          (when TeX-fold-mode
+            (TeX-fold-macro)))
+        (goto-char fold-end)))
+     ((and (fboundp 'czm-tex-fold--create-misc-overlay)
+           (boundp 'czm-tex-fold--verb-regex)
+           (looking-back czm-tex-fold--verb-regex (line-beginning-position)))
+      (czm-tex-fold--create-misc-overlay
+       (match-beginning 0) (match-end 0) (match-string 1))))))
+
+(defun dynexp-latex-space ()
+  "Function run after expansion in dynexp-space for LaTeX mode."
+  (when (looking-back "mmm" (max (- (point) 3) (point-min)))
+    (delete-char -3)
+    (run-at-time
+     "0.01 sec"
+     nil
+     #'dynexp--mmm-parse-LaTeX-environment)))
+
 (defun dynexp-latex-setup ()
+  "Set up dynexp hooks for LaTeX mode."
   (add-hook 'dynexp-after-tab-hook #'dynexp-latex-newline-before-begin nil t)
-  (add-hook 'dynexp-after-start-hook #'dynexp-latex-after-start nil t))
+  (add-hook 'dynexp-after-start-hook #'dynexp-latex-after-start nil t)
+  (add-hook 'dynexp-next-pre-expand-hook #'dynexp-latex-next-pre-expand nil t)
+  (add-hook 'dynexp-next-post-expand-hook #'dynexp-latex-next-post-expand nil t)
+  (add-hook 'dynexp-space-hook #'dynexp-latex-space nil t))
 
 ;;;###autoload
 (defun dynexp-fold ()
