@@ -343,28 +343,31 @@ START is the position post-expansion."
          (save-excursion
            (goto-char start)
            (texmathp)))
+        (start-texmathp-why texmathp-why)
         (end-in-latex-section-env
          (dynexp--in-latex-section-env-p)))
     (cond
      ((and start-texmathp
            (not (texmathp))
-           (equal (car texmathp-why) "$"))
-      (let ((math-start (cdr texmathp-why))
+           (equal (car start-texmathp-why) "$"))
+      (let ((math-start (cdr start-texmathp-why))
             (math-end
              (save-excursion
-               (goto-char (cdr texmathp-why))
+               (goto-char (cdr start-texmathp-why))
                (forward-char 1)
                (search-forward "$"))))
         (replace-region-contents
          (1+ math-start)
          (1- math-end)
-         (lambda (s)
-           (with-temp-buffer
-             (insert s)
-             (goto-char (point-min))
-             (while (re-search-forward "\\s-*_\\s-*" nil t)
-               (replace-match "_" t t))
-             (buffer-substring-no-properties (point-min) (point-max)))))))
+         (lambda ()
+           (let ((s (buffer-substring-no-properties (point-min) (point-max))))
+             (with-temp-buffer
+               (insert s)
+               (goto-char (point-min))
+               (while (re-search-forward "\\s-*_\\s-*" math-end t)
+                 (replace-match "_" t t))
+               (buffer-substring-no-properties (point-min)
+                                               (point-max))))))))
      ((and start-in-latex-section-env (not end-in-latex-section-env))
       (save-excursion
         (goto-char start)
