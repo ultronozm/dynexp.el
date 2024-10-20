@@ -2508,9 +2508,11 @@ Publisher." nil)
 <+++> 
 }<++>" dynexp)
    ("sn" "\\section{<+++>}
+
 <++>" dynexp)
    ("sni1" "\\sum^{n}_{i = 1}" nil)
    ("sns" "\\section*{<+++>}
+
 <++>" dynexp)
    ("snsref" "\\section*{References}" nil)
    ("spi" "\\setlength{\\parindent}{0em}" nil)
@@ -2526,13 +2528,17 @@ Publisher." nil)
    ("sqxp" "\\sqrt{\\pi}" nil)
    ("sskp" "\\smallskip" nil)
    ("ssn" "\\subsection{<+++>}
+
 <++>" dynexp)
    ("ssns" "\\subsection*{<+++>}
+
 <++>" dynexp)
    ("ssp" "\\," nil)
    ("sssn" "\\subsubsection{<+++>}
+
 <++>" dynexp)
    ("sssns" "\\subsubsection*{<+++>}
+
 <++>" dynexp)
    ("sssz" " \\scriptscriptstyle" nil)
    ("sst" "\\sideset{}{<+++>}<++>" dynexp)
