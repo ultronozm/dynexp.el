@@ -73,6 +73,20 @@ which are the start and end positions of the expanded region.")
 (defvar-local dynexp--last-expanded-abbrev nil
   "The last abbrev that was expanded using dynexp.")
 
+(defun dynexp--compat (start end)
+  "Clear <+START+>, <+END+> and <+TAB+> markers.
+Included for compatibility with older versions of this package."
+  (save-excursion
+    (goto-char start)
+    (when (search-forward "<+START+>" (marker-position end) t)
+      (replace-match ""))
+    (goto-char (marker-position end))
+    (when (search-backward "<+END+>" start t)
+      (replace-match ""))
+    (goto-char start)
+    (when (search-backward "<+TAB+>" (marker-position end) t)
+      (replace-match ""))))
+
 ;;;###autoload
 (defun dynexp ()
   "Core function for dynamic expansion.
@@ -80,6 +94,8 @@ If FOLD is non-nil, then fold the macro after inserting it."
   (interactive)
   (let ((start last-abbrev-location)
         (end (point-marker)))
+
+    (dynexp--compat start end)
 
     (goto-char start)
     (run-hooks 'dynexp-at-begin-hook)
