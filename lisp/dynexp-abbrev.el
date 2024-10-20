@@ -2,7 +2,9 @@
 
 (defvar latex-mode-abbrev-table)
 (defvar LaTeX-mode-abbrev-table)
-(require 'dynexp)
+(defvar AUCTeX-version)
+(declare-function dynexp-modify-abbrev-table "dynexp")
+;; (require 'dynexp)
 
 ;; adapted from FasTeX (http://www.cds.caltech.edu/~fastex/fastex.html)
 (dynexp-modify-abbrev-table
