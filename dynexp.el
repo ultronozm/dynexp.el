@@ -84,7 +84,7 @@ Included for compatibility with older versions of this package."
     (when (search-backward "<+END+>" start t)
       (replace-match ""))
     (goto-char start)
-    (when (search-backward "<+TAB+>" (marker-position end) t)
+    (while (search-forward "<+TAB+>" (marker-position end) t)
       (replace-match ""))))
 
 ;;;###autoload
