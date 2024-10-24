@@ -3621,4 +3621,5 @@ Text goes here
    ("zln" "z_n" nil)
    ("zq" "z^2" nil)
    ("zx" "$<+++>$<++>" dynexp)
+   ("fj" "$<+++>$<++>" dynexp)
    ))
