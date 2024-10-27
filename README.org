@@ -92,10 +92,28 @@ The package file =lisp/dynexp-abbrevs.el= contains a few thousand abbrevs that I
 
 You can create new expansion templates by modifying =lisp/dynexp-abbrevs.el=.  It's often convenient to mimic an existing expansion template.
 
-* Auto-expansion
+* Usage
+With =dynexp-auto-expand-mode= enabled and =dynexp-auto-expand-list= configured, simply type any abbrev included in the list. It will expand automatically when you finish typing it, saving you the extra step of pressing =SPC=.
+
+* Additional features
+
+** Viewing and Managing Abbrevs
+There are several ways to see and manage the available abbrevs:
+
+1. =M-x list-abbrevs=: This command displays all currently active abbrevs. You can use Emacs' built-in search features like =isearch= (=C-s=) or =occur= (=M-s o=) to find specific abbrevs within this list (see the [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Incremental-Search.html][Incremental Search]] documentation).
+
+2. =M-x edit-abbrevs=: This opens an editable buffer where you can modify existing abbrevs or add new ones.
+
+3. =M-x consult-abbrev=: If you have the [[https://github.com/ultronozm/consult-abbrev.el][consult-abbrev]] package installed, this command provides a more interactive way to browse and search through your abbrevs. It offers live preview of expansions and is particularly useful for quickly recalling which abbrev expands to a given LaTeX construction.
+
+4. Directly editing =dynexp-abbrev.el=: For more extensive changes or additions, you can edit the =dynexp-abbrev.el= file directly. This is especially useful when adding new expansion templates or modifying existing ones.
+
+Remember that changes made through =edit-abbrevs= or by directly editing =dynexp-abbrev.el= won't take effect until you reload the abbrevs file or restart Emacs.
+
+** Auto-expansion
 This package now includes an auto-expansion feature that allows certain abbrevs to be expanded automatically without the need to press =SPC=.  This may be useful for common abbreviations.
 
-** Setup
+*** Setup
 To use this feature:
 
 1. Enable =dynexp-auto-expand-mode= in the buffers of interest.  For instance, to enable it in your LaTeX buffers, add the following to your init file:
@@ -112,5 +130,3 @@ To use this feature:
 
    This will cause the abbrevs "zx", "bdp", and "bthm" to expand automatically as soon as you finish typing them, without needing to press =SPC=.
 
-** Usage
-With =dynexp-auto-expand-mode= enabled and =dynexp-auto-expand-list= configured, simply type any abbrev included in the list. It will expand automatically when you finish typing it, saving you the extra step of pressing =SPC=.
