@@ -7,7 +7,13 @@ This package provides completion features that allow for the rapid entry of, e.g
 * Configuration
 This package requires [[https://www.gnu.org/software/auctex/manual/auctex/Installation.html#Installation][AUCTeX]] (to carry out the macro folding), so install that first.
 
-Download this repository, install using =M-x package-install-file= (or package-vc-install, straight, elpaca, ...), and add something like the following to your [[https://www.emacswiki.org/emacs/InitFile][init file]] (after whatever is needed to load [[https://www.gnu.org/software/auctex/manual/auctex/Installation.html#Installation][AUCTeX]]):
+Either download this repository and install using =M-x package-install-file=, or install using your preferred package manager.  For the built-in package manager, you can do this by adding the following to your [[https://www.emacswiki.org/emacs/InitFile][init file]]:
+#+begin_src elisp
+(unless (package-installed-p 'dynexp)
+  (package-vc-install "https://github.com/ultronozm/dynexp.el"))
+#+end_src
+
+Then add the following to your [[https://www.emacswiki.org/emacs/InitFile][init file]] (after the relevant configuration for [[https://www.gnu.org/software/auctex/manual/auctex/Installation.html#Installation][AUCTeX]]):
 #+begin_src elisp
 (use-package dynexp
   :after latex
@@ -17,10 +23,14 @@ Download this repository, install using =M-x package-install-file= (or package-v
         ("SPC" . dynexp-space)
         ("TAB" . dynexp-next))
   :config
-  (quietly-read-abbrev-file "~/whatever/dynexp/lisp/dynexp-abbrev.el"))
+  (let ((file (expand-file-name
+               "lisp/dynexp-abbrev.el"
+               (file-name-directory (locate-library "dynexp")))))
+      (quietly-read-abbrev-file file)))
 #+end_src
 
-Replace the path with whatever the path is to the =dynexp-abbrev.el= file that comes with this package (and feel free to put that file somewhere else and modify it to your liking; see below for details on the format).
+You might wish to copy the "dynexp-abbrev.el" file provided by the package to your preferred location (so that you can modify it without your changes being overwritten by updates to this package).  In that case, you should replace the =:config= part of the above with
+=(quietly-read-abbrev-file "~/path/to/dynexp/lisp/dynexp-abbrev.el")=.
 
 * Usage
 This package makes use of Emacs's built-in [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Abbrevs.html][abbrevs]] feature, which expands words, called /abbrevs/, into some different text, called the /expansion/ of the abbrev.  Quoting from this most recent link:
