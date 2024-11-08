@@ -1391,11 +1391,13 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("f14" "\\frac{1}{4}" nil)
    ("f23" "\\frac{2}{3}" nil)
    ("f32" "\\frac{3}{2}" nil)
+   ("f34" "\\frac{3}{4}" nil)
    ("tf12" "\\tfrac{1}{2}" nil)
    ("tf13" "\\tfrac{1}{3}" nil)
    ("tf14" "\\tfrac{1}{4}" nil)
    ("tf23" "\\tfrac{2}{3}" nil)
    ("tf32" "\\tfrac{3}{2}" nil)
+   ("tf34" "\\tfrac{3}{4}" nil)
    ("fa" "\\forall" nil)
    ("fbm" "\\fbox{\\begin{minipage}{.9\\linewidth}
 <+++>
