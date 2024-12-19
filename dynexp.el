@@ -419,5 +419,16 @@ Inserts \"mmm\" to cooperate with `dynexp-space'."
     (dynexp))
   (insert "mmm"))
 
+(defun dynexp-inline-math ()
+  "Expand inline math differently for LaTeX versus `org-mode'.
+In `LaTeX-mode' and derivatives, use $...$.  Otherwise use \\(...\\)."
+  (if (derived-mode-p 'latex-mode)
+      (progn
+        (delete-region last-abbrev-location (point))
+        (insert "$<+++>$<++>"))
+    (delete-region last-abbrev-location (point))
+    (insert "\\(<+++>\\)<++>"))
+  (dynexp))
+
 (provide 'dynexp)
 ;;; dynexp.el ends here

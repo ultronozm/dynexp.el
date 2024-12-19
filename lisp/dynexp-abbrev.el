@@ -3702,6 +3702,6 @@ Text goes here
 \\end{equation*}<++>" dynexp)
    ("zln" "z_n" nil)
    ("zq" "z^2" nil)
-   ("zx" "$<+++>$<++>" dynexp)
-   ("fj" "$<+++>$<++>" dynexp)
+   ("zx" "" dynexp-inline-math)
+   ("fj" "\\(<+++>\\)<++>" dynexp)
    ))
