@@ -142,7 +142,7 @@ Insert trailing spaces only after abbrevs not expanded using `dynexp'."
   (unless table
     (error "Abbrev table does not exist"))
   (dolist (abbrev abbrevs)
-    (define-abbrev table (car abbrev) (cadr abbrev) (caddr abbrev))))
+    (apply #'define-abbrev table abbrev)))
 
 ;;; Miscellaneous functions
 
