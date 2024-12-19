@@ -206,7 +206,7 @@ Example:
 (defun dynexp-split-macro (beg)
   "Split macro at point and fold the first part.
 TODO: relevance of BEG?"
-  (when-let
+  (when-let*
       ((type (save-excursion
                (goto-char beg)
                (and
