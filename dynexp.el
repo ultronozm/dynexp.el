@@ -430,5 +430,14 @@ In `LaTeX-mode' and derivatives, use $...$.  Otherwise use \\(...\\)."
     (insert "\\(<+++>\\)<++>"))
   (dynexp))
 
+(defun dynexp-surround-with-dollars ()
+  "Surround the abbrev with dollar signs if not in math mode."
+  (unless (texmathp)
+    (let* ((start last-abbrev-location)
+           (end (point-marker))
+           (abbrev (buffer-substring-no-properties start end)))
+      (delete-region start end)
+      (insert (format "$%s$" abbrev)))))
+
 (provide 'dynexp)
 ;;; dynexp.el ends here
