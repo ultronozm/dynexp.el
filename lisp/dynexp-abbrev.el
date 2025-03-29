@@ -1553,7 +1553,7 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
    ("lflt" "_\\flat" dynexp-delete-leading-space)
    ("hg" "^g" dynexp-delete-leading-space)
    ("hh" "^h" dynexp-delete-leading-space)
-   ("hht" "{}^t" dynexp)
+   ("hht" "{}^t" nil)
    ("hhu" "{}^{<+++>}<++>" dynexp)
    ("hi" "^i" dynexp-delete-leading-space)
    ("hifni" "^\\infty" dynexp-delete-leading-space)
