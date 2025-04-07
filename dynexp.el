@@ -163,6 +163,21 @@ Example:
           (replace-match "")))
     (dynexp-cancel)))
 
+(defun dynexp-delete-leading-space-except-after-backslash ()
+  "Delete leading space, but cancel if preceded by a backslash.
+Example:
+    (\"lcm\" \"_M\" dynexp-delete-leading-space-except-after-backslash)"
+  (if (save-excursion
+        (goto-char last-abbrev-location)
+        (looking-back "\\\\" 1))
+      (dynexp-cancel)
+    (if (texmathp)
+        (save-excursion
+          (goto-char last-abbrev-location)
+          (while (looking-back "[[:space:]]+" (line-beginning-position))
+            (replace-match "")))
+      (dynexp-cancel))))
+
 (defun dynexp-delete-leading-space-dynexp ()
   "Delete leading space, then expand.
 Example:

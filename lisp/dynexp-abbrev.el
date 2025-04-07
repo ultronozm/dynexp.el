@@ -1841,7 +1841,7 @@ F(b)-F(a)=\\int^b_af(x)\\, dx
 \\end{document}
 " dynexp-fold)
    ("lu" "_{<+++>}<++>" dynexp-delete-leading-space-dynexp)
-   ("lucm" "_M" dynexp-delete-leading-space)
+   ("lcm" "_M" dynexp-delete-leading-space-except-after-backslash)
    ("lul" "_l" dynexp-delete-leading-space)
    ("luu" "_u" dynexp-delete-leading-space)
    ("lv" "_v" dynexp-delete-leading-space)
