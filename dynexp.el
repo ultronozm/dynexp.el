@@ -354,18 +354,19 @@ START is the position post-expansion."
                (goto-char (cdr start-texmathp-why))
                (forward-char 1)
                (search-forward "$"))))
-        (replace-region-contents
-         (1+ math-start)
-         (1- math-end)
-         (lambda ()
-           (let ((s (buffer-substring-no-properties (point-min) (point-max))))
-             (with-temp-buffer
-               (insert s)
-               (goto-char (point-min))
-               (while (re-search-forward "\\s-*_\\s-*" math-end t)
-                 (replace-match "_" t t))
-               (buffer-substring-no-properties (point-min)
-                                               (point-max))))))))
+        (save-excursion
+          (replace-region-contents
+           (1+ math-start)
+           (1- math-end)
+           (lambda ()
+             (let ((s (buffer-substring-no-properties (point-min) (point-max))))
+               (with-temp-buffer
+                 (insert s)
+                 (goto-char (point-min))
+                 (while (re-search-forward "\\s-*_\\s-*" math-end t)
+                   (replace-match "_" t t))
+                 (buffer-substring-no-properties (point-min)
+                                                 (point-max)))))))))
      ((and start-in-latex-section-env (not end-in-latex-section-env))
       (save-excursion
         (goto-char start)
