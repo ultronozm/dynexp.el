@@ -152,6 +152,11 @@ Insert trailing spaces only after abbrevs not expanded using `dynexp'."
   (delete-char (- last-abbrev-location (point)))
   (insert last-abbrev-text))
 
+(defun dynexp-math-only ()
+  "Cancel if not in math mode."
+  (unless (texmathp)
+    (dynexp-cancel)))
+
 (defun dynexp-delete-leading-space ()
   "Delete leading space.
 Example:
