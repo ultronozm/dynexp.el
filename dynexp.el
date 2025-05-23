@@ -452,13 +452,23 @@ In `LaTeX-mode' and derivatives, use $...$.  Otherwise use \\(...\\)."
   (dynexp))
 
 (defun dynexp-surround-with-dollars ()
-  "Surround the abbrev with dollar signs if not in math mode."
-  (unless (texmathp)
-    (let* ((start last-abbrev-location)
-           (end (point-marker))
-           (abbrev (buffer-substring-no-properties start end)))
-      (delete-region start end)
-      (insert (format "$%s$" abbrev)))))
+  "Surround the abbrev with dollar signs.
+In LaTeX-mode use $...$, otherwise use \\(...\\)."
+  (let* ((start last-abbrev-location)
+         (end (point-marker))
+         (abbrev (buffer-substring-no-properties start end))
+         (delimiters (if (derived-mode-p 'latex-mode)
+                         '("$" . "$")
+                       '("\\(" . "\\)"))))
+    (delete-region start end)
+    (insert (format "%s%s%s" (car delimiters) abbrev (cdr delimiters)))))
+
+(defun dynexp-surround-with-dollars-unless-texmathp ()
+  "Surround the abbrev with dollar signs if not in math mode.
+In LaTeX-mode use $...$, otherwise use \\(...\\)."
+  (unless (and (fboundp #'texmathp)
+               (texmathp))
+    (dynexp-surround-with-dollars)))
 
 (provide 'dynexp)
 ;;; dynexp.el ends here
