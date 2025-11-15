@@ -102,9 +102,6 @@ The package file =lisp/dynexp-abbrevs.el= contains a few thousand abbrevs that I
 
 You can create new expansion templates by modifying =lisp/dynexp-abbrevs.el=.  It's often convenient to mimic an existing expansion template.
 
-* Usage
-With =dynexp-auto-expand-mode= enabled and =dynexp-auto-expand-list= configured, simply type any abbrev included in the list. It will expand automatically when you finish typing it, saving you the extra step of pressing =SPC=.
-
 * Additional features
 
 ** Viewing and Managing Abbrevs
