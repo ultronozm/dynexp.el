@@ -104,6 +104,18 @@ You can create new expansion templates by modifying =lisp/dynexp-abbrevs.el=.  I
 
 * Additional features
 
+* Customizing math delimiters
+When dynexp inserts or surrounds inline math in non-TeX modes it can
+use `\\(...\\)' rather than `$...$'.  The choice is controlled by
+`dynexp-math-delimiters', which can be set to:
+- =auto=: `$...$' in =latex-mode= buffers and `\\(...\\)' otherwise (default),
+- =dollar=: always `$...$',
+- =paren=: always `\\(...\\)'.
+
+You can override this buffer-locally with e.g.
+  =(setq-local dynexp-math-delimiters 'paren)=
+in a buffer (or in a mode hook) without affecting other buffers.
+
 ** Viewing and Managing Abbrevs
 There are several ways to see and manage the available abbrevs:
 
@@ -136,4 +148,3 @@ To use this feature:
    #+end_src
 
    This will cause the abbrevs "zx", "bdp", and "bthm" to expand automatically as soon as you finish typing them, without needing to press =SPC=.
-

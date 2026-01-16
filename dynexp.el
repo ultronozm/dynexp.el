@@ -45,6 +45,18 @@
   :type '(repeat string)
   :group 'dynexp)
 
+(defcustom dynexp-math-delimiters 'auto
+  "Math delimiters to use when dynexp inserts or surrounds inline math.
+
+When set to:
+- `auto': use `$...$' in `latex-mode' buffers and `\\(...\\)' otherwise.
+- `dollar': always use `$...$'.
+- `paren': always use `\\(...\\)'."
+  :type '(choice (const :tag "Auto ($ in LaTeX, \\( elsewhere)" auto)
+                 (const :tag "Always $...$" dollar)
+                 (const :tag "Always \\(...\\)" paren))
+  :group 'dynexp)
+
 (defconst dynexp-markup-start "<+++>"
   "Markup indicating the starting point for dynexp expansion.")
 
@@ -72,6 +84,26 @@ which are the start and end positions of the expanded region.")
 
 (defvar-local dynexp--last-expanded-abbrev nil
   "The last abbrev that was expanded using dynexp.")
+
+(defun dynexp--inline-math-delimiters ()
+  "Return a cons cell (OPEN . CLOSE) for inline math delimiters."
+  (pcase dynexp-math-delimiters
+    ('dollar '("$" . "$"))
+    ('paren '("\\(" . "\\)"))
+    (_ (if (derived-mode-p 'latex-mode)
+           '("$" . "$")
+         '("\\(" . "\\)")))))
+
+;;;###autoload
+(defun dynexp-toggle-math-delimiters ()
+  "Cycle `dynexp-math-delimiters' through `auto', `dollar' and `paren'."
+  (interactive)
+  (setq-local dynexp-math-delimiters
+              (pcase dynexp-math-delimiters
+                ('auto 'dollar)
+                ('dollar 'paren)
+                (_ 'auto)))
+  (message "dynexp-math-delimiters: %S" dynexp-math-delimiters))
 
 (defun dynexp--compat (start end)
   "Clear <+START+>, <+END+> and <+TAB+> markers.
@@ -442,30 +474,28 @@ Inserts \"mmm\" to cooperate with `dynexp-space'."
 
 (defun dynexp-inline-math ()
   "Expand inline math differently for LaTeX versus `org-mode'.
-In `LaTeX-mode' and derivatives, use $...$.  Otherwise use \\(...\\)."
-  (if (derived-mode-p 'latex-mode)
-      (progn
-        (delete-region last-abbrev-location (point))
-        (insert "$<+++>$<++>"))
+In `LaTeX-mode' and derivatives, use `$...$' by default.  Otherwise use
+`\\(...\\)'.  Controlled by `dynexp-math-delimiters'."
+  (pcase-let ((`(,open . ,close) (dynexp--inline-math-delimiters)))
     (delete-region last-abbrev-location (point))
-    (insert "\\(<+++>\\)<++>"))
+    (insert (format "%s<+++>%s<++>" open close)))
   (dynexp))
 
 (defun dynexp-surround-with-dollars ()
   "Surround the abbrev with dollar signs.
-In LaTeX-mode use $...$, otherwise use \\(...\\)."
+In LaTeX-mode use `$...$' by default, otherwise use `\\(...\\)'.
+Controlled by `dynexp-math-delimiters'."
   (let* ((start last-abbrev-location)
          (end (point-marker))
          (abbrev (buffer-substring-no-properties start end))
-         (delimiters (if (derived-mode-p 'latex-mode)
-                         '("$" . "$")
-                       '("\\(" . "\\)"))))
+         (delimiters (dynexp--inline-math-delimiters)))
     (delete-region start end)
     (insert (format "%s%s%s" (car delimiters) abbrev (cdr delimiters)))))
 
 (defun dynexp-surround-with-dollars-unless-texmathp ()
   "Surround the abbrev with dollar signs if not in math mode.
-In LaTeX-mode use $...$, otherwise use \\(...\\)."
+In LaTeX-mode use `$...$' by default, otherwise use `\\(...\\)'.
+Controlled by `dynexp-math-delimiters'."
   (unless (and (fboundp #'texmathp)
                (texmathp))
     (dynexp-surround-with-dollars)))
