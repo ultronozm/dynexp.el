@@ -469,9 +469,7 @@
 <+++>
 \\end{displaymath}<++>" dynexp)
    ("bdo" "\\begin{document}" nil)
-   ("bdp" "\\begin{equation*}
-<+++>
-\\end{equation*}<++>" dynexp)
+   ("bdp" "" dynexp-equation-star-or-display-math)
    ("bms" "\\begin{minted}{sage}
 <+++>
 \\end{minted}" dynexp-fold-and-mmm-parse)
@@ -4589,7 +4587,5 @@ Text goes here
    ("zq" "z^2" dynexp-surround-with-dollars-unless-texmathp)
    ("zx" "" dynexp-inline-math)
    ("fj" "\\(<+++>\\)<++>" dynexp)
-   ("jf" "\\[
-  <+++>
-\\]<++>" dynexp)
+   ("jf" "" dynexp-display-math)
    ))

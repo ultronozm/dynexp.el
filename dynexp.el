@@ -63,6 +63,13 @@ When set to:
 (defconst dynexp-markup-poi "<++>"
   "Markup indicating a point of interest in dynexp expansion.")
 
+(defvar dynexp--suppress-indent nil
+  "When non-nil, `dynexp' skips its post-insert indentation pass.
+
+This is intended for expansion functions that insert newlines and
+indentation themselves (for example, to preserve indentation in
+`org-mode' buffers).")
+
 (defvar dynexp-at-begin-hook nil
   "Hook run after processing each tab marker in dynexp expansion.
 The hook functions are called with no arguments, with point at the
@@ -131,9 +138,10 @@ If FOLD is non-nil, then fold the macro after inserting it."
 
     (goto-char start)
     (run-hooks 'dynexp-at-begin-hook)
-    (save-excursion
-      (while (re-search-forward "[\n\r]" (marker-position end) t)
-        (indent-for-tab-command)))
+    (unless dynexp--suppress-indent
+      (save-excursion
+        (while (re-search-forward "[\n\r]" (marker-position end) t)
+          (indent-for-tab-command))))
 
     (search-forward dynexp-markup-start)
     (replace-match "")
@@ -486,6 +494,68 @@ In `LaTeX-mode' and derivatives, use `$...$' by default.  Otherwise use
     (delete-region last-abbrev-location (point))
     (insert (format "%s<+++>%s<++>" open close)))
   (dynexp))
+
+(defun dynexp--indent-prefix-at (pos)
+  "Return an indentation prefix string suitable for POS.
+
+If POS is on a whitespace-only line (up to POS), return the buffer text
+from BOL to POS (preserving tabs/spaces).  Otherwise, return an
+indentation string based on the current mode.
+
+In `org-mode', prefer `org-current-text-indentation' when available,
+since `current-indentation' may be 0 even when org would keep a
+paragraph visually indented on newline."
+  (save-excursion
+    (goto-char pos)
+    (let* ((bol (line-beginning-position))
+           (prefix (buffer-substring-no-properties bol pos)))
+      (cond
+       ((string-match-p "\\`[ \t]*\\'" prefix) prefix)
+       ((and (derived-mode-p 'org-mode)
+             (fboundp 'org-current-text-indentation))
+        (make-string (max 0 (or (org-current-text-indentation) 0)) ?\s))
+       (t
+        (make-string (current-indentation) ?\s))))))
+
+(defun dynexp-display-math ()
+  "Insert a `\\[ ... \\]' display math template, preserving indentation.
+
+In `org-mode', put the final \"<++>\" marker on a new (indented) line so
+the closing delimiter and the following text both obey org's indentation
+conventions."
+  (let* ((start last-abbrev-location)
+         (indent (dynexp--indent-prefix-at start))
+         (inner-indent (concat indent "  "))
+         (orgp (derived-mode-p 'org-mode)))
+    (delete-region start (point))
+    (unless (save-excursion
+              (beginning-of-line)
+              (looking-at-p "[ \t]*$"))
+      (insert "\n")
+      (insert indent))
+    (insert "\\[")
+    (insert "\n")
+    (insert inner-indent dynexp-markup-start)
+    (save-excursion
+      (insert "\n")
+      (insert indent "\\]")
+      (when orgp
+        (insert "\n")
+        (insert indent))
+      (insert dynexp-markup-poi))
+    (let ((dynexp--suppress-indent t))
+      (dynexp))))
+
+(defun dynexp-equation-star-or-display-math ()
+  "Insert an equation* template in LaTeX buffers, otherwise insert `\\[ ... \\]'."
+  (if (derived-mode-p 'latex-mode)
+      (progn
+        (delete-region last-abbrev-location (point))
+        (insert "\\begin{equation*}
+<+++>
+\\end{equation*}<++>")
+        (dynexp))
+    (dynexp-display-math)))
 
 (defun dynexp-surround-with-dollars ()
   "Surround the abbrev with dollar signs.

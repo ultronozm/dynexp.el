@@ -98,6 +98,12 @@ The recipe is likely clear:
 
 There are a few variants of the hook function =dynexp=, e.g., =dynexp-fold=, which expands the abbreviation template and applies =TeX-fold-region= to it.
 
+In buffers where mode-specific newline indentation matters (notably =org-mode=),
+some templates use specialized hook functions that insert and indent multi-line
+expansions explicitly.  For example, the built-in =jf= display-math template uses
+=dynexp-display-math=, and the =bdp= template uses =dynexp-equation-star-or-display-math=
+to behave like an equation environment in LaTeX buffers but like =jf= elsewhere.
+
 The package file =lisp/dynexp-abbrevs.el= contains a few thousand abbrevs that I've accumulated over the years.  As a base, I started with FasTeX (http://www.cds.caltech.edu/~fastex/fastex.html), specifically, the FasTeX shortcuts for Emacs released by Ari Stern.
 
 You can create new expansion templates by modifying =lisp/dynexp-abbrevs.el=.  It's often convenient to mimic an existing expansion template.
