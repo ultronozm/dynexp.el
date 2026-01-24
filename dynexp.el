@@ -189,6 +189,12 @@ Insert trailing spaces only after abbrevs not expanded using `dynexp'."
   (unless (texmathp)
     (dynexp-cancel)))
 
+(defun dynexp-math-only-dynexp ()
+  "Run `dynexp' only in math mode; otherwise cancel the expansion."
+  (if (texmathp)
+      (dynexp)
+    (dynexp-cancel)))
+
 (defun dynexp-delete-leading-space ()
   "Delete leading space.
 Example:
@@ -499,6 +505,54 @@ Controlled by `dynexp-math-delimiters'."
   (unless (and (fboundp #'texmathp)
                (texmathp))
     (dynexp-surround-with-dollars)))
+
+(defun dynexp--wrap-region-with-inline-math (start end)
+  "Wrap region START..END in inline math delimiters.
+
+START and END are buffer positions or markers."
+  (pcase-let ((`(,open . ,close) (dynexp--inline-math-delimiters)))
+    (let ((start-pos (if (markerp start) (marker-position start) start))
+          (end-marker (if (markerp end) end (copy-marker end t))))
+      (set-marker-insertion-type end-marker t)
+      (save-excursion
+        (goto-char (marker-position end-marker))
+        (insert close)
+        (goto-char start-pos)
+        (insert open))
+      (unless (markerp end)
+        (set-marker end-marker nil)))))
+
+(defun dynexp-surround-with-dollars-unless-texmathp-dynexp ()
+  "Run `dynexp', and if not already in math mode wrap the expansion in inline math.
+
+If the expansion ends with a final \"<++>\" marker, move that marker *outside* the
+inserted math delimiters so `dynexp-next' (TAB) can jump out of math."
+  (let* ((start-pos last-abbrev-location)
+         (start (copy-marker start-pos))
+         (end (copy-marker (point) t))
+         (in-math (and (fboundp #'texmathp)
+                       (save-excursion
+                         (goto-char start-pos)
+                         (texmathp)))))
+    (unwind-protect
+        (progn
+          (dynexp)
+          (unless in-math
+            (let* ((poi dynexp-markup-poi)
+                   (poi-len (length poi))
+                   (end-pos (marker-position end))
+                   (moved-final-poi nil))
+              (when (and (>= (- end-pos poi-len) (marker-position start))
+                         (string= (buffer-substring-no-properties (- end-pos poi-len) end-pos) poi))
+                (setq moved-final-poi t)
+                (delete-region (- end-pos poi-len) end-pos))
+              (dynexp--wrap-region-with-inline-math start end)
+              (when moved-final-poi
+                (save-excursion
+                  (goto-char (marker-position end))
+                  (insert poi))))))
+      (set-marker start nil)
+      (set-marker end nil))))
 
 (provide 'dynexp)
 ;;; dynexp.el ends here
